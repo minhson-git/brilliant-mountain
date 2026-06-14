@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<apps:MainWindowPage
+    x:Class="IOApp.Pages.Installer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:apps="using:IOApp"
+    xmlns:coreHelpers="using:IOCore.Helpers"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="using:IOApp.Pages"
+    d:DataContext="{d:DesignInstance Type=pages:Installer}"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <Grid>
+        <StackPanel
+            Margin="20"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal"
+            Spacing="12">
+            <Image
+                Width="24"
+                Height="24"
+                Source="{Binding Icon}" />
+            <TextBlock
+                FontSize="18"
+                FontWeight="SemiBold"
+                Text="{Binding AppName}" />
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <StackPanel
+                Name="StorageConfigurationPanel"
+                Width="550"
+                Spacing="30">
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="30">
+                    <FontIcon FontSize="24" Glyph="&#xE81B;" />
+                    <TextBlock
+                        FontSize="24"
+                        FontWeight="SemiBold"
+                        Text="{coreHelpers:SRE K=Features_SetUpPathTitle}" />
+                </StackPanel>
+                <coreUI:TextBoxComp
+                    x:Name="OutputFolderPathTextBox"
+                    PrefixIcon="&#xE8B7;"
+                    Size="XXL">
+                    <coreUI:TextBoxComp.TextBoxStyle>
+                        <Style TargetType="TextBox">
+                            <Setter Property="IsReadOnly" Value="True" />
+                        </Style>
+                    </coreUI:TextBoxComp.TextBoxStyle>
+                    <coreUI:TextBoxComp.ActionButton>
+                        <coreUI:IconButton
+                            x:Name="OutputFolderButton"
+                            Click="ActionButton_Click"
+                            Icon="&#xE8DA;" />
+                    </coreUI:TextBoxComp.ActionButton>
+                </coreUI:TextBoxComp>
+                <coreUI:IconTextButton
+                    x:Name="SetStorageButton"
+                    Width="200"
+                    Click="ActionButton_Click"
+                    Icon="&#xE78C;"
+                    IsTheme="True"
+                    Text="{coreHelpers:SRE K=Apply}" />
+                <StackPanel
+                    Margin="0,0,10,0"
+                    Padding="15"
+                    VerticalAlignment="Center"
+                    Background="#102040"
+                    BorderBrush="#0050b0"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Spacing="10">
+                    <FontIcon FontSize="24" Glyph="&#xE8BD;" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        Foreground="#fff"
+                        Text="{coreHelpers:SRE K=Features_Warning}"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel
+                Name="PasswordConfigurationPanel"
+                Width="400"
+                Padding="20"
+                BorderBrush="{ThemeResource Border}"
+                BorderThickness="1"
+                CornerRadius="5">
+                <TextBlock
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Text="{coreHelpers:SRE K=Features_CreatePassword}" />
+                <TextBlock
+                    FontSize="14"
+                    Text="{coreHelpers:SRE K=Features_CreatePasswordSubtitle}"
+                    TextWrapping="WrapWholeWords" />
+                <TextBlock
+                    FontSize="14"
+                    Foreground="{ThemeResource Foreground2}"
+                    Text="{coreHelpers:SRE K=Features_InitPasswordMessage}"
+                    TextWrapping="WrapWholeWords" />
+
+                <PasswordBox
+                    Name="InitialPasswordBox"
+                    Margin="0,10,0,0"
+                    PlaceholderText="{coreHelpers:SRE K=Password}" />
+                <PasswordBox
+                    Name="InitialConfirmedPasswordBox"
+                    Margin="0,10,0,0"
+                    PlaceholderText="{coreHelpers:SRE K=Features_ConfirmPassword}" />
+                <TextBlock Margin="0,10,0,0" Text="{Binding ErrorText}" />
+                <StackPanel Spacing="10">
+                    <coreUI:IconTextButton
+                        x:Name="SetPasswordButton"
+                        Click="ActionButton_Click"
+                        IsTheme="True"
+                        Text="{coreHelpers:SRE K=Apply}" />
+                    <HyperlinkButton
+                        HorizontalAlignment="Center"
+                        Click="ActionButton_Click"
+                        Content="{coreHelpers:SRE K=Features_DataRecoveryInfo}"
+                        Tag="LearnMore" />
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel
+                Name="LoginPanel"
+                Width="400"
+                Padding="20"
+                BorderBrush="{ThemeResource Border}"
+                BorderThickness="1"
+                CornerRadius="5">
+                <StackPanel MinHeight="140">
+                    <TextBlock
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Text="{coreHelpers:SRE K=Features_EnterPassword}" />
+                    <TextBlock
+                        FontSize="14"
+                        Text="{coreHelpers:SRE K=Features_EnterPasswordSubtitle}"
+                        TextWrapping="WrapWholeWords" />
+                    <PasswordBox
+                        Name="PasswordBox"
+                        Margin="0,10,0,0"
+                        KeyboardAcceleratorPlacementMode="Hidden"
+                        PlaceholderText="{coreHelpers:SRE K=Password}">
+                        <PasswordBox.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="Enter" Invoked="KeyboardAccelerator_Invoked" />
+                        </PasswordBox.KeyboardAccelerators>
+                    </PasswordBox>
+                    <Grid Margin="0,10,0,0" ColumnDefinitions="*,Auto">
+                        <TextBlock VerticalAlignment="Center" Text="{Binding ErrorText}" />
+                        <HyperlinkButton
+                            Name="ResetApplicationHyperlinkButton"
+                            Grid.Column="1"
+                            Click="ActionButton_Click"
+                            Content="{coreHelpers:SRE K=Features_ResetApplication}" />
+                    </Grid>
+                </StackPanel>
+                <StackPanel Spacing="10">
+                    <coreUI:IconTextButton
+                        x:Name="LoginButton"
+                        Click="ActionButton_Click"
+                        IsTheme="True"
+                        Text="{coreHelpers:SRE K=Unlock}" />
+                    <HyperlinkButton
+                        Name="LearnMoreHyperlinkButton"
+                        HorizontalAlignment="Center"
+                        Click="ActionButton_Click"
+                        Content="{coreHelpers:SRE K=Features_DataRecoveryInfo}" />
+                </StackPanel>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</apps:MainWindowPage>

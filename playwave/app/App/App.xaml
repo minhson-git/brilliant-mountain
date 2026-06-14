@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c:AppEx
+    x:Class="IOApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="using:IOCore"
+    xmlns:cc="using:IOCore.Converters">
+    <c:AppEx.Resources>
+        <XamlControlsResources>
+            <XamlControlsResources.MergedDictionaries>
+                <ResourceDictionary>
+                    <Color x:Key="ThemeColor">#8EFC08</Color>
+                    <Color x:Key="ThemeSecondaryColor">#8EFC08</Color>
+                </ResourceDictionary>
+
+                <c:ThemeResources />
+                <cc:ConverterResources />
+            </XamlControlsResources.MergedDictionaries>
+        </XamlControlsResources>
+    </c:AppEx.Resources>
+</c:AppEx>

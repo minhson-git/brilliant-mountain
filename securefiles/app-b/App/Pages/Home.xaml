@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<apps:MainWindowPage
+    x:Class="IOApp.Pages.Home"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:apps="using:IOApp"
+    xmlns:coreHelpers="using:IOCore.Helpers"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:features="using:IOApp.Features"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="using:IOApp.Pages"
+    d:DataContext="{d:DesignInstance Type=pages:Home}"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <apps:MainWindowPage.Resources>
+        <pages:HomeProxy x:Name="Proxy" Data="{Binding}" />
+    </apps:MainWindowPage.Resources>
+
+    <Grid
+        Padding="20"
+        ColumnDefinitions="*,320"
+        ColumnSpacing="20"
+        RowDefinitions="Auto,*"
+        RowSpacing="20">
+        <Grid
+            HorizontalAlignment="Center"
+            ColumnDefinitions="250,100,100"
+            ColumnSpacing="10">
+            <coreUI:TextBoxComp
+                IsEnabled="{Binding Status.IsNotLoading}"
+                PrefixIcon="&#xE71E;"
+                Text="{Binding SearchTerm, Mode=TwoWay}">
+                <coreUI:TextBoxComp.TextBoxStyle>
+                    <Style TargetType="TextBox">
+                        <Setter Property="PlaceholderText" Value="{coreHelpers:SRE K=Search}" />
+                    </Style>
+                </coreUI:TextBoxComp.TextBoxStyle>
+            </coreUI:TextBoxComp>
+
+            <Grid
+                Grid.Column="1"
+                BorderBrush="{ThemeResource Border}"
+                BorderThickness="1"
+                ColumnDefinitions="*,Auto"
+                CornerRadius="5">
+                <TextBlock
+                    Name="FilterTextBlock"
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center" />
+                <coreUI:IconButton
+                    Grid.Column="1"
+                    Corner="Right"
+                    Flyout="{Binding FilterMenuFlyout}"
+                    Icon="&#xE71C;"
+                    IsEnabled="{Binding Status.IsNotLoading}"
+                    IsTheme="True" />
+            </Grid>
+
+            <Grid
+                Grid.Column="2"
+                BorderBrush="{ThemeResource Border}"
+                BorderThickness="1"
+                ColumnDefinitions="*,Auto"
+                CornerRadius="5">
+                <TextBlock
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    Text="{Binding SortText}" />
+                <coreUI:IconButton
+                    Grid.Column="1"
+                    Corner="Right"
+                    Flyout="{Binding SortMenuFlyout}"
+                    Icon="&#xE8CB;"
+                    IsEnabled="{Binding Status.IsNotLoading}"
+                    IsTheme="True" />
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <coreUI:AZ IsA="{Binding PlayerItems.IsEmpty}">
+                <coreUI:AZ.A>
+                    <Button
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="Transparent"
+                        Command="{Binding AddFilesCommand}"
+                        CornerRadius="10"
+                        IsEnabled="{Binding Status.IsNotLoading}">
+                        <StackPanel VerticalAlignment="Center" Spacing="20">
+                            <Grid
+                                Width="128"
+                                Height="128"
+                                HorizontalAlignment="Center">
+                                <FontIcon
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="96"
+                                    Glyph="&#xea69;" />
+                                <FontIcon
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    FontSize="28"
+                                    Glyph="&#xECC8;" />
+                            </Grid>
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontSize="24"
+                                Text="{Binding SelectedPlaylistItem.Name, Converter={StaticResource AddToPlaylistNameStringFormatConverter}}" />
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontSize="14"
+                                Foreground="{ThemeResource Foreground2}"
+                                Text="{coreHelpers:SRE K=OrDragAndDrop}" />
+                        </StackPanel>
+                    </Button>
+                </coreUI:AZ.A>
+                <coreUI:AZ.B>
+                    <Grid RowDefinitions="Auto,*" RowSpacing="10">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <StackPanel Orientation="Horizontal" Spacing="20">
+                                <coreUI:IconButton
+                                    HorizontalAlignment="Left"
+                                    Command="{Binding PlayAllCommand}"
+                                    Icon="&#xF5B0;"
+                                    IsArcCorner="True"
+                                    IsEnabled0="{Binding Data.Status.IsNotLoading, Source={StaticResource Proxy}}"
+                                    IsEnabled1="{Binding PlayerItems.IsNotEmpty}"
+                                    Size="XXXL" />
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontSize="24"
+                                    FontWeight="SemiBold"
+                                    Text="{Binding SelectedPlaylistItem.Name}" />
+                            </StackPanel>
+                            <StackPanel
+                                Grid.Column="2"
+                                Orientation="Horizontal"
+                                Spacing="10">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontSize="16"
+                                    Text="{Binding PlayerItems.Count, Converter={StaticResource ItemCounterConverter}}" />
+                                <coreUI:IconButton
+                                    VerticalAlignment="Center"
+                                    Command="{Binding RemoveSelectedFilesCommand}"
+                                    Icon="&#xE74D;"
+                                    IsEnabled0="{Binding Status.IsNotLoading}"
+                                    IsEnabled1="{Binding ElementName=PlayerItemsGridView, Path=SelectedIndex, ConverterParameter=0, Converter={StaticResource GreaterThanOrEqualToComparisonConverter}}"
+                                    Size="XL"
+                                    Variant="Text" />
+                                <coreUI:IconButton
+                                    VerticalAlignment="Center"
+                                    Command="{Binding AddFilesCommand}"
+                                    Icon="&#xE710;"
+                                    IsEnabled="{Binding Status.IsNotLoading}"
+                                    Size="XL" />
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <GridView
+                                Name="PlayerItemsGridView"
+                                Padding="0"
+                                ItemsSource="{Binding PlayerItems}"
+                                SelectionMode="Extended">
+                                <GridView.ItemContainerStyle>
+                                    <Style TargetType="GridViewItem">
+                                        <Setter Property="Margin" Value="5" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="GridViewItem">
+                                                    <GridViewItemPresenter
+                                                        Background="{ThemeResource ItemBackground}"
+                                                        CornerRadius="10"
+                                                        SelectedBackground="{ThemeResource ItemSelectedBackground}"
+                                                        SelectedPointerOverBackground="{ThemeResource ItemSelectedBackground}" />
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </GridView.ItemContainerStyle>
+                                <GridView.ItemTemplate>
+                                    <DataTemplate>
+                                        <features:StandardPlayerItemControl OnHandle="PlayerItemControl_OnHandle" />
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+                        </Grid>
+                    </Grid>
+                </coreUI:AZ.B>
+            </coreUI:AZ>
+        </Grid>
+
+        <Grid
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            RowDefinitions="Auto,Auto,*"
+            RowSpacing="20">
+            <features:ListMenuLayout
+                Title="{coreHelpers:SRE K=Features_RemovableStorage}"
+                EmptyText="Insert USB or disc to play music or video."
+                IsEmpty="{Binding DriveItems.IsEmpty}">
+                <features:ListMenuLayout.ContentPanel>
+                    <ScrollView MaxHeight="120">
+                        <ItemsControl ItemsSource="{Binding DriveItems}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Spacing="1" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid
+                                        Padding="15,5"
+                                        Background="{ThemeResource ItemBackground}"
+                                        ColumnDefinitions="Auto,*,Auto"
+                                        ColumnSpacing="15">
+                                        <FontIcon VerticalAlignment="Center" Glyph="{Binding Icon}" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            Text="{Binding Text}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollView>
+                </features:ListMenuLayout.ContentPanel>
+            </features:ListMenuLayout>
+        </Grid>
+    </Grid>
+</apps:MainWindowPage>

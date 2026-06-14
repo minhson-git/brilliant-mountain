@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<core:WindowEx
+    x:Class="IOApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:apps="using:IOApp"
+    xmlns:core="using:IOCore"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="using:IOApp.Pages"
+    mc:Ignorable="d">
+
+    <Grid d:DataContext="{d:DesignInstance Type=apps:MainWindow}" Background="{ThemeResource WindowBackground}">
+        <Grid RowDefinitions="Auto,*">
+            <coreUI:TitleBarEx
+                x:Name="TitleBar"
+                x:FieldModifier="Public"
+                IsPaneToggleButtonVisible="False"
+                IsSubtitleVisible="False">
+                <coreUI:TitleBarEx.RightHeader>
+                    <StackPanel Orientation="Horizontal">
+                        <coreUI:IconTextButton
+                            Command="{Binding ShowPremiumDialogCommand}"
+                            Icon="&#xE728;"
+                            IsTheme="True"
+                            Text="{core:SRE K=Premium}"
+                            Visibility="{Binding License.Status.IsTrial}" />
+                        <coreUI:IconButton
+                            Name="PromotionAppItemButton"
+                            Command="{Binding Menu.ShowPromotionCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                            Icon="&#xEC24;"
+                            Variant="Text"
+                            Visibility="{Binding PromotionAppItems.IsNotEmpty}" />
+                        <coreUI:IconButton
+                            Command="{Binding ShowSupportDialogCommand}"
+                            Corner="None"
+                            Icon="&#xE715;"
+                            Variant="Text" />
+                        <coreUI:IconButton
+                            Command="{Binding Menu.ShowMenuCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                            Icon="&#xE713;"
+                            Variant="Text" />
+                    </StackPanel>
+                </coreUI:TitleBarEx.RightHeader>
+            </coreUI:TitleBarEx>
+
+            <coreUI:NavigationViewEx
+                x:Name="NavigationView"
+                Grid.Row="1"
+                x:FieldModifier="Public"
+                IsPaneVisible="False">
+                <coreUI:NavigationViewEx.MenuItems>
+                    <coreUI:NavigationViewItemEx PageType="{core:X T=pages:Home}" />
+                </coreUI:NavigationViewEx.MenuItems>
+
+                <Frame Name="_frame" Background="{ThemeResource PageBackground}" />
+            </coreUI:NavigationViewEx>
+        </Grid>
+    </Grid>
+</core:WindowEx>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<coreUI:UserControlEx
+    x:Class="IOApp.Features.FileControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:coreHelpers="using:IOCore.Helpers"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:features="using:IOApp.Features"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="using:CommunityToolkit.WinUI.Media"
+    d:DataContext="{d:DesignInstance Type=features:SecureFileItem}"
+    mc:Ignorable="d">
+
+    <Grid
+        Width="256"
+        Height="225"
+        Background="{ThemeResource IconItemBackgroundGroup}"
+        RowDefinitions="144,*">
+        <Grid
+            DoubleTapped="Item_DoubleTapped"
+            RowDefinitions="144"
+            Visibility="{Binding IsCorrupted, Converter={StaticResource InvertedBoolConverter}}">
+            <Grid Width="256" Height="144">
+                <FontIcon
+                    FontSize="64"
+                    Foreground="{ThemeResource Foreground2}"
+                    Glyph="&#xE8B7;"
+                    Visibility="{Binding FileType, ConverterParameter=Directory, Converter={StaticResource EnumComparisonToBoolConverter}}" />
+                <FontIcon
+                    FontSize="64"
+                    Foreground="{ThemeResource Foreground2}"
+                    Glyph="&#xE8A5;"
+                    Visibility="{Binding FileType, ConverterParameter=Document|Unknown, Converter={StaticResource EnumComparisonToBoolConverter}}" />
+                <features:MediaThumbnail
+                    CanPlay="{Binding FileType, ConverterParameter=Video|Audio, Converter={StaticResource EnumComparisonToBoolConverter}}"
+                    ThumbnailPath="{Binding Thumbnail}"
+                    UseLayoutRounding="False"
+                    Visibility="{Binding FileType, ConverterParameter=Video|Image, Converter={StaticResource EnumComparisonToBoolConverter}}" />
+                <FontIcon
+                    FontSize="64"
+                    Foreground="{ThemeResource Foreground2}"
+                    Glyph="&#xEC4F;"
+                    Visibility="{Binding FileType, ConverterParameter=Audio, Converter={StaticResource EnumComparisonToBoolConverter}}" />
+            </Grid>
+
+            <Border Visibility="{Binding Censor, ConverterParameter=Blur, Converter={StaticResource EnumComparisonToBoolConverter}}">
+                <Border.Background>
+                    <media:BackdropBlurBrush Amount="24" />
+                </Border.Background>
+            </Border>
+        </Grid>
+
+        <Grid
+            Grid.Row="1"
+            Padding="5"
+            ColumnDefinitions="190,*,60">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock
+                    FontSize="14"
+                    MaxLines="2"
+                    Text="{Binding OriginalInfo.Name, ConverterParameter=64, Converter={StaticResource TrimStringConverter}}"
+                    TextWrapping="Wrap"
+                    ToolTipService.ToolTip="{Binding OriginalInfo.Name}" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{ThemeResource Foreground2}"
+                        Visibility="{Binding IsCorrupted, Converter={StaticResource InvertedBoolConverter}}">
+                        <Run Text="{Binding EncryptedInfo.CreationTime, Converter={StaticResource DateTimeToStringConverter}}" />
+                        <Run Text=" " />
+                        <Run Text="{Binding FileSizeStr}" />
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel
+                Grid.Column="2"
+                VerticalAlignment="Center"
+                Orientation="Horizontal"
+                Spacing="5">
+                <coreUI:ABIconButton
+                    BIcon="&#xEA18;"
+                    Click="MenuItemButton_Click"
+                    Icon="&#xEA18;"
+                    IsEnabled="{Binding Status.S, ConverterParameter=Loading, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"
+                    IsTheme="{Binding Censor, ConverterParameter=Blur, Converter={StaticResource EnumComparisonToBoolConverter}}"
+                    Size="SM"
+                    Tag="Censor"
+                    Visibility="{Binding InputInfo.IsCorrupted, Converter={StaticResource InvertedBoolConverter}}" />
+
+                <coreUI:IconButton
+                    Icon="&#xe712;"
+                    IsEnabled="{Binding Status.S, ConverterParameter=Loading, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"
+                    Size="SM">
+                    <coreUI:IconButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <features:MenuFlyoutItemEx
+                                Click="MenuItemButton_Click"
+                                IsVisible0="{Binding FileType, ConverterParameter=Image, Converter={StaticResource EnumComparisonToBoolConverter}}"
+                                IsVisible1="{Binding IsCorrupted, Converter={StaticResource InvertedBoolConverter}}"
+                                Tag="ViewOrPlay"
+                                Text="{coreHelpers:SRE K=View}">
+                                <features:MenuFlyoutItemEx.Icon>
+                                    <FontIcon Glyph="&#xE91B;" />
+                                </features:MenuFlyoutItemEx.Icon>
+                            </features:MenuFlyoutItemEx>
+                            <features:MenuFlyoutItemEx
+                                Click="MenuItemButton_Click"
+                                IsVisible0="{Binding FileType, ConverterParameter=Video|Audio, Converter={StaticResource EnumComparisonToBoolConverter}}"
+                                IsVisible1="{Binding IsCorrupted, Converter={StaticResource InvertedBoolConverter}}"
+                                Tag="ViewOrPlay"
+                                Text="{coreHelpers:SRE K=Play}">
+                                <features:MenuFlyoutItemEx.Icon>
+                                    <FontIcon Glyph="&#xE768;" />
+                                </features:MenuFlyoutItemEx.Icon>
+                            </features:MenuFlyoutItemEx>
+                            <features:MenuFlyoutItemEx
+                                Click="MenuItemButton_Click"
+                                IsVisible0="{Binding Censor, ConverterParameter=Blur, Converter={StaticResource EnumComparisonToBoolConverter}}"
+                                IsVisible1="{Binding IsCorrupted, Converter={StaticResource InvertedBoolConverter}}"
+                                Tag="Censor"
+                                Text="{coreHelpers:SRE K=Features_Unblur}">
+                                <features:MenuFlyoutItemEx.Icon>
+                                    <FontIcon Glyph="&#xEA18;" />
+                                </features:MenuFlyoutItemEx.Icon>
+                            </features:MenuFlyoutItemEx>
+                            <features:MenuFlyoutItemEx
+                                Click="MenuItemButton_Click"
+                                IsVisible0="{Binding Censor, ConverterParameter=None, Converter={StaticResource EnumComparisonToBoolConverter}}"
+                                IsVisible1="{Binding IsCorrupted, Converter={StaticResource InvertedBoolConverter}}"
+                                Tag="Censor"
+                                Text="{coreHelpers:SRE K=Features_Blur}">
+                                <features:MenuFlyoutItemEx.Icon>
+                                    <FontIcon Glyph="&#xEA18;" />
+                                </features:MenuFlyoutItemEx.Icon>
+                            </features:MenuFlyoutItemEx>
+                            <features:MenuFlyoutItemEx
+                                Click="MenuItemButton_Click"
+                                IsVisible0="{Binding IsCorrupted, Converter={StaticResource InvertedBoolConverter}}"
+                                Tag="Export"
+                                Text="{coreHelpers:SRE K=Export}">
+                                <features:MenuFlyoutItemEx.Icon>
+                                    <FontIcon Glyph="&#xE898;" />
+                                </features:MenuFlyoutItemEx.Icon>
+                            </features:MenuFlyoutItemEx>
+                            <features:MenuFlyoutItemEx
+                                Click="MenuItemButton_Click"
+                                Tag="Properties"
+                                Text="{coreHelpers:SRE K=Properties}">
+                                <features:MenuFlyoutItemEx.Icon>
+                                    <FontIcon Glyph="&#xE946;" />
+                                </features:MenuFlyoutItemEx.Icon>
+                            </features:MenuFlyoutItemEx>
+                            <features:MenuFlyoutItemEx
+                                Click="MenuItemButton_Click"
+                                Foreground="{ThemeResource Failure}"
+                                Tag="RemovePermanently"
+                                Text="{coreHelpers:SRE K=RemovePermanently}">
+                                <features:MenuFlyoutItemEx.Icon>
+                                    <FontIcon Glyph="&#xE74D;" />
+                                </features:MenuFlyoutItemEx.Icon>
+                            </features:MenuFlyoutItemEx>
+                        </MenuFlyout>
+                    </coreUI:IconButton.Flyout>
+                </coreUI:IconButton>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</coreUI:UserControlEx>

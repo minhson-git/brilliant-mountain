@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<aw:PremiumWindowPremiumPage
+    x:Class="IOApp.Pages.Premium"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ag="using:IOApp.Gens"
+    xmlns:ap="using:IOApp.Pages"
+    xmlns:aw="using:IOApp.Windows"
+    xmlns:cc="using:IOCore.Converters"
+    xmlns:cl="using:IOCore.License"
+    xmlns:cp="using:IOCore.Premium"
+    xmlns:cui="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <aw:PremiumWindowPremiumPage.Resources>
+        <ap:PremiumProxy x:Name="Proxy" _="{x:Bind}" />
+
+        <cc:BoolToResourceStringConverter
+            x:Key="BoolToResourceString"
+            FalseValue="PurchaseNow"
+            TrueValue="SubscribeNow" />
+
+        <ap:StoreIdToGradientConverter x:Key="StoreIdToGradient" />
+    </aw:PremiumWindowPremiumPage.Resources>
+
+    <Grid>
+        <ScrollViewer
+            HorizontalScrollBarVisibility="Auto"
+            HorizontalScrollMode="Enabled"
+            VerticalScrollBarVisibility="Auto"
+            VerticalScrollMode="Enabled">
+            <ScrollViewer.Background>
+                <ImageBrush ImageSource="ms-appx:///Assets/premium-bg.jpg" Stretch="UniformToFill" />
+            </ScrollViewer.Background>
+
+            <Grid
+                Margin="0,20,0,0"
+                VerticalAlignment="Top"
+                RowDefinitions="Auto,Auto">
+                <StackPanel
+                    Width="800"
+                    HorizontalAlignment="Center"
+                    Spacing="5">
+                    <Grid ColumnDefinitions="*,100,100" Opacity="0.7">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="SemiBold"
+                            Foreground="#fff"
+                            Text="{ag:SR K=ComparePlans}" />
+                        <TextBlock
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            FontSize="18"
+                            FontWeight="SemiBold"
+                            Foreground="#fff"
+                            Text="{ag:SR K=Free}" />
+                        <TextBlock
+                            Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            FontSize="18"
+                            FontWeight="SemiBold"
+                            Foreground="#fff"
+                            Text="{x:Bind cp:PremiumCore.I.ConceptText}" />
+                    </Grid>
+
+                    <ItemsRepeater ItemsSource="{x:Bind cp:PremiumCore.I.FeatureExItems}">
+                        <ItemsRepeater.ItemTemplate>
+                            <DataTemplate x:DataType="cp:FeatureEx">
+                                <Grid
+                                    Padding="0,10"
+                                    BorderBrush="White"
+                                    BorderThickness="0,0,0,1"
+                                    ColumnDefinitions="50,*,100,100">
+                                    <FontIcon
+                                        FontSize="18"
+                                        Foreground="#fff"
+                                        Glyph="{x:Bind Icon}" />
+
+                                    <TextBlock Grid.Column="1" TextWrapping="WrapWholeWords">
+                                        <Run
+                                            FontSize="18"
+                                            Foreground="#fff"
+                                            Text="{x:Bind Title}" />
+                                        <LineBreak />
+                                        <Run Foreground="#cfff" Text="{x:Bind Headline}" />
+                                    </TextBlock>
+
+                                    <FontIcon
+                                        Grid.Column="2"
+                                        FontSize="10"
+                                        Foreground="#fff"
+                                        Glyph="&#xEF2D;" />
+
+                                    <FontIcon
+                                        Grid.Column="3"
+                                        HorizontalAlignment="Center"
+                                        FontSize="24"
+                                        Foreground="#fff"
+                                        Glyph="&#xE8FB;" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsRepeater.ItemTemplate>
+                    </ItemsRepeater>
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    Spacing="15">
+                    <StackPanel Margin="0,24,0,0" HorizontalAlignment="Center">
+                        <TextBlock
+                            FontSize="24"
+                            FontWeight="SemiBold"
+                            Foreground="White"
+                            HorizontalTextAlignment="Center"
+                            Text="{ag:SR K=Premium_PlanTitle}" />
+                        <TextBlock
+                            MaxWidth="800"
+                            FontSize="18"
+                            Foreground="White"
+                            HorizontalTextAlignment="Center"
+                            Text="{ag:SR K=Premium_PlanSubtitle}"
+                            TextWrapping="WrapWholeWords" />
+                    </StackPanel>
+
+                    <StackPanel Spacing="5">
+                        <ItemsRepeater HorizontalAlignment="Center" ItemsSource="{x:Bind cp:PremiumCore.I.AddOnItems}">
+                            <ItemsRepeater.Layout>
+                                <StackLayout Orientation="Horizontal" Spacing="20" />
+                            </ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate x:DataType="cp:ProductItem">
+                                    <StackPanel
+                                        Width="280"
+                                        Padding="15"
+                                        BorderBrush="{x:Bind Config, Converter={StaticResource StoreIdToGradient}}"
+                                        BorderThickness="2"
+                                        CornerRadius="8"
+                                        Spacing="10">
+                                        <TextBlock
+                                            HorizontalAlignment="Stretch"
+                                            FontSize="20"
+                                            FontWeight="SemiBold"
+                                            Foreground="#fff"
+                                            Text="{x:Bind Title}" />
+
+                                        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                            <TextBlock
+                                                Margin="0,0,5,0"
+                                                VerticalAlignment="Bottom"
+                                                FontSize="16"
+                                                Foreground="{ThemeResource Foreground2}"
+                                                Text="{x:Bind BasePrice}"
+                                                TextDecorations="Strikethrough"
+                                                Visibility="{x:Bind IsOnSale, Converter={StaticResource Bool}}" />
+
+                                            <TextBlock
+                                                VerticalAlignment="Bottom"
+                                                FontSize="20"
+                                                FontWeight="SemiBold"
+                                                Foreground="#fff"
+                                                Text="{x:Bind Price}" />
+
+                                            <TextBlock
+                                                VerticalAlignment="Bottom"
+                                                FontSize="16"
+                                                Foreground="#fff">
+                                                <Run Text="/" />
+                                                <Run Text="{x:Bind Config.Title}" />
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                        <TextBlock
+                                            HorizontalAlignment="Left"
+                                            FontSize="16"
+                                            Foreground="{ThemeResource Foreground2}"
+                                            Text="{x:Bind Config.Subtitle}"
+                                            TextWrapping="WrapWholeWords" />
+
+                                        <cui:IconTextButton
+                                            HorizontalAlignment="Stretch"
+                                            Background="{x:Bind Config.StoreId, Converter={StaticResource StoreIdToGradient}}"
+                                            Command="{Binding _.PurchaseCommand, Source={StaticResource Proxy}}"
+                                            CommandParameter="{x:Bind}"
+                                            Foreground="#000"
+                                            IsArcCorner="True"
+                                            IsEnabled="{x:Bind Product, Converter={StaticResource InvertedIsNull}}"
+                                            Text="{x:Bind Product.IsSubscription, Converter={StaticResource BoolToResourceString}}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <!--<HyperlinkButton
+                                HorizontalAlignment="Center"
+                                Content="{ag:SR K=Premium_HowToCancelSubscription}"
+                                FontSize="16"
+                                Foreground="{ThemeResource Foreground2}"
+                                NavigateUri="{x:Bind cp:PremiumCore.I.CancelSubscriptionUri}" />-->
+                            <HyperlinkButton
+                                HorizontalAlignment="Center"
+                                Command="{x:Bind RestorePurchaseCommand}"
+                                Content="{ag:SR K=Premium_RestorePurchase}"
+                                FontSize="16" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                Foreground="{ThemeResource Theme}"
+                                Text="{ag:SR K=Premium_LicenseExpired}"
+                                Visibility="{x:Bind cl:IOLicense.I.Status.IsPurchasedAndExpired, Mode=OneWay, Converter={StaticResource Bool}}" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</aw:PremiumWindowPremiumPage>

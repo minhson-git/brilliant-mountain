@@ -1,0 +1,2447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="About" xml:space="preserve">
+    <value>Thông tin ứng dụng</value>
+  </data>
+  <data name="Activate" xml:space="preserve">
+    <value>Kích hoạt</value>
+  </data>
+  <data name="ActivateAll" xml:space="preserve">
+    <value>Kích hoạt tất cả</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Thêm</value>
+  </data>
+  <data name="AddAlbum" xml:space="preserve">
+    <value>Thêm album</value>
+  </data>
+  <data name="AddAudio" xml:space="preserve">
+    <value>Thêm audio</value>
+  </data>
+  <data name="AddAudios" xml:space="preserve">
+    <value>Thêm audio</value>
+  </data>
+  <data name="AddFile" xml:space="preserve">
+    <value>Thêm tập tin</value>
+  </data>
+  <data name="AddFileAndFolder" xml:space="preserve">
+    <value>Thêm tập tin và thư mục</value>
+  </data>
+  <data name="AddFileOrFolder" xml:space="preserve">
+    <value>Thêm tập tin hoặc thư mục</value>
+  </data>
+  <data name="AddFiles" xml:space="preserve">
+    <value>Thêm tập tin</value>
+  </data>
+  <data name="AddFilesAndFolders" xml:space="preserve">
+    <value>Thêm tập tin và thư mục</value>
+  </data>
+  <data name="AddFilesOrFolders" xml:space="preserve">
+    <value>Thêm tập tin hoặc thư mục</value>
+  </data>
+  <data name="AddFolder" xml:space="preserve">
+    <value>Thêm thư mục</value>
+  </data>
+  <data name="AddFolders" xml:space="preserve">
+    <value>Thêm thư mục</value>
+  </data>
+  <data name="AddImage" xml:space="preserve">
+    <value>Thêm ảnh</value>
+  </data>
+  <data name="AddImages" xml:space="preserve">
+    <value>Thêm ảnh</value>
+  </data>
+  <data name="AddImagesToAlbum" xml:space="preserve">
+    <value>Thêm hình ảnh vào album {0}</value>
+  </data>
+  <data name="AddToAlbum" xml:space="preserve">
+    <value>Thêm vào album</value>
+  </data>
+  <data name="AddToFavorite" xml:space="preserve">
+    <value>Thêm vào mục yêu thích</value>
+  </data>
+  <data name="AddToPlaylist" xml:space="preserve">
+    <value>Thêm vào danh sách phát</value>
+  </data>
+  <data name="AddVideo" xml:space="preserve">
+    <value>Thêm video</value>
+  </data>
+  <data name="AddVideoFolderOrMusicFolder" xml:space="preserve">
+    <value>Thêm thư mục video hoặc thư mục nhạc</value>
+  </data>
+  <data name="AddVideoOrAudio" xml:space="preserve">
+    <value>Thêm video hoặc audio</value>
+  </data>
+  <data name="AddVideoOrMusic" xml:space="preserve">
+    <value>Thêm video hoặc nhạc</value>
+  </data>
+  <data name="AddVideos" xml:space="preserve">
+    <value>Thêm video</value>
+  </data>
+  <data name="AddVideosAudiosToAlbum" xml:space="preserve">
+    <value>Thêm video, âm thanh vào album {0}</value>
+  </data>
+  <data name="AddVideosAudiosToPlaylist" xml:space="preserve">
+    <value>Thêm video, âm thanh vào danh sách phát {0}</value>
+  </data>
+  <data name="AddVideosOrAudios" xml:space="preserve">
+    <value>Thêm video hoặc audio</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>Nâng cao</value>
+  </data>
+  <data name="AdvancedSettings" xml:space="preserve">
+    <value>Cài đặt nâng cao</value>
+  </data>
+  <data name="After" xml:space="preserve">
+    <value>Sau</value>
+  </data>
+  <data name="AfterFinishingPlayingThePlaylist" xml:space="preserve">
+    <value>Sau khi phát xong danh sách phát</value>
+  </data>
+  <data name="AfterFinishingTheMedia" xml:space="preserve">
+    <value>Sau khi xem xong video (audio)</value>
+  </data>
+  <data name="Album" xml:space="preserve">
+    <value>Album</value>
+  </data>
+  <data name="AlbumName" xml:space="preserve">
+    <value>Tên album</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Tất cả</value>
+  </data>
+  <data name="AllApps" xml:space="preserve">
+    <value>Tất cả ứng dụng</value>
+  </data>
+  <data name="AllProcessingSessionsWillBeTerminated" xml:space="preserve">
+    <value>Tất cả các tiến trình đang xử lý sẽ bị dừng lại.</value>
+  </data>
+  <data name="AlreadyExisting" xml:space="preserve">
+    <value>Đã tồn tại</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Áp dụng</value>
+  </data>
+  <data name="ApplyPrivacySettingsSubtitle" xml:space="preserve">
+    <value>Việc này sẽ áp dụng cho tất cả các mục sau khi xác nhận.</value>
+  </data>
+  <data name="ApplyPrivacySettingsTitle" xml:space="preserve">
+    <value>Bạn có muốn lưu cấu hình này không?</value>
+  </data>
+  <data name="ApplyThisSettingToAllItems" xml:space="preserve">
+    <value>Áp dụng cấu hình này cho tất cả</value>
+  </data>
+  <data name="ApplyToAll" xml:space="preserve">
+    <value>Áp dụng cho tất cả</value>
+  </data>
+  <data name="Argument" xml:space="preserve">
+    <value>Đối số</value>
+  </data>
+  <data name="Arguments" xml:space="preserve">
+    <value>Đối số</value>
+  </data>
+  <data name="Ascending" xml:space="preserve">
+    <value>Tăng dần</value>
+  </data>
+  <data name="AspectRatio" xml:space="preserve">
+    <value>Tỷ lệ</value>
+  </data>
+  <data name="Audio" xml:space="preserve">
+    <value>Âm thanh</value>
+  </data>
+  <data name="AudioGrabber" xml:space="preserve">
+    <value>Trình tải âm thanh</value>
+  </data>
+  <data name="AudioInfo" xml:space="preserve">
+    <value>Thông tin audio</value>
+  </data>
+  <data name="AudioStreamNotFound" xml:space="preserve">
+    <value>Không tìm thấy luồng âm thanh.</value>
+  </data>
+  <data name="Audios" xml:space="preserve">
+    <value>Âm thanh</value>
+  </data>
+  <data name="AudiosEmptyHint" xml:space="preserve">
+    <value>Tệp âm thanh bạn lưu sẽ hiển thị tại đây</value>
+  </data>
+  <data name="Auto" xml:space="preserve">
+    <value>Tự động</value>
+  </data>
+  <data name="AutoPlay" xml:space="preserve">
+    <value>Tự động phát</value>
+  </data>
+  <data name="AvailableInTheFuture" xml:space="preserve">
+    <value>Tính năng này sẽ hiện hữu trong tương lai.</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Trở về</value>
+  </data>
+  <data name="Background" xml:space="preserve">
+    <value>Hình nền</value>
+  </data>
+  <data name="BePatient" xml:space="preserve">
+    <value>Vui lòng kiên nhẫn, chúng tôi đang xử lý...</value>
+  </data>
+  <data name="BlackAndWhite" xml:space="preserve">
+    <value>Đen trắng</value>
+  </data>
+  <data name="BlackAndWhiteF" xml:space="preserve">
+    <value>Đen trắng</value>
+  </data>
+  <data name="Block" xml:space="preserve">
+    <value>Chặn</value>
+  </data>
+  <data name="Blue" xml:space="preserve">
+    <value>Màu xanh da trời</value>
+  </data>
+  <data name="Bluetooth" xml:space="preserve">
+    <value>Bluetooth</value>
+  </data>
+  <data name="Blur" xml:space="preserve">
+    <value>Mờ</value>
+  </data>
+  <data name="BlurAll" xml:space="preserve">
+    <value>Làm mờ tất cả hình ảnh</value>
+  </data>
+  <data name="BlurIntensity" xml:space="preserve">
+    <value>Cường độ mờ</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>Cả hai</value>
+  </data>
+  <data name="Bottom" xml:space="preserve">
+    <value>Dưới</value>
+  </data>
+  <data name="Brightness" xml:space="preserve">
+    <value>Sáng</value>
+  </data>
+  <data name="BrightnessContrast" xml:space="preserve">
+    <value>Độ sáng/Độ tương phản</value>
+  </data>
+  <data name="Buy" xml:space="preserve">
+    <value>Mua</value>
+  </data>
+  <data name="BuyNow" xml:space="preserve">
+    <value>Mua ngay</value>
+  </data>
+  <data name="CDRom" xml:space="preserve">
+    <value>CD-ROM</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="CancelSubscription" xml:space="preserve">
+    <value>Hủy đăng ký</value>
+  </data>
+  <data name="CannotBeUndone" xml:space="preserve">
+    <value>Không thể hoàn tác thao tác này</value>
+  </data>
+  <data name="Capture" xml:space="preserve">
+    <value>Bắt</value>
+  </data>
+  <data name="CellcularData" xml:space="preserve">
+    <value>Dữ liệu di động</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="ClearAll" xml:space="preserve">
+    <value>Xóa tất cả</value>
+  </data>
+  <data name="ClearItemList" xml:space="preserve">
+    <value>Xóa danh sách</value>
+  </data>
+  <data name="ClearMissingItems" xml:space="preserve">
+    <value>Xóa tập tin không tồn tại</value>
+  </data>
+  <data name="ClearSelectedItems" xml:space="preserve">
+    <value>Xóa mục đã chọn</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  <data name="Closing" xml:space="preserve">
+    <value>Đang đóng</value>
+  </data>
+  <data name="Collection" xml:space="preserve">
+    <value>Bộ sưu tập</value>
+  </data>
+  <data name="CollectionItemsEmptyHint" xml:space="preserve">
+    <value>Các mục trong bộ sưu tập sẽ hiển thị tại đây</value>
+  </data>
+  <data name="CollectionsEmptyHint" xml:space="preserve">
+    <value>Bộ sưu tập bạn thêm sẽ hiển thị tại đây</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Màu sắc</value>
+  </data>
+  <data name="Colors" xml:space="preserve">
+    <value>Màu sắc</value>
+  </data>
+  <data name="CompanyFullName" xml:space="preserve">
+    <value>Công ty TNHH Larige</value>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>Larige</value>
+  </data>
+  <data name="ComparePlans" xml:space="preserve">
+    <value>So sánh các gói</value>
+  </data>
+  <data name="Compress" xml:space="preserve">
+    <value>Nén</value>
+  </data>
+  <data name="CompressAll" xml:space="preserve">
+    <value>Nén tất cả</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Xác nhận mật khẩu</value>
+  </data>
+  <data name="ConnectWithUsOnTwitter" xml:space="preserve">
+    <value>Kết nối với chúng tôi trên Twitter</value>
+  </data>
+  <data name="ConnectWithUsOnTwitterDescription" xml:space="preserve">
+    <value>Liên hệ, nhận thông báo sớm nhất về các tính năng mới.</value>
+  </data>
+  <data name="ContentNotAvailableMessage" xml:space="preserve">
+    <value>Nội dung không khả dụng. Vui lòng khám phá các nguồn tương thích khác.</value>
+  </data>
+  <data name="Contrast" xml:space="preserve">
+    <value>Tương phản</value>
+  </data>
+  <data name="Convert" xml:space="preserve">
+    <value>Chuyển đổi</value>
+  </data>
+  <data name="Convert2MP3" xml:space="preserve">
+    <value>Chuyển đổi sang mp3</value>
+  </data>
+  <data name="Convert2MP4" xml:space="preserve">
+    <value>Chuyển đổi sang MP4</value>
+  </data>
+  <data name="ConvertAll" xml:space="preserve">
+    <value>Chuyển đổi tất cả</value>
+  </data>
+  <data name="ConvertTo" xml:space="preserve">
+    <value>Chuyển đổi sang</value>
+  </data>
+  <data name="Converting" xml:space="preserve">
+    <value>Đang chuyển đổi</value>
+  </data>
+  <data name="Copied" xml:space="preserve">
+    <value>Đã sao chép</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Sao chép</value>
+  </data>
+  <data name="CopyLink" xml:space="preserve">
+    <value>Sao chép liên kết</value>
+  </data>
+  <data name="CopyPasteThenScan" xml:space="preserve">
+    <value>Sao chép - Dán liên kết của bạn rồi nhấn Quét.</value>
+  </data>
+  <data name="CopyTo" xml:space="preserve">
+    <value>Sao chép tới</value>
+  </data>
+  <data name="CreateAlbum" xml:space="preserve">
+    <value>Tạo album</value>
+  </data>
+  <data name="CreateNew" xml:space="preserve">
+    <value>Tạo mới</value>
+  </data>
+  <data name="CreatePlaylist" xml:space="preserve">
+    <value>Tạo danh sách phát</value>
+  </data>
+  <data name="CreationTime" xml:space="preserve">
+    <value>Thời gian tạo</value>
+  </data>
+  <data name="Credit" xml:space="preserve">
+    <value>Bản quyền ©2021-{0} {1}. Bảo lưu mọi quyền.</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>Cắt</value>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Phong tục</value>
+  </data>
+  <data name="Customization" xml:space="preserve">
+    <value>Tùy chỉnh</value>
+  </data>
+  <data name="Customize" xml:space="preserve">
+    <value>Tùy chỉnh</value>
+  </data>
+  <data name="Darkness" xml:space="preserve">
+    <value>Bóng tối</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Bảng điều khiển</value>
+  </data>
+  <data name="DateCreated" xml:space="preserve">
+    <value>Ngày tạo</value>
+  </data>
+  <data name="DateModified" xml:space="preserve">
+    <value>Ngày chỉnh sửa</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Ngày</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>Ngày</value>
+  </data>
+  <data name="Deactivate" xml:space="preserve">
+    <value>Hủy kích hoạt</value>
+  </data>
+  <data name="DeactivateAll" xml:space="preserve">
+    <value>Hủy kích hoạt tất cả</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Mặc định</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="DeleteAll" xml:space="preserve">
+    <value>Xóa tất cả</value>
+  </data>
+  <data name="DeleteSelected" xml:space="preserve">
+    <value>Xóa đã chọn</value>
+  </data>
+  <data name="Descending" xml:space="preserve">
+    <value>Giảm dần</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Mô tả</value>
+  </data>
+  <data name="Deselect" xml:space="preserve">
+    <value>Bỏ chọn</value>
+  </data>
+  <data name="DeselectAll" xml:space="preserve">
+    <value>Bỏ chọn tất cả</value>
+  </data>
+  <data name="Difference" xml:space="preserve">
+    <value>Dung lượng</value>
+  </data>
+  <data name="Dimension" xml:space="preserve">
+    <value>Độ phân giải</value>
+  </data>
+  <data name="Disable" xml:space="preserve">
+    <value>Vô hiệu hóa</value>
+  </data>
+  <data name="DisableAll" xml:space="preserve">
+    <value>Vô hiệu hết</value>
+  </data>
+  <data name="DiscoverMoreApps" xml:space="preserve">
+    <value>Khám phá các ứng dụng khác</value>
+  </data>
+  <data name="DiscoverMoreAppsDescription" xml:space="preserve">
+    <value>Xem và tải các ứng dụng hữu ích khác cho Windows.</value>
+  </data>
+  <data name="DiscoverMoreUsefulApps" xml:space="preserve">
+    <value>Khám phá ứng dụng hữu ích</value>
+  </data>
+  <data name="DoNothing" xml:space="preserve">
+    <value>Không làm gì cả</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Xong</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Tải xuống</value>
+  </data>
+  <data name="DownloadNotSupportSiteMessage" xml:space="preserve">
+    <value>Trang web này không được hỗ trợ. Vui lòng khám phá các trang web phổ biến khác.</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Thời lượng</value>
+  </data>
+  <data name="ETAOutputSize" xml:space="preserve">
+    <value>Dung lượng dự kiến</value>
+  </data>
+  <data name="EchoShield_Content" xml:space="preserve">
+    <value>Màn hình EchoShield sẽ xuất hiện trước khi vào ứng dụng,
+mỗi khi bạn mở ứng dụng nếu bạn bật tính năng này,
+giúp bạn trì hoãn việc mở ứng dụng.
+
+Tính năng này hữu ích khi bạn có nội dung cá nhân hoặc nhạy cảm,
+cần thêm thời gian để cân nhắc,
+tránh việc vô tình mở ứng dụng và để người xung quanh nhìn thấy.</value>
+  </data>
+  <data name="EchoShield_Title" xml:space="preserve">
+    <value>Giải trí trên màn hình</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Chỉnh sửa</value>
+  </data>
+  <data name="EditListname" xml:space="preserve">
+    <value>Chỉnh sửa tên danh sách</value>
+  </data>
+  <data name="Eink" xml:space="preserve">
+    <value>E-ink</value>
+  </data>
+  <data name="Empty" xml:space="preserve">
+    <value>Trống</value>
+  </data>
+  <data name="EmptyDrivesSubtitle" xml:space="preserve">
+    <value>Hoặc cắm USB vào cổng USB.</value>
+  </data>
+  <data name="EmptyDrivesTitle" xml:space="preserve">
+    <value>Đưa đĩa CD/DVD vào để phát</value>
+  </data>
+  <data name="EmptyLink" xml:space="preserve">
+    <value>Vui lòng cung cấp liên kết trước khi tìm kiếm.</value>
+  </data>
+  <data name="Enable" xml:space="preserve">
+    <value>Cho phép</value>
+  </data>
+  <data name="EnableAll" xml:space="preserve">
+    <value>Cho phép hết</value>
+  </data>
+  <data name="EnableHardwareAcceleration" xml:space="preserve">
+    <value>Kích hoạt tăng tốc phần cứng</value>
+  </data>
+  <data name="Encrypt" xml:space="preserve">
+    <value>Mã hóa</value>
+  </data>
+  <data name="EncryptAll" xml:space="preserve">
+    <value>Mã hóa tất cả</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>Kết thúc</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Nhập mật khẩu của bạn</value>
+  </data>
+  <data name="EnterPasswordSubtitle" xml:space="preserve">
+    <value>Nhập mật khẩu của bạn để mở khóa mục này</value>
+  </data>
+  <data name="Entry" xml:space="preserve">
+    <value>Đầu vào</value>
+  </data>
+  <data name="Error_AlbumAlreadyExisted" xml:space="preserve">
+    <value>Tên album đã tồn tại</value>
+  </data>
+  <data name="EstimatedFileSize" xml:space="preserve">
+    <value>Dung lượng dự kiến</value>
+  </data>
+  <data name="EstimatedFileSizeDesc" xml:space="preserve">
+    <value>Kích thước hiển thị chỉ là ước tính. Dung lượng cuối cùng có thể thay đổi tùy thuộc vào mã hóa gốc, định dạng đã chọn và quá trình tối ưu hóa để đảm bảo cân bằng giữa chất lượng và bộ nhớ.</value>
+  </data>
+  <data name="Every" xml:space="preserve">
+    <value>Mỗi</value>
+  </data>
+  <data name="ExistedCollection" xml:space="preserve">
+    <value>Bộ sưu tập này đã tồn tại.</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Thoát</value>
+  </data>
+  <data name="Expired" xml:space="preserve">
+    <value>Hết hạn</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Xuất</value>
+  </data>
+  <data name="ExportToComputer" xml:space="preserve">
+    <value>Xuất ra máy tính của bạn</value>
+  </data>
+  <data name="Extension" xml:space="preserve">
+    <value>Mở rộng</value>
+  </data>
+  <data name="ExternalDisk" xml:space="preserve">
+    <value>Ổ cứng di động</value>
+  </data>
+  <data name="FM" xml:space="preserve">
+    <value>FM</value>
+  </data>
+  <data name="FMRadio" xml:space="preserve">
+    <value>Đài FM</value>
+  </data>
+  <data name="FailedToCreateDirectory" xml:space="preserve">
+    <value>Không tạo được thư mục</value>
+  </data>
+  <data name="Favorite" xml:space="preserve">
+    <value>Yêu thích</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Tệp</value>
+  </data>
+  <data name="FileInfo" xml:space="preserve">
+    <value>Thông tin tập tin</value>
+  </data>
+  <data name="FileOrFolderDoesNotExist" xml:space="preserve">
+    <value>Tập tin hoặc thư mục không tồn tại</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>Kích thước</value>
+  </data>
+  <data name="FileType" xml:space="preserve">
+    <value>Loại tập tin</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Tệp</value>
+  </data>
+  <data name="FilesOnly" xml:space="preserve">
+    <value>Chỉ file</value>
+  </data>
+  <data name="Flip" xml:space="preserve">
+    <value>Lật</value>
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Thư mục</value>
+  </data>
+  <data name="FolderInfo" xml:space="preserve">
+    <value>Thông tin thư mục</value>
+  </data>
+  <data name="Folders" xml:space="preserve">
+    <value>Thư mục</value>
+  </data>
+  <data name="Follow" xml:space="preserve">
+    <value>Theo dõi</value>
+  </data>
+  <data name="FollowUsOn" xml:space="preserve">
+    <value>Theo dõi chúng tôi trên {0}</value>
+  </data>
+  <data name="FollowUsOnDescription" xml:space="preserve">
+    <value>để cập nhật thông tin về app này, các chương trình khuyến mại, yêu cầu tính năng và tìm hiểu thêm về chúng tôi.</value>
+  </data>
+  <data name="Format" xml:space="preserve">
+    <value>Định dạng</value>
+  </data>
+  <data name="FormatOptimizationMessage" xml:space="preserve">
+    <value>Việc lưu phương tiện với tùy chọn tối ưu hóa định dạng (MP3, MP4) sẽ mất nhiều thời gian hơn bình thường.</value>
+  </data>
+  <data name="Frame" xml:space="preserve">
+    <value>Khung</value>
+  </data>
+  <data name="Frames" xml:space="preserve">
+    <value>Khung</value>
+  </data>
+  <data name="Free" xml:space="preserve">
+    <value>Miễn phí</value>
+  </data>
+  <data name="FreeTrial" xml:space="preserve">
+    <value>Dùng thử miễn phí</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>Từ</value>
+  </data>
+  <data name="FromFiles" xml:space="preserve">
+    <value>Từ tệp</value>
+  </data>
+  <data name="FullLicense" xml:space="preserve">
+    <value>Bản quyền đầy đủ</value>
+  </data>
+  <data name="Gallery" xml:space="preserve">
+    <value>Phòng trưng bày</value>
+  </data>
+  <data name="GetIt" xml:space="preserve">
+    <value>Tải</value>
+  </data>
+  <data name="GrabAll" xml:space="preserve">
+    <value>Tải tất cả</value>
+  </data>
+  <data name="GrabAllItemsOfCollection" xml:space="preserve">
+    <value>Hành động này sẽ tải tất cả mục trong bộ sưu tập. Tiếp tục?</value>
+  </data>
+  <data name="GrabAllItemsOfList" xml:space="preserve">
+    <value>Hành động này sẽ tải tất cả mục trong danh sách. Tiếp tục?</value>
+  </data>
+  <data name="GrabThisCollectionTitle" xml:space="preserve">
+    <value>Tải bộ sưu tập này?</value>
+  </data>
+  <data name="GrabThisItem" xml:space="preserve">
+    <value>Tải mục này</value>
+  </data>
+  <data name="GrabThisListTitle" xml:space="preserve">
+    <value>Tải danh sách này?</value>
+  </data>
+  <data name="GrabToEnd" xml:space="preserve">
+    <value>Tải từ đây đến cuối</value>
+  </data>
+  <data name="GrabToOriginalFile" xml:space="preserve">
+    <value>Tải vào tệp gốc</value>
+  </data>
+  <data name="Grayscale" xml:space="preserve">
+    <value>Xám</value>
+  </data>
+  <data name="GrayscaleF" xml:space="preserve">
+    <value>Xám</value>
+  </data>
+  <data name="Green" xml:space="preserve">
+    <value>Màu xanh lá</value>
+  </data>
+  <data name="H" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Cao</value>
+  </data>
+  <data name="HelpAndSupport" xml:space="preserve">
+    <value>Hỗ trợ</value>
+  </data>
+  <data name="HelpAndSupportDescription" xml:space="preserve">
+    <value>Bạn có thể sử dụng biểu mẫu bên dưới để liên hệ, báo cáo lỗi và yêu cầu tính năng.</value>
+  </data>
+  <data name="Hide" xml:space="preserve">
+    <value>Ẩn</value>
+  </data>
+  <data name="HorizontalFlip" xml:space="preserve">
+    <value>Lật ngang</value>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>Giờ</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>Giờ</value>
+  </data>
+  <data name="HowToUse" xml:space="preserve">
+    <value>Cách sử dụng</value>
+  </data>
+  <data name="IcoSize" xml:space="preserve">
+    <value>Kích thước ICO</value>
+  </data>
+  <data name="Ignore" xml:space="preserve">
+    <value>Bỏ qua</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Ảnh</value>
+  </data>
+  <data name="Image_Contain" xml:space="preserve">
+    <value>Chứa trong</value>
+  </data>
+  <data name="Image_Cover" xml:space="preserve">
+    <value>Phủ toàn bộ</value>
+  </data>
+  <data name="Image_Fill" xml:space="preserve">
+    <value>Lấp đầy</value>
+  </data>
+  <data name="Image_FixedHeight" xml:space="preserve">
+    <value>Cố định cao</value>
+  </data>
+  <data name="Image_FixedWidth" xml:space="preserve">
+    <value>Cố định rộng</value>
+  </data>
+  <data name="Image_FloydSteinberg" xml:space="preserve">
+    <value>Floyd-Steinberg</value>
+  </data>
+  <data name="Image_Graph" xml:space="preserve">
+    <value>Đồ thị</value>
+  </data>
+  <data name="Image_Interlaced" xml:space="preserve">
+    <value>Xen kẽ</value>
+  </data>
+  <data name="Image_Lossless" xml:space="preserve">
+    <value>Lossless</value>
+  </data>
+  <data name="Image_Lossy" xml:space="preserve">
+    <value>Lossy</value>
+  </data>
+  <data name="Image_MaxHeight" xml:space="preserve">
+    <value>Độ cao tối đa</value>
+  </data>
+  <data name="Image_MaxWidth" xml:space="preserve">
+    <value>Độ rộng tối đa</value>
+  </data>
+  <data name="Image_MinHeight" xml:space="preserve">
+    <value>Độ cao tối thiểu</value>
+  </data>
+  <data name="Image_MinWidth" xml:space="preserve">
+    <value>Độ rộng tối thiểu</value>
+  </data>
+  <data name="Image_MissingEspLib" xml:space="preserve">
+    <value>Cần thêm thư viện</value>
+  </data>
+  <data name="Image_MissingEspLibDesc" xml:space="preserve">
+    <value>Để xử lý tệp .eps, vui lòng tải, cài đặt thêm thư việc sau và khởi động lại ứng dụng.</value>
+  </data>
+  <data name="Image_Percentage" xml:space="preserve">
+    <value>Tỷ lệ phần trăm</value>
+  </data>
+  <data name="Image_Photo" xml:space="preserve">
+    <value>Ảnh chụp</value>
+  </data>
+  <data name="Image_Picture" xml:space="preserve">
+    <value>Ảnh họa</value>
+  </data>
+  <data name="Image_Progressive" xml:space="preserve">
+    <value>Lũy tiến</value>
+  </data>
+  <data name="Image_PseudoRandom" xml:space="preserve">
+    <value>Pseudo random</value>
+  </data>
+  <data name="Image_RemoveAllMetadata" xml:space="preserve">
+    <value>Xóa tất cả metadata</value>
+  </data>
+  <data name="Image_RemoveExifMetadata" xml:space="preserve">
+    <value>Xóa EXIF metadata</value>
+  </data>
+  <data name="Image_RemoveIptcMetadata" xml:space="preserve">
+    <value>Xóa IPTC metadata</value>
+  </data>
+  <data name="Image_RemoveXmpMetadata" xml:space="preserve">
+    <value>Xóa XMP metadata</value>
+  </data>
+  <data name="Image_Riemersma" xml:space="preserve">
+    <value>Riemersma</value>
+  </data>
+  <data name="Image_SameAsInput" xml:space="preserve">
+    <value>Tương tự đầu vào</value>
+  </data>
+  <data name="Image_SegmentSmooth" xml:space="preserve">
+    <value>Segment smooth</value>
+  </data>
+  <data name="Image_Simple" xml:space="preserve">
+    <value>Simple</value>
+  </data>
+  <data name="Image_Strong" xml:space="preserve">
+    <value>Strong</value>
+  </data>
+  <data name="Image_UseCamera" xml:space="preserve">
+    <value>Theo cấu hình Camera</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Ảnh</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Nhập</value>
+  </data>
+  <data name="InAppPurchases" xml:space="preserve">
+    <value>Mua hàng trong app</value>
+  </data>
+  <data name="Inactive_EchoShield" xml:space="preserve">
+    <value>Không hoạt động</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Mật khẩu không đúng</value>
+  </data>
+  <data name="Increase" xml:space="preserve">
+    <value>Tăng</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Thông tin</value>
+  </data>
+  <data name="Info_HardwareAcceleration" xml:space="preserve">
+    <value>Tăng tốc phần cứng</value>
+  </data>
+  <data name="Info_HardwareAccelerationDesc" xml:space="preserve">
+    <value>Bật tăng tốc phần cứng sẽ cải thiện thời lượng pin, hiệu suất và khả năng phản hồi của máy tính. Tăng tốc phần cứng giảm tải một số tác vụ nhất định từ CPU sang GPU hoặc bất kỳ phần cứng chuyên dụng nào khác có thể thực hiện công việc hiệu quả hơn, dẫn đến thời gian xử lý nhanh hơn và pin lâu hơn.</value>
+  </data>
+  <data name="Info_ImageFitType" xml:space="preserve">
+    <value>Cách điều chỉnh kích thước</value>
+  </data>
+  <data name="Info_ImageFitTypeDesc" xml:space="preserve">
+    <value>Cho phép nhúng nhiều kích thước vào một tệp và đặt cách thay đổi kích thước hình ảnh để vừa với vùng chứa hình ảnh:
+• Chứa: hình ảnh được thu nhỏ để duy trì tỷ lệ khung hình trong khi vừa với hộp nội dung của hình ảnh. Toàn bộ đối tượng được tạo để lấp đầy hộp, trong khi vẫn giữ nguyên tỷ lệ khung hình của nó.
+• Bìa: hình ảnh được thay đổi kích thước để duy trì tỷ lệ khung hình trong khi lấp đầy toàn bộ ô nội dung của hình ảnh. Nếu tỷ lệ khung hình của đối tượng không khớp với tỷ lệ khung hình của hộp thì đối tượng sẽ bị cắt bớt cho vừa.
+• Fill: hình ảnh được thay đổi kích thước để lấp đầy ô nội dung của hình ảnh. Toàn bộ hình ảnh sẽ lấp đầy hoàn toàn hộp. Nếu tỷ lệ khung hình của hình ảnh không khớp với tỷ lệ khung hình của hộp thì hình ảnh sẽ được kéo dài cho vừa.</value>
+  </data>
+  <data name="Info_Interlaced" xml:space="preserve">
+    <value>Xen kẽ (interlaced)</value>
+  </data>
+  <data name="Info_InterlacedDesc" xml:space="preserve">
+    <value>Chọn cách nó nén và hiển thị hình ảnh:
+• Không xen kẽ (non-interlaced): Hình ảnh sẽ tải và hiển thị theo dòng từ trên xuống dưới.
+• Xen kẽ (interlaced): tải các đường lẻ của ảnh và hiển thị các đường lẻ, sau đó tiếp tục tải và hiển thị đường chẵn.</value>
+  </data>
+  <data name="Info_InterlacedProgressive" xml:space="preserve">
+    <value>Xen kẽ PNG và lũy tiến JPEG (interlaced và progressive)</value>
+  </data>
+  <data name="Info_InterlacedProgressiveDesc" xml:space="preserve">
+    <value>Xen kẽ PNG (interlaced)
+• Không xen kẽ (non-interlaced): Hình ảnh sẽ tải và hiển thị theo dòng từ trên xuống dưới.
+• Xen kẽ (interlaced): tải các đường lẻ của ảnh và hiển thị các đường lẻ, sau đó tiếp tục tải và hiển thị đường chẵn.
+Lỹ tiến JPEG (progressive)
+• Đường cơ sở (baseline): Từ trên xuống dưới.
+• Lũy tiến (progressive): Từ mờ đến sắc nét. phù hợp cho các hình ảnh lớn sẽ được hiển thị trong khi tải xuống kết nối chậm, cho phép xem trước ảnh dưới dạng mờ khi chỉ nhận được một phần dữ liệu.</value>
+  </data>
+  <data name="Info_LimitReachedSubtitle" xml:space="preserve">
+    <value>Phiên bản miễn phí chỉ giới hạn xử lý {0} nội dung đầu tiên của danh sách. Để thu thập toàn bộ, vui lòng nâng cấp lên phiên bản trả phí.</value>
+  </data>
+  <data name="Info_LimitReachedTitle" xml:space="preserve">
+    <value>Đã đạt giới hạn lưu trữ</value>
+  </data>
+  <data name="Info_Progressive" xml:space="preserve">
+    <value>Lũy tiến (progressive)</value>
+  </data>
+  <data name="Info_ProgressiveDesc" xml:space="preserve">
+    <value>Chọn cách nó nén và hiển thị hình ảnh:
+• Đường cơ sở (baseline): Từ trên xuống dưới.
+• Lũy tiến (progressive): Từ mờ đến sắc nét. phù hợp cho các hình ảnh lớn sẽ được hiển thị trong khi tải xuống kết nối chậm, cho phép xem trước ảnh dưới dạng mờ khi chỉ nhận được một phần dữ liệu.</value>
+  </data>
+  <data name="Info_Quality" xml:space="preserve">
+    <value>Chất lượng</value>
+  </data>
+  <data name="Info_QualityDesc" xml:space="preserve">
+    <value>Chất lượng càng cao thì kích thước file càng cao và ngược lại.</value>
+  </data>
+  <data name="Info_TrialLimitItems" xml:space="preserve">
+    <value>Bản dùng thử giới hạn {0} mục đầu tiên</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Đầu vào</value>
+  </data>
+  <data name="InputFileInfo" xml:space="preserve">
+    <value>Thông tin tập tin đầu vào</value>
+  </data>
+  <data name="InsertUSBToOpen" xml:space="preserve">
+    <value>Cắm USB hoặc đĩa để phát nhạc hoặc video.</value>
+  </data>
+  <data name="InstallDate" xml:space="preserve">
+    <value>Ngày cài đặt</value>
+  </data>
+  <data name="InstallIOPrivateText" xml:space="preserve">
+    <value>Bảo vệ hình ảnh của bạn với IO Private.
+
+Sau khi cài đặt IO Private, bạn có thể giữ an toàn cho hình ảnh của mình.
+
+IO Private có sẵn trên Microsoft Store.</value>
+  </data>
+  <data name="InstallIconMakerStudioText" xml:space="preserve">
+    <value>Tạo file icon (.ico) bằng Icon Maker Studio.
+
+Sau khi cài đặt Icon Maker Studio, bạn có thể tạo icon với các tính năng nâng cao như cắt ảnh, mỗi kích thước là 1 ảnh khác nhau, ...
+
+Icon Maker Studio đã có sẵn trên Microsoft Store.</value>
+  </data>
+  <data name="InstallPhototypeText" xml:space="preserve">
+    <value>Xem hình ảnh này {0} bằng Phototype miễn phí.
+
+Sau khi cài đặt Phototype, bạn có thể xem hình ảnh ở bất kỳ định dạng nào.
+
+Phototype đã có sẵn trên Microsoft Store.</value>
+  </data>
+  <data name="InstallPlayerText" xml:space="preserve">
+    <value>Chơi {0} với trình phát {1} miễn phí.
+
+Sau khi cài đặt {1}, bạn có thể phát video, âm thanh ở bất kỳ định dạng nào.
+
+{1} có sẵn trên Microsoft Store.</value>
+  </data>
+  <data name="InstallPlaylistText" xml:space="preserve">
+    <value>Phát {0} miễn phí với Play-list.
+
+Sau khi cài đặt Play-list, bạn có thể phát video, âm thanh ở bất kỳ định dạng nào.
+
+Play-list có sẵn trên Microsoft Store.</value>
+  </data>
+  <data name="InstallViewerText" xml:space="preserve">
+    <value>Xem hình ảnh này {0} với {1} miễn phí.
+
+Sau khi cài đặt {1}, bạn có thể xem hình ảnh ở bất kỳ định dạng nào.
+
+{1} có sẵn trên Microsoft Store.</value>
+  </data>
+  <data name="InstalledDate" xml:space="preserve">
+    <value>Ngày cài đặt</value>
+  </data>
+  <data name="InstallerSubtitle" xml:space="preserve">
+    <value>This application's purpose is to hinder the view of other people to the app. Clicking yes will mask all the thumbnails of the items base on your privacy settings, this does not affect the original images.</value>
+  </data>
+  <data name="InstallerTitle" xml:space="preserve">
+    <value>Do you want to mask all your content?</value>
+  </data>
+  <data name="InvalidCollectionLink" xml:space="preserve">
+    <value>Liên kết bộ sưu tập không hợp lệ</value>
+  </data>
+  <data name="InvalidCollectionLinkDesc" xml:space="preserve">
+    <value>Liên kết này là một nội dung đơn. Bạn có muốn xử lý ngay không?</value>
+  </data>
+  <data name="InvalidEmailAddress" xml:space="preserve">
+    <value>Email của bạn không hợp lệ.</value>
+  </data>
+  <data name="Item" xml:space="preserve">
+    <value>mục</value>
+  </data>
+  <data name="ItemTitle" xml:space="preserve">
+    <value>Tiêu đề</value>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>mục</value>
+  </data>
+  <data name="KeepPcAwakeWhileProcessing" xml:space="preserve">
+    <value>Giữ máy tính thức khi đang xử lý</value>
+  </data>
+  <data name="Keyboard" xml:space="preserve">
+    <value>Bàn phím</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Ngôn ngữ</value>
+  </data>
+  <data name="LanguageDeDe" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="LanguageEnUs" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="LanguageEsEs" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="LanguageFrFr" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="LanguageInfo" xml:space="preserve">
+    <value>Nếu đặt thành Tự động, ngôn ngữ gốc của phương tiện sẽ được sử dụng. Nếu chọn một ngôn ngữ cụ thể, nó sẽ được ưu tiên nếu có; nếu không, ngôn ngữ gốc sẽ được sử dụng.</value>
+  </data>
+  <data name="LanguageItIt" xml:space="preserve">
+    <value>Italiano</value>
+  </data>
+  <data name="LanguageJaJp" xml:space="preserve">
+    <value>日本</value>
+  </data>
+  <data name="LanguageKoKr" xml:space="preserve">
+    <value>한국인</value>
+  </data>
+  <data name="LanguagePtBr" xml:space="preserve">
+    <value>Português</value>
+  </data>
+  <data name="LanguageSetting" xml:space="preserve">
+    <value>Cài đặt ngôn ngữ</value>
+  </data>
+  <data name="LanguageUsingSystemSetting" xml:space="preserve">
+    <value>Dùng cấu hình hệ thống</value>
+  </data>
+  <data name="LanguageViVn" xml:space="preserve">
+    <value>Tiếng Việt</value>
+  </data>
+  <data name="LanguageZhHant" xml:space="preserve">
+    <value>中文</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>Lần cuối</value>
+  </data>
+  <data name="LastPlayed" xml:space="preserve">
+    <value>Lần cuối phát</value>
+  </data>
+  <data name="LastWriteTime" xml:space="preserve">
+    <value>Thời gian ghi cuối cùng</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>Để sau</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Tìm hiểu thêm</value>
+  </data>
+  <data name="Left" xml:space="preserve">
+    <value>Trái</value>
+  </data>
+  <data name="Legal" xml:space="preserve">
+    <value>Pháp lý</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>Thư viện</value>
+  </data>
+  <data name="LicensingInformation" xml:space="preserve">
+    <value>Thông tin giấy phép</value>
+  </data>
+  <data name="Limit" xml:space="preserve">
+    <value>Giới hạn</value>
+  </data>
+  <data name="LinksNotChanged" xml:space="preserve">
+    <value>Không phát hiện thay đổi nào.</value>
+  </data>
+  <data name="List" xml:space="preserve">
+    <value>Danh sách</value>
+  </data>
+  <data name="ListItemsEmptyHint" xml:space="preserve">
+    <value>Các mục trong danh sách sẽ hiển thị tại đây</value>
+  </data>
+  <data name="ListsEmptyHint" xml:space="preserve">
+    <value>Danh sách bạn thêm sẽ hiển thị tại đây</value>
+  </data>
+  <data name="Load" xml:space="preserve">
+    <value>Tải</value>
+  </data>
+  <data name="LoadCorruptedFile" xml:space="preserve">
+    <value>Tệp bạn đang tải không được hỗ trợ hoặc bị hỏng, vui lòng thử lại với định dạng khác</value>
+  </data>
+  <data name="LoadCorruptedSomeFiles" xml:space="preserve">
+    <value>Một số tập tin hoặc thư mục không thể mở được</value>
+  </data>
+  <data name="LocalDisk" xml:space="preserve">
+    <value>Ổ đĩa nội bộ</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Vị trí</value>
+  </data>
+  <data name="Lock" xml:space="preserve">
+    <value>Khóa</value>
+  </data>
+  <data name="LockScreen" xml:space="preserve">
+    <value>Khóa màn hình</value>
+  </data>
+  <data name="LockScreenContent" xml:space="preserve">
+    <value>Chế độ này giúp làm mờ màn hình để bảo vệ quyền riêng tư hoặc tiết kiệm pin. Nhấn vào nút bên dưới để thoát.</value>
+  </data>
+  <data name="MakeDefault" xml:space="preserve">
+    <value>Mặc định</value>
+  </data>
+  <data name="MaxQuality" xml:space="preserve">
+    <value>Chất lượng tối đa</value>
+  </data>
+  <data name="Media" xml:space="preserve">
+    <value>Đa phương tiện</value>
+  </data>
+  <data name="MediaEmptyHint" xml:space="preserve">
+    <value>Phương tiện bạn lưu sẽ hiển thị tại đây</value>
+  </data>
+  <data name="Media_Album" xml:space="preserve">
+    <value>Album</value>
+  </data>
+  <data name="Media_Artists" xml:space="preserve">
+    <value>Nghệ sĩ</value>
+  </data>
+  <data name="Media_AudioBitrate" xml:space="preserve">
+    <value>Audio bitrate</value>
+  </data>
+  <data name="Media_AudioChannel" xml:space="preserve">
+    <value>Audio channel</value>
+  </data>
+  <data name="Media_AudioCodec" xml:space="preserve">
+    <value>Audio codec</value>
+  </data>
+  <data name="Media_FrameRate" xml:space="preserve">
+    <value>Frame rate</value>
+  </data>
+  <data name="Media_Genre" xml:space="preserve">
+    <value>Thể loại</value>
+  </data>
+  <data name="Media_SampleRate" xml:space="preserve">
+    <value>Sample rate</value>
+  </data>
+  <data name="Media_VideoBitrate" xml:space="preserve">
+    <value>Video bitrate</value>
+  </data>
+  <data name="Media_VideoCodec" xml:space="preserve">
+    <value>Video codec</value>
+  </data>
+  <data name="MimeType" xml:space="preserve">
+    <value>Kiểu MIME</value>
+  </data>
+  <data name="MinimizeToTrayAtStartup" xml:space="preserve">
+    <value>Thu nhỏ vào khay khi khởi động</value>
+  </data>
+  <data name="Minute" xml:space="preserve">
+    <value>Phút</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>Phút</value>
+  </data>
+  <data name="Missing" xml:space="preserve">
+    <value>Mất</value>
+  </data>
+  <data name="MissingFile" xml:space="preserve">
+    <value>Mất tập tin</value>
+  </data>
+  <data name="MobileAPR_FreeSubTitle" xml:space="preserve">
+    <value>Tải miễn phí {0} cho điện thoại của bạn</value>
+  </data>
+  <data name="MobileAPR_SubTitle" xml:space="preserve">
+    <value>Tải {0} cho điện thoại của bạn</value>
+  </data>
+  <data name="MobileAPR_Title" xml:space="preserve">
+    <value>{0} cho di động</value>
+  </data>
+  <data name="MobileBroadband" xml:space="preserve">
+    <value>Mạng di động</value>
+  </data>
+  <data name="MobileData" xml:space="preserve">
+    <value>Mạng di động</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Tháng</value>
+  </data>
+  <data name="Months" xml:space="preserve">
+    <value>Tháng</value>
+  </data>
+  <data name="MoreApps" xml:space="preserve">
+    <value>Ứng dụng hữu ích</value>
+  </data>
+  <data name="MoreAppsDescription" xml:space="preserve">
+    <value>Các ứng dụng được cập nhật thường xuyên.</value>
+  </data>
+  <data name="MoreAppsTitle" xml:space="preserve">
+    <value>Tải các ứng dụng hữu ích từ chúng tôi</value>
+  </data>
+  <data name="Mouse" xml:space="preserve">
+    <value>Chuột</value>
+  </data>
+  <data name="Multiple" xml:space="preserve">
+    <value>Hàng loạt</value>
+  </data>
+  <data name="MusicGrabber" xml:space="preserve">
+    <value>Trình tải nhạc</value>
+  </data>
+  <data name="Mute" xml:space="preserve">
+    <value>Tắt tiếng</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Tên</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Mới</value>
+  </data>
+  <data name="NewUpdateAvailable" xml:space="preserve">
+    <value>Đã có bản cập nhật mới!</value>
+  </data>
+  <data name="NewUpdateAvailableMessage" xml:space="preserve">
+    <value>Cập nhật {0} lên v{1} để trải nghiệm các tính năng mới nhất và sửa lỗi.</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Không</value>
+  </data>
+  <data name="NoAudioStreamFoundMessage" xml:space="preserve">
+    <value>Không tìm thấy luồng âm thanh nào trong tệp đầu vào.</value>
+  </data>
+  <data name="NoLimit" xml:space="preserve">
+    <value>Không giới hạn</value>
+  </data>
+  <data name="NoVideoStreamFoundMessage" xml:space="preserve">
+    <value>Không tìm thấy luồng video nào trong tệp đầu vào.</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Không</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>Không tìm thấy</value>
+  </data>
+  <data name="NothingInList" xml:space="preserve">
+    <value>Danh sách rỗng</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>Tắt</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Đồng ý</value>
+  </data>
+  <data name="Okay" xml:space="preserve">
+    <value>Đồng ý</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>Bật</value>
+  </data>
+  <data name="OnlineAudioGrabber" xml:space="preserve">
+    <value>Trình Truy Xuất Âm Thanh Web</value>
+  </data>
+  <data name="OnlineMediaGrabberDesc" xml:space="preserve">
+    <value>Truy xuất và lưu trữ các nội dung đa phương tiện được cấp phép của bạn để truy cập ngoại tuyến cá nhân.</value>
+  </data>
+  <data name="OnlineMusicGrabber" xml:space="preserve">
+    <value>Trình Truy Xuất Nhạc Web</value>
+  </data>
+  <data name="OnlineVideoGrabber" xml:space="preserve">
+    <value>Trình Truy Xuất Video Web</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Mở</value>
+  </data>
+  <data name="OpenAll" xml:space="preserve">
+    <value>Mở toàn bộ</value>
+  </data>
+  <data name="OpenFile" xml:space="preserve">
+    <value>Mở tập tin</value>
+  </data>
+  <data name="OpenFileAfterProcessing" xml:space="preserve">
+    <value>Mở file sau khi xử lý</value>
+  </data>
+  <data name="OpenFiles" xml:space="preserve">
+    <value>Mở tập tin</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Mở thư mục</value>
+  </data>
+  <data name="OpenFolders" xml:space="preserve">
+    <value>Mở thư mục</value>
+  </data>
+  <data name="OpenImage" xml:space="preserve">
+    <value>Mở ảnh</value>
+  </data>
+  <data name="OpenImages" xml:space="preserve">
+    <value>Mở ảnh</value>
+  </data>
+  <data name="OpenVideosOrMusic" xml:space="preserve">
+    <value>Mở video hoặc nhạc</value>
+  </data>
+  <data name="OpenWithDefaultApp" xml:space="preserve">
+    <value>Mở bằng ứng dụng mặc định</value>
+  </data>
+  <data name="OpenWithOtherApps" xml:space="preserve">
+    <value>Mở bằng ứng dụng khác</value>
+  </data>
+  <data name="OptimizeAudioToMp3" xml:space="preserve">
+    <value>Tự động tối ưu hóa âm thanh sang MP3</value>
+  </data>
+  <data name="OptimizeAudioToMp3Desc" xml:space="preserve">
+    <value>Một số âm thanh gốc không có định dạng MP3. Tùy chọn này giúp tự động tối ưu hóa các tệp này sang MP3 trong quá trình lưu.</value>
+  </data>
+  <data name="OptimizeVideoToMp4" xml:space="preserve">
+    <value>Tự động tối ưu hóa phương tiện sang MP4</value>
+  </data>
+  <data name="OptimizeVideoToMp4Desc" xml:space="preserve">
+    <value>Một số mục gốc có thể ở nhiều định dạng khác nhau. Tùy chọn này giúp tự động tối ưu hóa các tệp này sang MP4 trong quá trình lưu. Quá trình này có thể mất nhiều thời gian hơn.</value>
+  </data>
+  <data name="OrDragAndDrop" xml:space="preserve">
+    <value>Hoặc kéo thả</value>
+  </data>
+  <data name="Original" xml:space="preserve">
+    <value>Nguyên bản</value>
+  </data>
+  <data name="OriginalF" xml:space="preserve">
+    <value>Nguyên bản</value>
+  </data>
+  <data name="OtherSupportMethod" xml:space="preserve">
+    <value>Cần 1 cách liên hệ khác? Xin vui lòng gửi đến developer@larige.co</value>
+  </data>
+  <data name="OurWebsite" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="OurWebsiteDescription" xml:space="preserve">
+    <value>Để tìm hiểu, liên hệ hoặc cần hỗ trợ thêm vui lòng truy cập website của chúng tôi</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Đầu ra</value>
+  </data>
+  <data name="OutputFolderMustBeSet" xml:space="preserve">
+    <value>Thư mục đầu ra phải được đặt</value>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>Định dạng đầu ra</value>
+  </data>
+  <data name="OverwriteExistingFiles" xml:space="preserve">
+    <value>Ghi đè các tập tin hiện có</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
+  <data name="PasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
+    <value>Mật khẩu và mật khẩu xác nhận không khớp</value>
+  </data>
+  <data name="PasswordIsNotEmpty" xml:space="preserve">
+    <value>Mật khẩu không được để trống</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Dán</value>
+  </data>
+  <data name="PasteCollectionLinkHint" xml:space="preserve">
+    <value>Dán liên kết bộ sưu tập, sau đó nhấn Tìm kiếm để sưu tầm nội dung.</value>
+  </data>
+  <data name="PasteLinkOrIdHint" xml:space="preserve">
+    <value>Dán liên kết hoặc ID, sau đó nhấn Tìm kiếm để thu thập nội dung.</value>
+  </data>
+  <data name="PasteNewLine" xml:space="preserve">
+    <value>Dán vào dòng mới</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>Tạm dừng</value>
+  </data>
+  <data name="PermanentlyDelete" xml:space="preserve">
+    <value>Xóa vĩnh viễn</value>
+  </data>
+  <data name="Play" xml:space="preserve">
+    <value>Phát</value>
+  </data>
+  <data name="PlayAll" xml:space="preserve">
+    <value>Phát tất cả</value>
+  </data>
+  <data name="Playlist" xml:space="preserve">
+    <value>Danh sách phát</value>
+  </data>
+  <data name="PlusCopy" xml:space="preserve">
+    <value>+ Sao chép</value>
+  </data>
+  <data name="PlusVersion" xml:space="preserve">
+    <value>Phiên bản Plus</value>
+  </data>
+  <data name="Preferences" xml:space="preserve">
+    <value>Thiết lập</value>
+  </data>
+  <data name="PreferredLanguage" xml:space="preserve">
+    <value>Ngôn ngữ ưu tiên</value>
+  </data>
+  <data name="PreferredLanguageDesc" xml:space="preserve">
+    <value>Chọn ngôn ngữ ưu tiên cho nội dung sưu tầm. Nếu không có, hệ thống sẽ tự động lấy ngôn ngữ mặc định sẵn có.</value>
+  </data>
+  <data name="Premium" xml:space="preserve">
+    <value>Cao cấp</value>
+  </data>
+  <data name="Premium_ActiveAllPremiumFeatures" xml:space="preserve">
+    <value>Active all premium features</value>
+  </data>
+  <data name="Premium_AnnuallyBilling" xml:space="preserve">
+    <value>Thanh toán hàng năm</value>
+  </data>
+  <data name="Premium_BuyOnceUseForever" xml:space="preserve">
+    <value>Mua một lần, sử dụng mãi mãi</value>
+  </data>
+  <data name="Premium_ConvertMoreSubtitle1" xml:space="preserve">
+    <value>Không chỉ MP4, MP3</value>
+  </data>
+  <data name="Premium_ConvertMoreSubtitle2" xml:space="preserve">
+    <value>Mà còn: MOV, MKV, AVI, WEBM, AAC, OGG, FLAC, WAV, ...</value>
+  </data>
+  <data name="Premium_ConvertMoreTitle" xml:space="preserve">
+    <value>Nhiều lựa chọn chuyển đổi video và âm thanh hơn</value>
+  </data>
+  <data name="Premium_Converter0Headline" xml:space="preserve">
+    <value>FLAC để giữ chất lượng tốt hơn và OGG để tiết kiệm dung lượng lưu trữ, …</value>
+  </data>
+  <data name="Premium_Converter0Title" xml:space="preserve">
+    <value>Converter hỗ trợ nhiều định dạng đầu ra hơn, không chỉ MP3 và MP4</value>
+  </data>
+  <data name="Premium_Converter1Headline" xml:space="preserve">
+    <value>Tăng hoặc giảm độ phân giải và tốc độ bit để cân bằng chất lượng và tiết kiệm dung lượng lưu trữ</value>
+  </data>
+  <data name="Premium_Converter1Title" xml:space="preserve">
+    <value>Converter có nhiều tùy chọn về chất lượng, không chỉ Tự động</value>
+  </data>
+  <data name="Premium_Getter0Headline" xml:space="preserve">
+    <value>Dễ dàng thu thập âm thanh chất lượng 192kbps, 320kbps, hoặc lossless 1411kbps cho kho nhạc cá nhân của bạn.</value>
+  </data>
+  <data name="Premium_Getter0Title" xml:space="preserve">
+    <value>Trình Truy Xuất Âm Thanh Hi-Fi: Hỗ trợ 192kbps, 320kbps, 512kbps, lên đến 1411kbps.</value>
+  </data>
+  <data name="Premium_HowToCancelSubscription" xml:space="preserve">
+    <value>Cách hủy đăng ký</value>
+  </data>
+  <data name="Premium_LicenseExpired" xml:space="preserve">
+    <value>Giấy phép hết hạn</value>
+  </data>
+  <data name="Premium_MonthlyBilling" xml:space="preserve">
+    <value>Thanh toán hàng tháng</value>
+  </data>
+  <data name="Premium_MorePlaybackOptionSubtitle1" xml:space="preserve">
+    <value>0,125x ... 2,5x, tốc độ 3x</value>
+  </data>
+  <data name="Premium_MorePlaybackOptionSubtitle2" xml:space="preserve">
+    <value>Dễ dàng xem lướt hoặc xem xét nội dung chi tiết hơn.</value>
+  </data>
+  <data name="Premium_MorePlaybackOptionTitle" xml:space="preserve">
+    <value>Nhiều tùy chọn tốc độ chơi hơn</value>
+  </data>
+  <data name="Premium_NoAdsSubtitle1" xml:space="preserve">
+    <value>Gỡ quảng cáo</value>
+  </data>
+  <data name="Premium_NoAdsSubtitle2" xml:space="preserve">
+    <value>Tập trung vào những gì cần thiết.</value>
+  </data>
+  <data name="Premium_NoAdsTitle" xml:space="preserve">
+    <value>Không quảng cáo</value>
+  </data>
+  <data name="Premium_OneTime" xml:space="preserve">
+    <value>Thanh toán một lần</value>
+  </data>
+  <data name="Premium_OneTimePayment" xml:space="preserve">
+    <value>One-time payment, no subscription</value>
+  </data>
+  <data name="Premium_PlanSubtitle" xml:space="preserve">
+    <value>Chọn một gói phù hợp với mục tiêu Ngắn hạn, Trung hạn hoặc Dài hạn của bạn</value>
+  </data>
+  <data name="Premium_PlanTitle" xml:space="preserve">
+    <value>Các gói giá linh hoạt để đáp ứng nhu cầu của bạn</value>
+  </data>
+  <data name="Premium_Player0Headline" xml:space="preserve">
+    <value>Không cảm thấy nặng nề khi ngủ quên hoặc rời khỏi máy tính vì nó tự động tắt</value>
+  </data>
+  <data name="Premium_Player0Title" xml:space="preserve">
+    <value>Player có nhiều tùy chọn hơn về thời gian tắt máy</value>
+  </data>
+  <data name="Premium_Player1Headline" xml:space="preserve">
+    <value>Xem lại một lúc hoặc lướt qua các phần không quan trọng của video</value>
+  </data>
+  <data name="Premium_Player1Title" xml:space="preserve">
+    <value>Player có nhiều tùy chọn hơn về tốc độ phát lại</value>
+  </data>
+  <data name="Premium_PremiumFeatures" xml:space="preserve">
+    <value>Tính năng cao cấp</value>
+  </data>
+  <data name="Premium_PurchasePremiumIntro" xml:space="preserve">
+    <value>Sở hữu các tính năng độc quyền cùng</value>
+  </data>
+  <data name="Premium_QuarterlyBilling" xml:space="preserve">
+    <value>Thanh toán hàng quý</value>
+  </data>
+  <data name="Premium_RestorePurchase" xml:space="preserve">
+    <value>Khôi phục giao dịch</value>
+  </data>
+  <data name="Premium_ScheduleShutdownSubtitle1" xml:space="preserve">
+    <value>Tự động tắt máy tính</value>
+  </data>
+  <data name="Premium_ScheduleShutdownSubtitle2" xml:space="preserve">
+    <value>Khi hết video hoặc hết danh sách phát hoặc đặt hẹn giờ tắt máy.</value>
+  </data>
+  <data name="Premium_ScheduleShutdownTitle" xml:space="preserve">
+    <value>Kích hoạt đầy đủ tính năng hẹn giờ tắt máy</value>
+  </data>
+  <data name="Premium_SemiAnnuallyBilling" xml:space="preserve">
+    <value>Thanh toán nửa năm một lần</value>
+  </data>
+  <data name="Premium_TinySubtitle1" xml:space="preserve">
+    <value>Trải nghiệm Mini Player tốt hơn</value>
+  </data>
+  <data name="Premium_TinySubtitle2" xml:space="preserve">
+    <value>Điều chỉnh kích thước Mini Player lên đến 2 lần</value>
+  </data>
+  <data name="Premium_TinyTitle" xml:space="preserve">
+    <value>Mini Player tiện lợi hơn</value>
+  </data>
+  <data name="Premium_UnlimitedLibrarySubtitle1" xml:space="preserve">
+    <value>Thư viện không giới hạn</value>
+  </data>
+  <data name="Premium_UnlimitedLibrarySubtitle2" xml:space="preserve">
+    <value>Gỡ bỏ giới hạn {0} thư mục âm thanh, phim.</value>
+  </data>
+  <data name="Premium_UnlimitedLibraryTitle" xml:space="preserve">
+    <value>Quản lý thư mục</value>
+  </data>
+  <data name="PreventDefault" xml:space="preserve">
+    <value>Dừng mặc định</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>In</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Chính sách cá nhân</value>
+  </data>
+  <data name="PrivacySettings" xml:space="preserve">
+    <value>Thiết lập riêng tư</value>
+  </data>
+  <data name="PrivacySettingsSubtitle" xml:space="preserve">
+    <value>Các cấu hình chỉ nhằm mục đích hạn chế hiển thị các mục riêng tư, nhạy cảm trong môi trường công cộng, các tính năng này không hỗ trợ bảo mật cấp cao.</value>
+  </data>
+  <data name="PrivacySettingsTitle" xml:space="preserve">
+    <value>Những thiết lập riêng tư</value>
+  </data>
+  <data name="Pro" xml:space="preserve">
+    <value>Chuyên nghiệp</value>
+  </data>
+  <data name="ProEdition" xml:space="preserve">
+    <value>Phiên bản Pro</value>
+  </data>
+  <data name="ProcessingQuality" xml:space="preserve">
+    <value>Chất lượng phương tiện cho bộ sưu tập</value>
+  </data>
+  <data name="ProcessingQualityDesc" xml:space="preserve">
+    <value>Đặt chất lượng ưu tiên cho bộ sưu tập của bạn. Nếu một mục không đạt chất lượng đó, nó sẽ được lưu ở độ phân giải gần nhất hiện có.</value>
+  </data>
+  <data name="ProcessingSpeed" xml:space="preserve">
+    <value>Tốc độ xử lý</value>
+  </data>
+  <data name="Properties" xml:space="preserve">
+    <value>Thuộc tính</value>
+  </data>
+  <data name="Publisher" xml:space="preserve">
+    <value>Nhà phát hành</value>
+  </data>
+  <data name="Purchase" xml:space="preserve">
+    <value>Mua</value>
+  </data>
+  <data name="PurchaseNow" xml:space="preserve">
+    <value>Mua ngay</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Chất lượng</value>
+  </data>
+  <data name="Random" xml:space="preserve">
+    <value>Ngẫu nhiên</value>
+  </data>
+  <data name="RateToUnlock_Note" xml:space="preserve">
+    <value>Lưu ý: Bạn có thể sử dụng phiên bản đầy đủ bằng cách xếp hạng 5 sao cho đến khi bạn xóa ứng dụng này. Chúng tôi có thể kết thúc chiến dịch này bất cứ lúc nào mà không cần thông báo trước.</value>
+  </data>
+  <data name="RateToUnlock_Rate5StartsToUnlock" xml:space="preserve">
+    <value>Đánh giá 5 sao để mở khóa</value>
+  </data>
+  <data name="RateToUnlock_SubTitle" xml:space="preserve">
+    <value>Để mở khóa phiên bản đầy đủ ngay bây giờ, vui lòng cho chúng tôi xếp hạng 5 sao và viết điều gì đó thú vị.
+
+Cảm ơn sự hỗ trợ của bạn!</value>
+  </data>
+  <data name="RateToUnlock_Title" xml:space="preserve">
+    <value>Mở khóa phiên bản đầy đủ miễn phí</value>
+  </data>
+  <data name="RateUs" xml:space="preserve">
+    <value>Xếp hạng</value>
+  </data>
+  <data name="Rec601" xml:space="preserve">
+    <value>Rec.601</value>
+  </data>
+  <data name="Rec709" xml:space="preserve">
+    <value>Rec.709</value>
+  </data>
+  <data name="Recent" xml:space="preserve">
+    <value>Gần đây</value>
+  </data>
+  <data name="RecentSubtitle" xml:space="preserve">
+    <value>Các video và nhạc bạn nghe gần nhất sẽ ở đây.</value>
+  </data>
+  <data name="RecentTitle" xml:space="preserve">
+    <value>Các video và nhạc gần đây</value>
+  </data>
+  <data name="Red" xml:space="preserve">
+    <value>Màu đỏ</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Làm mới</value>
+  </data>
+  <data name="RegrabItem" xml:space="preserve">
+    <value>Tải lại mục này?</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Tải lại</value>
+  </data>
+  <data name="RemovableDrive" xml:space="preserve">
+    <value>Ổ đĩa lưu động</value>
+  </data>
+  <data name="RemovableStorage" xml:space="preserve">
+    <value>Bộ nhớ ngoài</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Gỡ</value>
+  </data>
+  <data name="RemoveAll" xml:space="preserve">
+    <value>Gỡ tất cả</value>
+  </data>
+  <data name="RemoveAudioFromVideo" xml:space="preserve">
+    <value>Chỉ lưu video (Tắt tiếng)</value>
+  </data>
+  <data name="RemoveAudioFromVideoDesc" xml:space="preserve">
+    <value>Tùy chọn này giúp lưu luồng video mà không có âm thanh, tạo ra một tệp không có tiếng.</value>
+  </data>
+  <data name="RemoveFromFavorite" xml:space="preserve">
+    <value>Xóa khỏi mục yêu thích</value>
+  </data>
+  <data name="RemoveFromList" xml:space="preserve">
+    <value>Xóa khỏi danh sách</value>
+  </data>
+  <data name="RemovePermanently" xml:space="preserve">
+    <value>Xóa vĩnh viễn</value>
+  </data>
+  <data name="RemoveSelected" xml:space="preserve">
+    <value>Gỡ mục đã chọn</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>Đổi tên</value>
+  </data>
+  <data name="Replace" xml:space="preserve">
+    <value>Thay thế</value>
+  </data>
+  <data name="Replay" xml:space="preserve">
+    <value>Phát lại</value>
+  </data>
+  <data name="RequireAllInfo" xml:space="preserve">
+    <value>Vui lòng cung cấp đầy đủ thông tin vào biểu mẫu.</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Cài lại</value>
+  </data>
+  <data name="ResetAdvancedSettingsToDefault" xml:space="preserve">
+    <value>Tái cấu hình nâng cao về mặc định?</value>
+  </data>
+  <data name="ResetAllSettingsToDefault" xml:space="preserve">
+    <value>Tái cấu hình tất cả về mặc định?</value>
+  </data>
+  <data name="ResetTimer" xml:space="preserve">
+    <value>Đặt lại bộ đếm thời gian</value>
+  </data>
+  <data name="Resolution" xml:space="preserve">
+    <value>Độ phân giải</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Khởi động lại</value>
+  </data>
+  <data name="RestartToApplySettings" xml:space="preserve">
+    <value>Khởi động lại để áp dụng thay đổi.</value>
+  </data>
+  <data name="Restarting" xml:space="preserve">
+    <value>Đang khởi động lại</value>
+  </data>
+  <data name="RestorePurchase" xml:space="preserve">
+    <value>Khôi phục đã mua</value>
+  </data>
+  <data name="Restrict" xml:space="preserve">
+    <value>Hạn chế</value>
+  </data>
+  <data name="Resume" xml:space="preserve">
+    <value>Tiếp tục</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Thử lại</value>
+  </data>
+  <data name="RevealInFileExplorer" xml:space="preserve">
+    <value>Mở trong Explorer</value>
+  </data>
+  <data name="Right" xml:space="preserve">
+    <value>Phải</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Xoay</value>
+  </data>
+  <data name="Run" xml:space="preserve">
+    <value>Chạy</value>
+  </data>
+  <data name="RunAll" xml:space="preserve">
+    <value>Chạy tất cả</value>
+  </data>
+  <data name="RunAsAdministrator" xml:space="preserve">
+    <value>Chạy dưới quyền admin</value>
+  </data>
+  <data name="RunOnSystemStartup" xml:space="preserve">
+    <value>Khởi động cùng máy tính</value>
+  </data>
+  <data name="SameFolderAsInput" xml:space="preserve">
+    <value>Cùng thư mục với đầu vào</value>
+  </data>
+  <data name="SameItemProcessing" xml:space="preserve">
+    <value>Phiên này không thể bắt đầu vì một mục tương tự đang được xử lý.</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
+  <data name="SaveTo" xml:space="preserve">
+    <value>Lưu vào</value>
+  </data>
+  <data name="Saver" xml:space="preserve">
+    <value>Lưu trữ</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Tìm kiếm</value>
+  </data>
+  <data name="Second" xml:space="preserve">
+    <value>Giây</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>Giây</value>
+  </data>
+  <data name="Secure" xml:space="preserve">
+    <value>Bảo vệ</value>
+  </data>
+  <data name="Secured" xml:space="preserve">
+    <value>Đã bảo mật</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Chọn</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Chọn tất cả</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Gửi</value>
+  </data>
+  <data name="SendFailure" xml:space="preserve">
+    <value>Đã xảy ra lỗi trong quá trình gửi yêu cầu</value>
+  </data>
+  <data name="SendFailureDescription" xml:space="preserve">
+    <value>Vui lòng thử lại hoặc gửi trực tiếp đến {0}</value>
+  </data>
+  <data name="SendSuccess" xml:space="preserve">
+    <value>Cám ơn báo cáo của bạn</value>
+  </data>
+  <data name="SendSuccessDescription" xml:space="preserve">
+    <value>Khi chúng tôi nhận được phản hồi từ bạn, chúng tôi sẽ tìm hiểu và phản hồi cho bạn sớm nhất có thể.</value>
+  </data>
+  <data name="Sepia" xml:space="preserve">
+    <value>Nâu đỏ</value>
+  </data>
+  <data name="Sepia1" xml:space="preserve">
+    <value>Nâu đỏ 1</value>
+  </data>
+  <data name="Sepia2" xml:space="preserve">
+    <value>Nâu đỏ 2</value>
+  </data>
+  <data name="SepiaF" xml:space="preserve">
+    <value>Nâu đỏ</value>
+  </data>
+  <data name="Serial" xml:space="preserve">
+    <value>Nối tiếp</value>
+  </data>
+  <data name="ServerIsTooBusy" xml:space="preserve">
+    <value>Máy chủ đang bận, vui lòng thử lại sau 1 hoặc 2 phút.</value>
+  </data>
+  <data name="ServiceWindow_OnlyOneInstantMessage" xml:space="preserve">
+    <value>Một phiên bản khác của ứng dụng đang trong quá trình thực hiện chức năng chuyển đổi. Vui lòng tắt phiên bản đó trước khi mở phiên bản mới.</value>
+  </data>
+  <data name="SetNewFileSettings" xml:space="preserve">
+    <value>Tái cấu hình với ảnh mới</value>
+  </data>
+  <data name="SetTime" xml:space="preserve">
+    <value>Cài đặt giờ</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Cấu hình</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Chia sẻ</value>
+  </data>
+  <data name="ShareValuableIdeas" xml:space="preserve">
+    <value>Chia sẻ ý tưởng</value>
+  </data>
+  <data name="ShareValuableIdeasDescription" xml:space="preserve">
+    <value>Góp ý để chúng tôi hoàn thiện ứng dụng hơn.</value>
+  </data>
+  <data name="Shutdown" xml:space="preserve">
+    <value>Tắt máy</value>
+  </data>
+  <data name="ShutdownWhenCompleted" xml:space="preserve">
+    <value>Tắt máy sau khi xong</value>
+  </data>
+  <data name="ShuttingDown" xml:space="preserve">
+    <value>Đang tắt</value>
+  </data>
+  <data name="Single" xml:space="preserve">
+    <value>Đơn</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Kích thước</value>
+  </data>
+  <data name="SkipExistingItems" xml:space="preserve">
+    <value>Bỏ qua các mục đã tồn tại</value>
+  </data>
+  <data name="Sleep" xml:space="preserve">
+    <value>Để máy ngủ</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Sắp xếp</value>
+  </data>
+  <data name="SortA2Z" xml:space="preserve">
+    <value>A-Z</value>
+  </data>
+  <data name="SortLastModified" xml:space="preserve">
+    <value>Ngày chỉnh sửa</value>
+  </data>
+  <data name="SortLastPlayed" xml:space="preserve">
+    <value>Lần cuối phát</value>
+  </data>
+  <data name="SortNewest" xml:space="preserve">
+    <value>Mới Nhất</value>
+  </data>
+  <data name="SortOldest" xml:space="preserve">
+    <value>Cũ nhất</value>
+  </data>
+  <data name="SortZ2A" xml:space="preserve">
+    <value>Z-A</value>
+  </data>
+  <data name="Speed" xml:space="preserve">
+    <value>Tốc độ</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Bắt đầu</value>
+  </data>
+  <data name="StartAppAsMinimized" xml:space="preserve">
+    <value>Thu nhỏ app khi khởi động</value>
+  </data>
+  <data name="StartWithWindows" xml:space="preserve">
+    <value>Bắt đầu với Windows</value>
+  </data>
+  <data name="Status_Init" xml:space="preserve">
+    <value>Khởi tạo</value>
+  </data>
+  <data name="Status_LoadCanceled" xml:space="preserve">
+    <value>Hủy tải</value>
+  </data>
+  <data name="Status_LoadFailed" xml:space="preserve">
+    <value>Tải thất bại</value>
+  </data>
+  <data name="Status_LoadPaused" xml:space="preserve">
+    <value>Tạm dừng tải</value>
+  </data>
+  <data name="Status_LoadPausing" xml:space="preserve">
+    <value>Đang tạm dừng tải</value>
+  </data>
+  <data name="Status_LoadStopped" xml:space="preserve">
+    <value>Dừng tải</value>
+  </data>
+  <data name="Status_LoadStopping" xml:space="preserve">
+    <value>Đang dừng tải</value>
+  </data>
+  <data name="Status_Loaded" xml:space="preserve">
+    <value>Đã tải</value>
+  </data>
+  <data name="Status_Loading" xml:space="preserve">
+    <value>Đang tải</value>
+  </data>
+  <data name="Status_LoadingAll" xml:space="preserve">
+    <value>Đang tải tất cả</value>
+  </data>
+  <data name="Status_LoadingOne" xml:space="preserve">
+    <value>Đang tải một</value>
+  </data>
+  <data name="Status_ProcessCanceled" xml:space="preserve">
+    <value>Hủy xử lý</value>
+  </data>
+  <data name="Status_ProcessCanceling" xml:space="preserve">
+    <value>Đang hủy xử lý</value>
+  </data>
+  <data name="Status_ProcessFailed" xml:space="preserve">
+    <value>Xử lý thất bại</value>
+  </data>
+  <data name="Status_ProcessInQueue" xml:space="preserve">
+    <value>Chờ xử lý</value>
+  </data>
+  <data name="Status_ProcessPaused" xml:space="preserve">
+    <value>Tạm dừng xử lý</value>
+  </data>
+  <data name="Status_ProcessPausing" xml:space="preserve">
+    <value>Đang tạm dừng xử lý</value>
+  </data>
+  <data name="Status_ProcessSkipped" xml:space="preserve">
+    <value>Đã bỏ qua</value>
+  </data>
+  <data name="Status_ProcessStart" xml:space="preserve">
+    <value>Bắt đầu xử lý</value>
+  </data>
+  <data name="Status_ProcessStopped" xml:space="preserve">
+    <value>Dừng xử lý</value>
+  </data>
+  <data name="Status_ProcessStopping" xml:space="preserve">
+    <value>Đang dừng xử lý</value>
+  </data>
+  <data name="Status_Processed" xml:space="preserve">
+    <value>Đã xử lý</value>
+  </data>
+  <data name="Status_Processing" xml:space="preserve">
+    <value>Đang xử lý</value>
+  </data>
+  <data name="Status_ProcessingAll" xml:space="preserve">
+    <value>Đang xử lý tất cả</value>
+  </data>
+  <data name="Status_ProcessingOne" xml:space="preserve">
+    <value>Đang xử lý một</value>
+  </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Sẵn sàng</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Dừng</value>
+  </data>
+  <data name="StopAll" xml:space="preserve">
+    <value>Dừng hết</value>
+  </data>
+  <data name="StopAllProcesses" xml:space="preserve">
+    <value>Ngưng toàn bộ xử lý?</value>
+  </data>
+  <data name="Subscribe" xml:space="preserve">
+    <value>Đăng ký</value>
+  </data>
+  <data name="SubscribeNow" xml:space="preserve">
+    <value>Đăng ký ngay</value>
+  </data>
+  <data name="SuggestAFeature" xml:space="preserve">
+    <value>Đề xuất tính năng</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>Hỗ trợ</value>
+  </data>
+  <data name="SupportDescriptionHint" xml:space="preserve">
+    <value>Để dễ dàng hơn trong việc hiểu lỗi và cung cấp các bản vá lỗi, xin vui lòng giải thích vấn đề chi tiết.</value>
+  </data>
+  <data name="SupportFor" xml:space="preserve">
+    <value>Hỗ trợ cho</value>
+  </data>
+  <data name="Sync" xml:space="preserve">
+    <value>Đồng bộ</value>
+  </data>
+  <data name="TakeSnapshot" xml:space="preserve">
+    <value>Chụp ảnh</value>
+  </data>
+  <data name="TermsOfService" xml:space="preserve">
+    <value>Điều khoản dịch vụ</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Giao diện</value>
+  </data>
+  <data name="ThemeDark" xml:space="preserve">
+    <value>Tối</value>
+  </data>
+  <data name="ThemeDescription" xml:space="preserve">
+    <value>Chọn cài đặt mà bạn muốn ứng dụng hiển thị.</value>
+  </data>
+  <data name="ThemeLight" xml:space="preserve">
+    <value>Sáng</value>
+  </data>
+  <data name="ThemeSetting" xml:space="preserve">
+    <value>Cài đặt chủ đề</value>
+  </data>
+  <data name="ThemeUsingSystemSetting" xml:space="preserve">
+    <value>Dùng cấu hình hệ thống</value>
+  </data>
+  <data name="Then" xml:space="preserve">
+    <value>Sau đó</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Thời gian</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Tiêu đề</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>Đến</value>
+  </data>
+  <data name="ToAudio" xml:space="preserve">
+    <value>sang Audio</value>
+  </data>
+  <data name="ToSAcceptCypher" xml:space="preserve">
+    <value>Chấp nhận Điều khoản &amp; Bắt đầu</value>
+  </data>
+  <data name="ToSAcceptKing" xml:space="preserve">
+    <value>Đã xác nhận &amp; Đồng ý</value>
+  </data>
+  <data name="ToSAcceptLab" xml:space="preserve">
+    <value>Xác nhận &amp; Tiếp tục</value>
+  </data>
+  <data name="ToSAcceptLay" xml:space="preserve">
+    <value>Đồng ý &amp; Mở</value>
+  </data>
+  <data name="ToSAcceptSerene" xml:space="preserve">
+    <value>Đồng ý điều khoản &amp; Mở</value>
+  </data>
+  <data name="ToSAcceptSpring" xml:space="preserve">
+    <value>Tôi xác nhận các điều khoản</value>
+  </data>
+  <data name="ToSAcceptStream" xml:space="preserve">
+    <value>Tôi đã hiểu &amp; Đồng ý</value>
+  </data>
+  <data name="ToSAcceptVision" xml:space="preserve">
+    <value>Chấp nhận &amp; Bắt đầu</value>
+  </data>
+  <data name="ToSAckCypher" xml:space="preserve">
+    <value>Tôi đồng ý Điều khoản &amp; Giới hạn dịch vụ ngoài.</value>
+  </data>
+  <data name="ToSAckKing" xml:space="preserve">
+    <value>Tôi chấp nhận Điều khoản &amp; Quy tắc phụ thuộc.</value>
+  </data>
+  <data name="ToSAckLab" xml:space="preserve">
+    <value>Tôi chấp nhận Điều khoản &amp; Chính sách sử dụng.</value>
+  </data>
+  <data name="ToSAckLay" xml:space="preserve">
+    <value>Tôi đồng ý Điều khoản &amp; Giới hạn nền tảng.</value>
+  </data>
+  <data name="ToSAckSerene" xml:space="preserve">
+    <value>Tôi đồng ý Điều khoản &amp; Chính sách cung cấp.</value>
+  </data>
+  <data name="ToSAckSpring" xml:space="preserve">
+    <value>Tôi chấp nhận Điều khoản &amp; Ràng buộc bên thứ ba.</value>
+  </data>
+  <data name="ToSAckStream" xml:space="preserve">
+    <value>Tôi đồng ý Điều khoản &amp; Phụ thuộc bên thứ ba.</value>
+  </data>
+  <data name="ToSAckVision" xml:space="preserve">
+    <value>Tôi chấp nhận Điều khoản &amp; Quy tắc khả dụng.</value>
+  </data>
+  <data name="ToSExitCypher" xml:space="preserve">
+    <value>Bỏ qua lúc này</value>
+  </data>
+  <data name="ToSExitKing" xml:space="preserve">
+    <value>Không phải bây giờ</value>
+  </data>
+  <data name="ToSExitLab" xml:space="preserve">
+    <value>Từ chối &amp; Đóng</value>
+  </data>
+  <data name="ToSExitLay" xml:space="preserve">
+    <value>Hỏi lại mình lần sau</value>
+  </data>
+  <data name="ToSExitSerene" xml:space="preserve">
+    <value>Quyết định sau</value>
+  </data>
+  <data name="ToSExitSpring" xml:space="preserve">
+    <value>Mình sẽ xem sau</value>
+  </data>
+  <data name="ToSExitStream" xml:space="preserve">
+    <value>Để sau nhé</value>
+  </data>
+  <data name="ToSExitVision" xml:space="preserve">
+    <value>Không phải lúc này</value>
+  </data>
+  <data name="ToSHeaderCypher" xml:space="preserve">
+    <value>Tận hưởng</value>
+  </data>
+  <data name="ToSHeaderKing" xml:space="preserve">
+    <value>Lời chào từ</value>
+  </data>
+  <data name="ToSHeaderLab" xml:space="preserve">
+    <value>Bắt đầu cùng</value>
+  </data>
+  <data name="ToSHeaderLay" xml:space="preserve">
+    <value>Khám phá cùng</value>
+  </data>
+  <data name="ToSHeaderSerene" xml:space="preserve">
+    <value>Trải nghiệm</value>
+  </data>
+  <data name="ToSHeaderSpring" xml:space="preserve">
+    <value>Hành trình cùng</value>
+  </data>
+  <data name="ToSHeaderStream" xml:space="preserve">
+    <value>Chào mừng đến với</value>
+  </data>
+  <data name="ToSHeaderVision" xml:space="preserve">
+    <value>Khám phá</value>
+  </data>
+  <data name="ToSLinkCypher" xml:space="preserve">
+    <value>Xem Điều khoản dịch vụ ngoài</value>
+  </data>
+  <data name="ToSLinkKing" xml:space="preserve">
+    <value>Xem lại Điều khoản ngoài &amp; Toàn bộ</value>
+  </data>
+  <data name="ToSLinkLab" xml:space="preserve">
+    <value>Đọc Điều khoản &amp; Quyền riêng tư</value>
+  </data>
+  <data name="ToSLinkLay" xml:space="preserve">
+    <value>Xem Điều khoản &amp; Chính sách nền tảng</value>
+  </data>
+  <data name="ToSLinkSerene" xml:space="preserve">
+    <value>Về Điều khoản dịch vụ &amp; Pháp lý</value>
+  </data>
+  <data name="ToSLinkSpring" xml:space="preserve">
+    <value>Điều khoản &amp; Chi tiết bên thứ ba</value>
+  </data>
+  <data name="ToSLinkStream" xml:space="preserve">
+    <value>Xem Điều khoản &amp; Phụ thuộc</value>
+  </data>
+  <data name="ToSLinkVision" xml:space="preserve">
+    <value>Kiểm tra Quy tắc &amp; Điều khoản</value>
+  </data>
+  <data name="ToSMediaFull" xml:space="preserve">
+    <value>_</value>
+  </data>
+  <data name="ToSTitleCypher" xml:space="preserve">
+    <value>Bắt đầu sử dụng</value>
+  </data>
+  <data name="ToSTitleKing" xml:space="preserve">
+    <value>Bắt đầu nhanh</value>
+  </data>
+  <data name="ToSTitleLab" xml:space="preserve">
+    <value>Giới thiệu</value>
+  </data>
+  <data name="ToSTitleLay" xml:space="preserve">
+    <value>Lời chào</value>
+  </data>
+  <data name="ToSTitleSerene" xml:space="preserve">
+    <value>Thông tin ứng dụng</value>
+  </data>
+  <data name="ToSTitleSpring" xml:space="preserve">
+    <value>Về</value>
+  </data>
+  <data name="ToSTitleStream" xml:space="preserve">
+    <value>Chào mừng</value>
+  </data>
+  <data name="ToSTitleVision" xml:space="preserve">
+    <value>Xin chào!</value>
+  </data>
+  <data name="ToVideo" xml:space="preserve">
+    <value>sang Video</value>
+  </data>
+  <data name="TooSoon" xml:space="preserve">
+    <value>Bạn đang gửi quá nhanh!</value>
+  </data>
+  <data name="TooSoonDesc" xml:space="preserve">
+    <value>Vui lòng chờ {0} giây trước khi gửi lại.</value>
+  </data>
+  <data name="Top" xml:space="preserve">
+    <value>Trên</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>Chuyển đi</value>
+  </data>
+  <data name="TransferSpeed" xml:space="preserve">
+    <value>Cân bằng giữa tốc độ xử lý và hiệu quả lưu trữ</value>
+  </data>
+  <data name="TransferSpeedDesc" xml:space="preserve">
+    <value>Tốc độ xử lý càng cao thì kích thước tệp có thể càng lớn. Điều chỉnh tốc độ chậm hơn để đạt được hiệu quả lưu trữ tốt hơn.</value>
+  </data>
+  <data name="Transparent" xml:space="preserve">
+    <value>Trong suốt</value>
+  </data>
+  <data name="TrialCollectionLimits" xml:space="preserve">
+    <value>Giới hạn dùng thử: {0}/{1}</value>
+  </data>
+  <data name="TrialLimitReachedSubtitle" xml:space="preserve">
+    <value>Để sử dụng đầy đủ tính năng, vui lòng mua phiên bản cao cấp hoặc bạn vẫn có thể sử dụng bản miễn phí giới hạn này.</value>
+  </data>
+  <data name="TrialLimitReachedTitle" xml:space="preserve">
+    <value>Đã đạt đến giới hạn - {0} giới hạn: {1}.</value>
+  </data>
+  <data name="TryNow" xml:space="preserve">
+    <value>Thử ngay</value>
+  </data>
+  <data name="Undefined" xml:space="preserve">
+    <value>Không xác định</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Không biết</value>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>Lỗi không xác định</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Mở khoá</value>
+  </data>
+  <data name="UnlockPremiumFeatures" xml:space="preserve">
+    <value>Mở khóa tính năng cao cấp</value>
+  </data>
+  <data name="Unsecure" xml:space="preserve">
+    <value>Gỡ bảo vệ</value>
+  </data>
+  <data name="Unsecured" xml:space="preserve">
+    <value>Chưa bảo mật</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Cập nhật</value>
+  </data>
+  <data name="UpdateAll" xml:space="preserve">
+    <value>Cập nhật tất cả</value>
+  </data>
+  <data name="UpdateEmptyLink" xml:space="preserve">
+    <value>Cung cấp liên kết trước khi cập nhật.</value>
+  </data>
+  <data name="UpdateNow" xml:space="preserve">
+    <value>Cập nhật ngay</value>
+  </data>
+  <data name="UpdateSuccessful" xml:space="preserve">
+    <value>Đã cập nhật phiên bản mới</value>
+  </data>
+  <data name="UpdateSuccessfulDesc" xml:space="preserve">
+    <value>Khởi động lại ứng dụng để áp dụng các thay đổi.</value>
+  </data>
+  <data name="Url" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="UrlListPlaceholder" xml:space="preserve">
+    <value>Dán liên kết phương tiện tại đây hoặc nhập từ tệp</value>
+  </data>
+  <data name="Urls" xml:space="preserve">
+    <value>URLs</value>
+  </data>
+  <data name="Use" xml:space="preserve">
+    <value>Sử dụng</value>
+  </data>
+  <data name="Used" xml:space="preserve">
+    <value>Đã sử dụng</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Người dùng</value>
+  </data>
+  <data name="ValidCollectionLink" xml:space="preserve">
+    <value>Phát hiện liên kết bộ sưu tập</value>
+  </data>
+  <data name="ValidCollectionLinkDesc" xml:space="preserve">
+    <value>Liên kết này chứa nhiều nội dung. Bạn có muốn lưu bộ sưu tập này không?</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Phiên bản</value>
+  </data>
+  <data name="VerticalFlip" xml:space="preserve">
+    <value>Lật dọc</value>
+  </data>
+  <data name="Video" xml:space="preserve">
+    <value>Phim</value>
+  </data>
+  <data name="VideoAndMusicGrabber" xml:space="preserve">
+    <value>Trình tải Video và Nhạc</value>
+  </data>
+  <data name="VideoGrabber" xml:space="preserve">
+    <value>Trình tải Video</value>
+  </data>
+  <data name="VideoInfo" xml:space="preserve">
+    <value>Thông tin video</value>
+  </data>
+  <data name="Videos" xml:space="preserve">
+    <value>Phim</value>
+  </data>
+  <data name="VideosEmptyHint" xml:space="preserve">
+    <value>Video bạn đã lưu sẽ hiển thị tại đây</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Xem</value>
+  </data>
+  <data name="ViewAll" xml:space="preserve">
+    <value>Xem tất cả</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>R</value>
+  </data>
+  <data name="WelcomeDesc1" xml:space="preserve">
+    <value>Tận hưởng trải nghiệm nghe nhạc hoàn hảo với công nghệ xử lý âm thanh độ trung thực cao và hệ thống quản lý thư viện cá nhân trực quan.</value>
+  </data>
+  <data name="WelcomeDesc2" xml:space="preserve">
+    <value>Tái mã hóa mượt mà các tệp âm thanh sang các định dạng chất lượng như MP3 hoặc FLAC, được tối ưu riêng biệt để tương thích trên nhiều thiết bị.</value>
+  </data>
+  <data name="WelcomeDesc3" xml:space="preserve">
+    <value>Công cụ mạnh mẽ giúp trích xuất siêu dữ liệu và tinh gọn các luồng âm thanh được cấp phép để quản lý ngoại tuyến một cách dễ dàng.</value>
+  </data>
+  <data name="WelcomeDesc4" xml:space="preserve">
+    <value>Bằng việc truy cập PlayWave, bạn cam kết chỉ xử lý các phương tiện được sở hữu hợp pháp. Nhà phát triển không chịu trách nhiệm cho bất kỳ hành vi trái phép hoặc sai mục đích nào.</value>
+  </data>
+  <data name="WelcomeTitle1" xml:space="preserve">
+    <value>Bộ Giải Mã Âm Thanh Cao Cấp</value>
+  </data>
+  <data name="WelcomeTitle2" xml:space="preserve">
+    <value>Trình Chuyển Mã Âm Thanh Hiệu Quả</value>
+  </data>
+  <data name="WelcomeTitle3" xml:space="preserve">
+    <value>Trình Truy Xuất Âm Thanh Chuyên Nghiệp</value>
+  </data>
+  <data name="WelcomeTitle4" xml:space="preserve">
+    <value>Trách Nhiệm Pháp Lý</value>
+  </data>
+  <data name="WiFi" xml:space="preserve">
+    <value>Wi-Fi</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>Rộng</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Năm</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>Năm</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Có</value>
+  </data>
+  <data name="YourEmail" xml:space="preserve">
+    <value>Email của bạn</value>
+  </data>
+  <data name="YourEmailHint" xml:space="preserve">
+    <value>Chúng tôi sử dụng để liên hệ với bạn</value>
+  </data>
+  <data name="_" xml:space="preserve">
+    <value>_</value>
+  </data>
+  <data name="_10Days" xml:space="preserve">
+    <value>10 ngày</value>
+  </data>
+  <data name="_10Minutes" xml:space="preserve">
+    <value>10 phút</value>
+  </data>
+  <data name="_10Months" xml:space="preserve">
+    <value>10 tháng</value>
+  </data>
+  <data name="_10Seconds" xml:space="preserve">
+    <value>10 giây</value>
+  </data>
+  <data name="_11Months" xml:space="preserve">
+    <value>11 tháng</value>
+  </data>
+  <data name="_12Months" xml:space="preserve">
+    <value>12 tháng</value>
+  </data>
+  <data name="_15Days" xml:space="preserve">
+    <value>15 ngày</value>
+  </data>
+  <data name="_15Minutes" xml:space="preserve">
+    <value>15 phút</value>
+  </data>
+  <data name="_15Seconds" xml:space="preserve">
+    <value>15 giây</value>
+  </data>
+  <data name="_1Day" xml:space="preserve">
+    <value>1 ngày</value>
+  </data>
+  <data name="_1Hour" xml:space="preserve">
+    <value>1 giờ</value>
+  </data>
+  <data name="_1Minute" xml:space="preserve">
+    <value>1 phút</value>
+  </data>
+  <data name="_1Month" xml:space="preserve">
+    <value>1 tháng</value>
+  </data>
+  <data name="_20Days" xml:space="preserve">
+    <value>20 ngày</value>
+  </data>
+  <data name="_20Minutes" xml:space="preserve">
+    <value>20 phút</value>
+  </data>
+  <data name="_20Seconds" xml:space="preserve">
+    <value>20 giây</value>
+  </data>
+  <data name="_25Minutes" xml:space="preserve">
+    <value>25 phút</value>
+  </data>
+  <data name="_25Seconds" xml:space="preserve">
+    <value>25 giây</value>
+  </data>
+  <data name="_2Days" xml:space="preserve">
+    <value>2 ngày</value>
+  </data>
+  <data name="_2Hours" xml:space="preserve">
+    <value>2 giờ</value>
+  </data>
+  <data name="_2Minutes" xml:space="preserve">
+    <value>2 phút</value>
+  </data>
+  <data name="_2Months" xml:space="preserve">
+    <value>2 tháng</value>
+  </data>
+  <data name="_30Days" xml:space="preserve">
+    <value>30 ngày</value>
+  </data>
+  <data name="_30Minutes" xml:space="preserve">
+    <value>30 phút</value>
+  </data>
+  <data name="_30Seconds" xml:space="preserve">
+    <value>30 giây</value>
+  </data>
+  <data name="_3Days" xml:space="preserve">
+    <value>3 ngày</value>
+  </data>
+  <data name="_3Hours" xml:space="preserve">
+    <value>3 giờ</value>
+  </data>
+  <data name="_3Minutes" xml:space="preserve">
+    <value>3 phút</value>
+  </data>
+  <data name="_3Months" xml:space="preserve">
+    <value>3 tháng</value>
+  </data>
+  <data name="_40Seconds" xml:space="preserve">
+    <value>40 giây</value>
+  </data>
+  <data name="_45Minutes" xml:space="preserve">
+    <value>45 phút</value>
+  </data>
+  <data name="_45Seconds" xml:space="preserve">
+    <value>45 giây</value>
+  </data>
+  <data name="_4Days" xml:space="preserve">
+    <value>4 ngày</value>
+  </data>
+  <data name="_4Months" xml:space="preserve">
+    <value>4 tháng</value>
+  </data>
+  <data name="_5Days" xml:space="preserve">
+    <value>5 ngày</value>
+  </data>
+  <data name="_5Minutes" xml:space="preserve">
+    <value>5 phút</value>
+  </data>
+  <data name="_5Months" xml:space="preserve">
+    <value>5 tháng</value>
+  </data>
+  <data name="_5Seconds" xml:space="preserve">
+    <value>5 giây</value>
+  </data>
+  <data name="_60Days" xml:space="preserve">
+    <value>60 ngày</value>
+  </data>
+  <data name="_60Seconds" xml:space="preserve">
+    <value>60 giây</value>
+  </data>
+  <data name="_6Days" xml:space="preserve">
+    <value>6 ngày</value>
+  </data>
+  <data name="_6Months" xml:space="preserve">
+    <value>6 tháng</value>
+  </data>
+  <data name="_7Days" xml:space="preserve">
+    <value>7 ngày</value>
+  </data>
+  <data name="_7Months" xml:space="preserve">
+    <value>7 tháng</value>
+  </data>
+  <data name="_8Months" xml:space="preserve">
+    <value>8 tháng</value>
+  </data>
+  <data name="_90Days" xml:space="preserve">
+    <value>90 ngày</value>
+  </data>
+  <data name="_9Months" xml:space="preserve">
+    <value>9 tháng</value>
+  </data>
+</root>

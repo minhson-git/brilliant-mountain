@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<apps:MainWindowPage
+    x:Class="IOApp.Pages.LargeFiles"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:apps="using:IOApp"
+    xmlns:coreHelpers="using:IOCore.Helpers"
+    xmlns:coreLibs="using:IOCore.Libs"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="using:IOApp.Pages"
+    d:DataContext="{d:DesignInstance Type=pages:LargeFiles}"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <apps:MainWindowPage.Resources>
+        <pages:CleanLargeFilesProxy x:Name="Proxy" Data="{Binding}" />
+
+        <coreLibs:BoolToResourceBrushConverter
+            x:Key="BoolToResourceBrushConverter"
+            FalseKey="Foreground"
+            TrueKey="Foreground2" />
+
+        <coreLibs:BoolToObjectConverter x:Key="BoolToObjectConverter">
+            <coreLibs:BoolToObjectConverter.FalseValue>
+                <TextDecorations>None</TextDecorations>
+            </coreLibs:BoolToObjectConverter.FalseValue>
+            <coreLibs:BoolToObjectConverter.TrueValue>
+                <TextDecorations>Strikethrough</TextDecorations>
+            </coreLibs:BoolToObjectConverter.TrueValue>
+        </coreLibs:BoolToObjectConverter>
+    </apps:MainWindowPage.Resources>
+
+    <Grid Loaded="DragDropGrid_Loaded">
+        <coreUI:AZ IsA="{Binding FolderItemWrapper.Items.IsEmpty}">
+            <coreUI:AZ.A>
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="20">
+                    <FontIcon
+                        HorizontalAlignment="Center"
+                        FontSize="120"
+                        Glyph="&#xED43;" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="20"
+                        Text="{coreHelpers:SRE K=AddFolderToCleanLargeFiles}" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="14"
+                        Foreground="{ThemeResource Foreground2}"
+                        Text="{coreHelpers:SRE K=OrDragAndDrop}" />
+                    <coreUI:IconTextButton
+                        Width="200"
+                        Command="{Binding AddFolderCommand}"
+                        Icon="&#xe710;"
+                        IsTheme="True"
+                        Text="{coreHelpers:SRE K=AddFolder}"
+                        Visibility="{Binding Status.IsNotLoading}" />
+                </StackPanel>
+            </coreUI:AZ.A>
+            <coreUI:AZ.B>
+                <Grid Padding="10" ColumnDefinitions="280,*">
+                    <Grid
+                        Background="{ThemeResource WindowBackground}"
+                        BorderBrush="{ThemeResource Border}"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        RowDefinitions="Auto,*">
+                        <Grid Padding="10" ColumnDefinitions="*,Auto">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontWeight="SemiBold"
+                                Text="{coreHelpers:SRE K=Folder}" />
+
+                            <StackPanel
+                                Grid.Column="1"
+                                Orientation="Horizontal"
+                                Spacing="5">
+                                <coreUI:CheckBoxEx
+                                    MinWidth="24"
+                                    MaxWidth="24"
+                                    IsChecked="{Binding FolderItemWrapper.IsChecked, Mode=TwoWay}"
+                                    IsEnabled="{Binding Status.IsNotBusy}"
+                                    Size="SM" />
+                                <coreUI:IconButton
+                                    VerticalAlignment="Center"
+                                    Command="{Binding AddFolderCommand}"
+                                    Icon="&#xe710;"
+                                    IsEnabled="{Binding Status.IsNotBusy}"
+                                    Size="SM" />
+                            </StackPanel>
+                        </Grid>
+
+                        <ScrollViewer Grid.Row="1" Padding="10,0">
+                            <ItemsRepeater ItemsSource="{Binding FolderItemWrapper.Items}">
+                                <ItemsRepeater.Layout>
+                                    <StackLayout Spacing="5" />
+                                </ItemsRepeater.Layout>
+                                <ItemsRepeater.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid
+                                            Padding="10,5"
+                                            Background="{ThemeResource ItemBackground}"
+                                            ColumnDefinitions="*,Auto"
+                                            ColumnSpacing="5"
+                                            CornerRadius="5"
+                                            ToolTipService.ToolTip="{Binding Target.InputInfo.FullName}">
+                                            <StackPanel VerticalAlignment="Center">
+                                                <HyperlinkButton
+                                                    Padding="0"
+                                                    Command="{Binding Data.Window.RevealInFileExplorerCommand, Source={StaticResource Proxy}}"
+                                                    CommandParameter="{Binding Target.InputInfo.FullName}">
+                                                    <TextBlock FontSize="14" Text="{Binding Target.InputInfo.Name}" />
+                                                </HyperlinkButton>
+                                                <TextBlock
+                                                    FontSize="10"
+                                                    Foreground="{ThemeResource Foreground2}"
+                                                    Text="{Binding Target.InputInfo.FolderPath}" />
+                                            </StackPanel>
+
+                                            <StackPanel
+                                                Grid.Column="1"
+                                                Orientation="Horizontal"
+                                                Spacing="5">
+                                                <coreUI:CheckBoxEx
+                                                    MinWidth="24"
+                                                    MaxWidth="24"
+                                                    IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                                    IsEnabled="{Binding Data.Status.IsNotBusy, Source={StaticResource Proxy}}"
+                                                    Size="SM" />
+
+                                                <coreUI:IconButton
+                                                    Icon="&#xE712;"
+                                                    IsEnabled="{Binding Data.Status.IsNotBusy, Source={StaticResource Proxy}}"
+                                                    Size="SM"
+                                                    Variant="Text">
+                                                    <coreUI:IconButton.Flyout>
+                                                        <MenuFlyout Placement="Bottom">
+                                                            <MenuFlyoutItem
+                                                                Command="{Binding Data.Window.RevealInFileExplorerCommand, Source={StaticResource Proxy}}"
+                                                                CommandParameter="{Binding Target.InputInfo.FullName}"
+                                                                Icon="OpenFile"
+                                                                Text="{coreHelpers:SRE K=RevealInFileExplorer}" />
+                                                            <MenuFlyoutItem
+                                                                Command="{Binding Data.RemoveFolderCommand, Source={StaticResource Proxy}}"
+                                                                CommandParameter="{Binding Target}"
+                                                                Icon="Cancel"
+                                                                Text="{coreHelpers:SRE K=Remove}" />
+                                                        </MenuFlyout>
+                                                    </coreUI:IconButton.Flyout>
+                                                </coreUI:IconButton>
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsRepeater.ItemTemplate>
+                            </ItemsRepeater>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <coreUI:AZ Grid.Column="1" IsA="{Binding SourceLargeFileItems.IsEmpty}">
+                        <coreUI:AZ.A>
+                            <StackPanel VerticalAlignment="Center" Spacing="20">
+                                <coreUI:EmptyList Icon="&#xE8FE;" Text="{coreHelpers:SRE K=ScanLargeEmptyMessage}" />
+                                <coreUI:IconTextButton
+                                    Width="200"
+                                    Command="{Binding Data.ScanCommand, Source={StaticResource Proxy}}"
+                                    IsEnabled="{Binding Status.IsNotBusy}"
+                                    IsTheme="True"
+                                    Size="XXL"
+                                    Text="{coreHelpers:SRE K=Features_Scan}" />
+                            </StackPanel>
+                        </coreUI:AZ.A>
+                        <coreUI:AZ.B>
+                            <Grid RowDefinitions="Auto,*">
+                                <Grid
+                                    Padding="10"
+                                    ColumnDefinitions="*,Auto,Auto"
+                                    ColumnSpacing="10">
+                                    <Grid
+                                        Grid.Column="1"
+                                        BorderBrush="{ThemeResource Border}"
+                                        BorderThickness="1"
+                                        ColumnDefinitions="*,Auto"
+                                        CornerRadius="5">
+                                        <TextBlock
+                                            Name="FilterTextBlock"
+                                            Width="70"
+                                            Margin="10,0,10,0"
+                                            VerticalAlignment="Center" />
+                                        <coreUI:IconButton
+                                            Grid.Column="1"
+                                            Corner="Right"
+                                            Flyout="{Binding FileTypeFilterMenuFlyout}"
+                                            Icon="&#xE71C;"
+                                            IsEnabled="{Binding Status.IsNotLoading}"
+                                            IsTheme="True" />
+                                    </Grid>
+
+                                    <ComboBox
+                                        Grid.Column="2"
+                                        Width="100"
+                                        HorizontalAlignment="Stretch"
+                                        DisplayMemberPath="Value"
+                                        ItemsSource="{Binding SizeFilterItems}"
+                                        SelectedIndex="{Binding SizeFilterItemIndex, Mode=TwoWay}">
+                                        <ComboBox.ItemContainerStyle>
+                                            <Style TargetType="ComboBoxItem">
+                                                <Setter Property="coreHelpers:BindingHelper.IsEnabled" Value="IsEnabled" />
+                                            </Style>
+                                        </ComboBox.ItemContainerStyle>
+                                    </ComboBox>
+                                </Grid>
+
+                                <Grid Grid.Row="1">
+                                    <Grid
+                                        Padding="10,0"
+                                        RowDefinitions="*,Auto"
+                                        RowSpacing="10">
+                                        <coreUI:ListViewEx
+                                            Padding="0,0,0,10"
+                                            ContainerContentChanging="ListView_ContainerContentChanging"
+                                            ItemsSource="{Binding LargeFileItems}"
+                                            SelectionMode="None">
+                                            <coreUI:ListViewEx.ItemContainerStyle>
+                                                <Style TargetType="ListViewItem">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="ListViewItem">
+                                                                <ListViewItemPresenter SelectedBackground="{ThemeResource Theme}" SelectedPointerOverBackground="{ThemeResource Theme}" />
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </coreUI:ListViewEx.ItemContainerStyle>
+                                            <coreUI:ListViewEx.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Padding="10,0,15,10">
+                                                        <Grid ColumnDefinitions="Auto,Auto,*,Auto">
+                                                            <Grid
+                                                                Width="50"
+                                                                Height="50"
+                                                                Margin="0,10,10,0"
+                                                                Background="{ThemeResource ListViewBackground}"
+                                                                BorderBrush="{ThemeResource Theme}"
+                                                                BorderThickness="1,0,0,0">
+                                                                <coreUI:AZ IsA="{Binding Thumbnail, Converter={StaticResource IsNullOrEmptyStringConverter}}">
+                                                                    <coreUI:AZ.A>
+                                                                        <FontIcon
+                                                                            FontSize="24"
+                                                                            Foreground="{ThemeResource Foreground2}"
+                                                                            Glyph="&#xE8A5;" />
+                                                                    </coreUI:AZ.A>
+                                                                    <coreUI:AZ.B>
+                                                                        <Image
+                                                                            Width="50"
+                                                                            Height="50"
+                                                                            Source="{Binding Thumbnail}"
+                                                                            Stretch="UniformToFill"
+                                                                            UseLayoutRounding="True" />
+                                                                    </coreUI:AZ.B>
+                                                                </coreUI:AZ>
+                                                            </Grid>
+
+                                                            <coreUI:ABIconButton
+                                                                Grid.Column="1"
+                                                                Margin="0,0,10,0"
+                                                                VerticalAlignment="Center"
+                                                                BIcon="&#xF5B0;"
+                                                                Command="{Binding Data.OpenCommand, Source={StaticResource Proxy}}"
+                                                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                                                Icon="&#xE91B;"
+                                                                IsAOrB="{Binding FileType, ConverterParameter=Image, Converter={StaticResource EnumComparisonToBoolConverter}}"
+                                                                IsArcCorner="True"
+                                                                IsTheme2nd="True"
+                                                                ToolTipService.ToolTip="{coreHelpers:SRE K=OpenFile}"
+                                                                Visibility="{Binding Thumbnail, Converter={StaticResource InvertedIsNullOrEmptyStringConverter}}" />
+
+                                                            <StackPanel
+                                                                Grid.Column="2"
+                                                                Padding="0,10,0,0"
+                                                                VerticalAlignment="Center"
+                                                                Spacing="5">
+                                                                <StackPanel>
+                                                                    <HyperlinkButton
+                                                                        Padding="0"
+                                                                        Command="{Binding Data.Window.RevealInFileExplorerCommand, Source={StaticResource Proxy}}"
+                                                                        CommandParameter="{Binding InputInfo.FullName}">
+                                                                        <TextBlock
+                                                                            FontSize="12"
+                                                                            FontWeight="Bold"
+                                                                            Foreground="{Binding IsSelected, Converter={StaticResource BoolToResourceBrushConverter}}"
+                                                                            Text="{Binding InputInfo.Name}"
+                                                                            TextDecorations="{Binding IsDeleted, Converter={StaticResource BoolToObjectConverter}}"
+                                                                            ToolTipService.ToolTip="{Binding InputInfo.Name}" />
+                                                                    </HyperlinkButton>
+                                                                    <TextBlock
+                                                                        FontSize="12"
+                                                                        Foreground="{ThemeResource Foreground2}"
+                                                                        Text="{Binding InputInfo.FolderPath, ConverterParameter=60, Converter={StaticResource TrimStringConverter}}"
+                                                                        ToolTipService.ToolTip="{Binding InputInfo.FolderPath}" />
+                                                                </StackPanel>
+                                                                <Grid ColumnDefinitions="70,Auto" ColumnSpacing="20">
+                                                                    <coreUI:IconTextBlock
+                                                                        FontSize="12"
+                                                                        Foreground="{ThemeResource Foreground2}"
+                                                                        Icon="&#xE8A5;"
+                                                                        Spacing="5"
+                                                                        Text="{Binding InputInfo.Extension}" />
+                                                                    <coreUI:IconTextBlock
+                                                                        Grid.Column="1"
+                                                                        FontSize="12"
+                                                                        Foreground="{ThemeResource Foreground2}"
+                                                                        Icon="&#xE8A5;"
+                                                                        Spacing="5"
+                                                                        Text="{Binding InputInfo.FileSize, Converter={StaticResource FileSizeToStringConverter}}" />
+                                                                </Grid>
+                                                            </StackPanel>
+
+                                                            <coreUI:ABIconButton
+                                                                Grid.Column="3"
+                                                                VerticalAlignment="Center"
+                                                                BIcon="&#xe739;"
+                                                                Command="{Binding Data.SelectFileCommand, Source={StaticResource Proxy}}"
+                                                                CommandParameter="{Binding}"
+                                                                Icon="&#xe73d;"
+                                                                IsAOrB="{Binding IsSelected}"
+                                                                IsEnabled0="{Binding Data.Status.IsNotBusy, Source={StaticResource Proxy}}"
+                                                                IsEnabled1="{Binding IsEnabled}"
+                                                                Variant="Text"
+                                                                Visibility="{Binding IsDeleted, Converter={StaticResource InvertedBoolConverter}}" />
+                                                        </Grid>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </coreUI:ListViewEx.ItemTemplate>
+                                        </coreUI:ListViewEx>
+
+                                        <Grid
+                                            Grid.Row="1"
+                                            Padding="10"
+                                            Background="{ThemeResource WindowBackground}"
+                                            ColumnDefinitions="Auto,*,Auto"
+                                            CornerRadius="10">
+                                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                                <TextBlock VerticalAlignment="Center" Text="{Binding LargeItemsCount, Converter={StaticResource FileCounterConverter}}" />
+                                                <TextBlock VerticalAlignment="Center" Text="{Binding LargeItemsSize, Converter={StaticResource FileSizeToStringConverter}}" />
+                                                <StackPanel Orientation="Horizontal">
+                                                    <coreUI:IconTextButton
+                                                        Command="{Binding SelectFilesCommand}"
+                                                        CommandParameter="SelectAll"
+                                                        Corner="Left"
+                                                        IsEnabled="{Binding Status.IsNotBusy}"
+                                                        Text="{coreHelpers:SRE K=SelectAll}" />
+                                                    <coreUI:IconTextButton
+                                                        Command="{Binding SelectFilesCommand}"
+                                                        CommandParameter="DeselectAll"
+                                                        Corner="Right"
+                                                        IsEnabled="{Binding Status.IsNotBusy}"
+                                                        Text="{coreHelpers:SRE K=Features_DeselectAllFile}" />
+                                                </StackPanel>
+                                            </StackPanel>
+
+                                            <StackPanel
+                                                Grid.Column="2"
+                                                Orientation="Horizontal"
+                                                Spacing="10">
+                                                <coreUI:IconTextButton
+                                                    Command="{Binding Data.ScanCommand, Source={StaticResource Proxy}}"
+                                                    Icon="&#xE8FE;"
+                                                    IsEnabled="{Binding Status.IsNotBusy}"
+                                                    Text="{coreHelpers:SRE K=Features_Scan}" />
+                                                <coreUI:IconTextButton
+                                                    VerticalAlignment="Center"
+                                                    Command="{Binding CleanCommand}"
+                                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                                    Icon="&#xEA99;"
+                                                    IsEnabled="{Binding Status.IsNotBusy}"
+                                                    IsTheme2nd="True"
+                                                    Text="{coreHelpers:SRE K=Features_Clean}" />
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <Grid
+                                            Padding="10"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Bottom"
+                                            Background="{ThemeResource Theme}"
+                                            ColumnDefinitions="Auto"
+                                            ColumnSpacing="5"
+                                            CornerRadius="5,5,0,0"
+                                            Visibility="{Binding Window.LicenseStatus.IsTrial}">
+                                            <TextBlock
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                FontWeight="SemiBold"
+                                                Foreground="#000"
+                                                Text="{Binding TrialLimitText}" />
+                                        </Grid>
+                                    </Grid>
+
+                                    <Grid
+                                        Background="{ThemeResource Background}"
+                                        Opacity="0.8"
+                                        Visibility="{Binding Status.IsBusy}">
+                                        <StackPanel
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Spacing="23">
+                                            <ProgressRing Background="{ThemeResource ProgressRingForeground}" IsActive="True" />
+                                            <TextBlock HorizontalAlignment="Center" Text="{Binding CurrentScanningText}" />
+                                            <coreUI:ABIconTextButton
+                                                Width="200"
+                                                BText="{coreHelpers:SRE K=Canceling}"
+                                                Command="{Binding CancelCommand}"
+                                                IsAOrB="{Binding Status.S, ConverterParameter=ProcessStopping, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"
+                                                IsEnabled="{Binding Status.S, ConverterParameter=ProcessStopping, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"
+                                                IsTheme="True"
+                                                Text="{coreHelpers:SRE K=Cancel}"
+                                                Variant="Text" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </coreUI:AZ.B>
+                    </coreUI:AZ>
+                </Grid>
+            </coreUI:AZ.B>
+        </coreUI:AZ>
+    </Grid>
+</apps:MainWindowPage>

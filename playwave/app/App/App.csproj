@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="BuildSettings.targets" Condition="Exists('BuildSettings.targets')" />
+
+  <PropertyGroup>
+    <AppName Condition="'$(AppName)' == ''">$(MSBuildProjectName)</AppName>
+    <RootNamespace>IOApp</RootNamespace>
+
+    <OutputType>WinExe</OutputType>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+
+    <TargetFramework>net10.0-windows10.0.22621.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <Platforms>x86;x64;ARM64</Platforms>
+    <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+    <UseWinUI>true</UseWinUI>
+    <WinUISDKReferences>false</WinUISDKReferences>
+    <Nullable>enable</Nullable>
+
+    <DefineConstants>$(DefineConstants);DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+
+    <PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
+    <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">False</PublishReadyToRun>
+    <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
+    <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">False</PublishTrimmed>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'!='Release'">
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <AssemblyName>$(AppName)</AssemblyName>
+    <VersionPrefix>1.0</VersionPrefix>
+    <Version>$(VersionPrefix).$([System.DateTime]::Now.ToString("MMdd.HHmm"))</Version>
+    <FileVersion>$(Version)</FileVersion>
+    <Product>$(AppName) Suite</Product>
+    <Company>$(AppName) Studio</Company>
+    <Copyright>Copyright © $([System.DateTime]::Now.ToString("yyyy")) $(AppName)</Copyright>
+
+    <Deterministic>false</Deterministic>
+    <PathMap>$(MSBuildProjectDirectory)=Z:\$(AppName)\$(MSBuildProjectName)</PathMap>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <CompilerVisibleProperty Include="Configuration;SolutionPath;MSBuildProjectFullPath;AppName;AssemblyName" />
+    <ProjectReference Include="..\..\..\..\iocore\Generator\ZGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+
+    <Manifest Include="$(ApplicationManifest)" />
+    <AdditionalFiles Include="NativeMethods.txt" />
+
+    <ProjectReference Include="..\..\..\..\iocore\project\IOCore.csproj" />
+    <ProjectReference Include="..\..\..\..\xmedia\project\XMedia.csproj" />
+  </ItemGroup>
+
+  <Target Name="VariableCheck" BeforeTargets="PrepareForBuild">
+    <Message Importance="high" Text="Solution: $(SolutionPath) | Profile: $(Configuration)" />
+    <Message Importance="high" Text="Project:  $(MSBuildProjectFullPath) | AppName: $(AppName)" />
+    <Message Importance="high" Text="AssemblyName: $(AssemblyName) | Namespace: $(RootNamespace) | Version: $(Version)" />
+    <Message Importance="high" Text="Targeting: $(RuntimeIdentifier) | Version: $(Version)" />
+    <Message Importance="high" Text="----------------------------------------------------------" />
+  </Target>
+</Project>

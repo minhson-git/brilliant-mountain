@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<features:PlayerItemControl
+    x:Class="IOApp.Features.StandardPlayerItemControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:coreLibs="using:IOCore.Libs"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:features="using:IOApp.Features"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance Type=features:PlayerItem}"
+    mc:Ignorable="d">
+    <features:PlayerItemControl.Resources>
+        <coreLibs:BoolToResourceBrushConverter
+            x:Key="FavoriteBoolToResourceBrushConverter"
+            FalseKey="Foreground"
+            TrueKey="Theme" />
+    </features:PlayerItemControl.Resources>
+    <Grid
+        Width="272"
+        Padding="8"
+        RowDefinitions="Auto,144,Auto"
+        RowSpacing="8">
+        <Grid ColumnDefinitions="*,Auto,Auto">
+            <TextBlock
+                VerticalAlignment="Center"
+                FontSize="12"
+                Foreground="{ThemeResource Foreground2}"
+                Text="{Binding InputInfo.FileSize, Converter={StaticResource FileSizeToStringConverter}}"
+                Visibility="{Binding InputInfo.IsCorrupted, Converter={StaticResource InvertedBoolConverter}}" />
+            <coreUI:ABIconButton
+                Grid.Column="1"
+                BIcon="&#xEB51;"
+                Command="{x:Bind FavoriteCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                Foreground="{Binding IsFavorite, Converter={StaticResource FavoriteBoolToResourceBrushConverter}}"
+                Icon="&#xEB52;"
+                IsAOrB="{Binding IsFavorite}"
+                IsEnabled="{Binding Status.IsNotLoading}"
+                Variant="Text"
+                Visibility="{Binding InputInfo.IsCorrupted, Converter={StaticResource InvertedBoolConverter}}" />
+            <coreUI:IconButton
+                Grid.Column="2"
+                Command="{x:Bind ShowMenuCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                Icon="&#xe712;"
+                IsEnabled="{Binding Status.IsNotLoading}"
+                Variant="Text" />
+        </Grid>
+
+        <Grid
+            Grid.Row="1"
+            Width="256"
+            Height="144"
+            Background="{ThemeResource Background}"
+            CornerRadius="6">
+            <StackPanel
+                Padding="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="{Binding InputInfo.IsCorrupted}">
+                <FontIcon
+                    HorizontalAlignment="Center"
+                    FontSize="64"
+                    Foreground="{ThemeResource Foreground2}"
+                    Glyph="&#xE814;" />
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="10"
+                    MaxLines="2"
+                    Text="{Binding InputInfo.Name}"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <Grid
+                DoubleTapped="ActionPanel_DoubleTapped"
+                Tapped="ActionPanel_Tapped"
+                Visibility="{Binding InputInfo.IsCorrupted, Converter={StaticResource InvertedBoolConverter}}">
+                <coreUI:AZ IsA="{Binding InputInfo.HasVideo}">
+                    <coreUI:AZ.A>
+                        <Image
+                            Width="256"
+                            Height="144"
+                            Source="{Binding Thumbnail.ImagePath}"
+                            Stretch="Uniform" />
+                    </coreUI:AZ.A>
+                    <coreUI:AZ.B>
+                        <FontIcon
+                            FontSize="64"
+                            Foreground="{ThemeResource Foreground2}"
+                            Glyph="&#xE8D6;" />
+                    </coreUI:AZ.B>
+                </coreUI:AZ>
+                <Border
+                    Margin="8"
+                    Padding="6,4"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Background="{ThemeResource Background}"
+                    CornerRadius="4">
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{ThemeResource Foreground2}"
+                        Text="{Binding InputInfo.Duration, Converter={StaticResource TimeSpanToStringConverter}}" />
+                </Border>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2" ColumnDefinitions="*,Auto">
+            <TextBlock
+                VerticalAlignment="Center"
+                FontSize="14"
+                Text="{Binding InputInfo.Name, ConverterParameter=64, Converter={StaticResource TrimStringConverter}}"
+                ToolTipService.ToolTip="{Binding InputInfo.Name}" />
+            <coreUI:ABIconButton
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                BIcon="&#xE768;"
+                Command="{x:Bind PreviewCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                Icon="&#xE769;"
+                IsAOrB="{Binding IsPlaying}"
+                IsEnabled="{Binding Status.IsNotLoading}"
+                Variant="Text"
+                Visibility="{Binding InputInfo.IsCorrupted, Converter={StaticResource InvertedBoolConverter}}" />
+        </Grid>
+    </Grid>
+</features:PlayerItemControl>

@@ -1,0 +1,934 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<apps:MainWindowConverterPage
+    x:Class="IOApp.Pages.Home"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:apps="using:IOApp"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:core="using:IOCore"
+    xmlns:coreAppManager="using:IOCore.AppManager"
+    xmlns:coreHelpers="using:IOCore.Helpers"
+    xmlns:corePremium="using:IOCore.Premium"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:features="using:IOApp.Features"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="using:IOApp.Pages"
+    d:DataContext="{d:DesignInstance Type=pages:Home}"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <apps:MainWindowConverterPage.Resources>
+        <pages:HomeProxy x:Name="Proxy" Data="{Binding}" />
+
+        <MenuFlyout
+            x:Name="MediaItemMoreMenuFlyout"
+            d:DataContext="{d:DesignInstance Type=features:ExtractingItem}"
+            Placement="BottomEdgeAlignedLeft">
+            <MenuFlyoutItem
+                Command="{Binding Data.ReplaceExtractItemCommand, Source={StaticResource Proxy}}"
+                CommandParameter="{Binding}"
+                Text="{core:SRE K=Replace}">
+                <MenuFlyoutItem.Icon>
+                    <FontIcon Glyph="&#xE710;" />
+                </MenuFlyoutItem.Icon>
+            </MenuFlyoutItem>
+
+            <MenuFlyoutItem
+                Command="{Binding Data.Window.RevealInFileExplorerCommand, Source={StaticResource Proxy}}"
+                CommandParameter="{Binding InputInfo.FullName}"
+                Text="{core:SRE K=RevealInFileExplorer}">
+                <MenuFlyoutItem.Icon>
+                    <FontIcon Glyph="&#xE8E5;" />
+                </MenuFlyoutItem.Icon>
+            </MenuFlyoutItem>
+
+            <MenuFlyoutItem
+                Name="OpenFileLocationMenuFlyoutItem"
+                Command="{Binding Data.Window.ShowPropertiesDialogCommand, Source={StaticResource Proxy}}"
+                CommandParameter="{Binding InputInfo.Info}"
+                Text="{core:SRE K=FileInfo}">
+                <MenuFlyoutItem.Icon>
+                    <FontIcon Glyph="&#xE946;" />
+                </MenuFlyoutItem.Icon>
+            </MenuFlyoutItem>
+        </MenuFlyout>
+
+        <Flyout
+            x:Name="AdvancedConverterConfigFlyout"
+            d:DataContext="{d:DesignInstance Type=features:ExtractingItem}"
+            Placement="BottomEdgeAlignedLeft">
+            <StackPanel Width="280" Spacing="10">
+                <StackPanel Spacing="10">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontSize="11"
+                            FontWeight="SemiBold"
+                            Text="{core:SRE K=Features_ConvertTo}" />
+
+                        <coreUI:ComboBoxEx
+                            Grid.Column="1"
+                            HorizontalAlignment="Stretch"
+                            DisplayMemberPath="Value"
+                            IsEnabled0="{Binding Status.IsNotProcessing, Mode=OneWay}"
+                            IsEnabled1="{Binding Status.IsNotBusy, Mode=OneWay}"
+                            ItemsSource="{Binding ExtractingConvertArgv.Families, Mode=OneWay}"
+                            SelectedIndex="{Binding ExtractingConvertArgv.FamilyIndex, Mode=TwoWay}">
+                            <coreUI:ComboBoxEx.ItemContainerStyle>
+                                <Style TargetType="ComboBoxItem">
+                                    <Setter Property="coreHelpers:BindingHelper.IsEnabled" Value="IsEnabled" />
+                                </Style>
+                            </coreUI:ComboBoxEx.ItemContainerStyle>
+                        </coreUI:ComboBoxEx>
+
+                        <coreUI:InfoButton Grid.Column="2" K="Info_ResizeOption" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontSize="11"
+                            FontWeight="SemiBold"
+                            Text="{core:SRE K=Size}" />
+
+                        <coreUI:ComboBoxEx
+                            Grid.Column="1"
+                            HorizontalAlignment="Stretch"
+                            DisplayMemberPath="Value"
+                            IsEnabled0="{Binding Status.IsNotProcessing}"
+                            IsEnabled1="{Binding Data.Status.IsNotBusy, Source={StaticResource Proxy}}"
+                            ItemsSource="{Binding ExtractingConvertArgv.ResizeOptions}"
+                            SelectedIndex="{Binding ExtractingConvertArgv.ResizeOptionIndex, Mode=TwoWay}">
+                            <coreUI:ComboBoxEx.ItemContainerStyle>
+                                <Style TargetType="ComboBoxItem">
+                                    <Setter Property="coreHelpers:BindingHelper.IsEnabled" Value="IsEnabled" />
+                                </Style>
+                            </coreUI:ComboBoxEx.ItemContainerStyle>
+                        </coreUI:ComboBoxEx>
+
+                        <coreUI:InfoButton Grid.Column="2" K="Info_ResizeOption" />
+                    </Grid>
+
+                    <coreUI:AZ IsA="{Binding ExtractingConvertArgv.ResizeOption, ConverterParameter=Percentage, Converter={StaticResource EnumComparisonToBoolConverter}}" IsB="{Binding ExtractingConvertArgv.ResizeOption, ConverterParameter=SameAsInput, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}">
+                        <coreUI:AZ.A>
+                            <Grid ColumnDefinitions="20,*,Auto" ColumnSpacing="10">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontSize="12"
+                                    Text="{Binding ExtractingConvertArgv.Percentage}" />
+
+                                <Slider
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Stretch"
+                                    LargeChange="1"
+                                    Maximum="110"
+                                    Minimum="1"
+                                    SmallChange="10"
+                                    StepFrequency="1"
+                                    Value="{Binding ExtractingConvertArgv.Percentage, Mode=TwoWay}" />
+
+                                <TextBlock
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    FontSize="12"
+                                    Text="%" />
+                            </Grid>
+                        </coreUI:AZ.A>
+                        <coreUI:AZ.B>
+                            <StackPanel>
+                                <coreUI:TextBoxComp
+                                    Margin="0,0,0,5"
+                                    PostfixText="px"
+                                    PrefixText="{core:SRE K=W}"
+                                    Text="{Binding ExtractingConvertArgv.Width, Mode=TwoWay, Converter={StaticResource UIntNumberToStringConverter}}"
+                                    Type="Number"
+                                    Visibility="{Binding ExtractingConvertArgv.ResizeOption, ConverterParameter=FixedHeight|MaxHeight|MinHeight, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}" />
+
+                                <coreUI:TextBoxComp
+                                    PostfixText="px"
+                                    PrefixText="{core:SRE K=H}"
+                                    Text="{Binding ExtractingConvertArgv.Height, Mode=TwoWay, Converter={StaticResource UIntNumberToStringConverter}}"
+                                    Type="Number"
+                                    Visibility="{Binding ExtractingConvertArgv.ResizeOption, ConverterParameter=FixedWidth|MaxWidth|MinWidth, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}" />
+                            </StackPanel>
+                        </coreUI:AZ.B>
+                    </coreUI:AZ>
+                </StackPanel>
+
+                <Grid ColumnDefinitions="*,*,Auto" ColumnSpacing="10">
+                    <StackPanel>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontSize="11"
+                            FontWeight="SemiBold"
+                            Text="{core:SRE K=Features_Brightness}" />
+
+                        <Slider
+                            HorizontalAlignment="Stretch"
+                            IsEnabled="{Binding Data.Window.License.Status.IsPremium, Source={StaticResource Proxy}}"
+                            LargeChange="1"
+                            Maximum="50"
+                            Minimum="-50"
+                            SmallChange="1"
+                            StepFrequency="1"
+                            Value="{Binding ExtractingConvertArgv.Brightness, Mode=TwoWay}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontSize="11"
+                            FontWeight="SemiBold"
+                            Text="{core:SRE K=Features_Contrast}" />
+
+                        <Slider
+                            HorizontalAlignment="Stretch"
+                            IsEnabled="{Binding Data.Window.License.Status.IsPremium, Source={StaticResource Proxy}}"
+                            LargeChange="1"
+                            Maximum="50"
+                            Minimum="-50"
+                            SmallChange="1"
+                            StepFrequency="1"
+                            Value="{Binding ExtractingConvertArgv.Contrast, Mode=TwoWay}" />
+                    </StackPanel>
+
+                    <TextBlock
+                        Grid.Column="2"
+                        VerticalAlignment="Center"
+                        FontSize="11"
+                        Foreground="{ThemeResource Foreground2}"
+                        Text="{core:SRE K=Premium}"
+                        Visibility="{Binding Data.Window.License.Status.IsTrial, Source={StaticResource Proxy}}" />
+                </Grid>
+
+                <!--  OPTIMIZE  -->
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                    <StackPanel>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <coreUI:CheckBoxEx
+                                VerticalAlignment="Center"
+                                Content="{core:SRE K=Features_OptimizeFileSize}"
+                                IsChecked="{Binding ExtractingConvertArgv.Optimize, Mode=TwoWay}"
+                                IsEnabled="{Binding Data.Window.License.Status.IsPremium, Source={StaticResource Proxy}}" />
+
+                            <coreUI:InfoButton Grid.Column="1" K="Info_OptimizeOutputFileSize" />
+                        </Grid>
+
+                        <coreUI:CheckBoxEx
+                            VerticalAlignment="Center"
+                            Content="{core:SRE K=Features_OptimizationLevel}"
+                            IsChecked="{Binding ExtractingConvertArgv.OptimalCompression, Mode=TwoWay}"
+                            Visibility="{Binding ExtractingConvertArgv.Optimize}" />
+                    </StackPanel>
+
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontSize="11"
+                        Foreground="{ThemeResource Foreground2}"
+                        Text="{corePremium:X T=ConceptText}"
+                        Visibility="{Binding Data.Window.License.Status.IsTrial, Source={StaticResource Proxy}}" />
+                </Grid>
+
+                <!--  FORMAT SPECIFIC SETTINGS  -->
+                <StackPanel Spacing="10">
+                    <StackPanel Spacing="10" Visibility="{Binding ExtractingConvertArgv.Family, ConverterParameter=Jpg, Converter={StaticResource EnumComparisonToBoolConverter}}">
+                        <!--  [JPG] BACKGROUND COLOR  -->
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                            <coreUI:ColorPickerButton
+                                IsEnabled="{Binding Data.Window.License.Status.IsPremium, Source={StaticResource Proxy}}"
+                                IsTransparent="{Binding ExtractingConvertArgv.Background.IsTransparent, Mode=TwoWay}"
+                                UseTransparency="{Binding ExtractingConvertArgv.Background.UseTransparency}"
+                                Color="{Binding ExtractingConvertArgv.Background.Color, Mode=TwoWay}" />
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <coreUI:InfoButton K="Info_BackgroundColor" />
+                                <TextBlock
+                                    Margin="10,0,0,0"
+                                    VerticalAlignment="Center"
+                                    FontSize="11"
+                                    Foreground="{ThemeResource Foreground2}"
+                                    Text="{corePremium:X T=ConceptText}"
+                                    Visibility="{Binding Data.Window.License.Status.IsTrial, Source={StaticResource Proxy}}" />
+                            </StackPanel>
+                        </Grid>
+                        <!--  [JPG] Progressive  -->
+                        <Grid ColumnDefinitions="*,Auto">
+                            <coreUI:CheckBoxEx Content="{core:SRE K=Image_Progressive}" IsChecked="{Binding ExtractingConvertArgv.JpgIsProgressive, Mode=TwoWay}" />
+                            <coreUI:InfoButton Grid.Column="1" K="Info_Progressive" />
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Spacing="10" Visibility="{Binding ExtractingConvertArgv.Family, ConverterParameter=Png, Converter={StaticResource EnumComparisonToBoolConverter}}">
+                        <!--  [PNG] Transparent  -->
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                            <coreUI:ColorPickerButton
+                                IsEnabled="{Binding Data.Window.License.Status.IsPremium, Source={StaticResource Proxy}}"
+                                IsTransparent="{Binding ExtractingConvertArgv.Background.IsTransparent, Mode=TwoWay}"
+                                UseTransparency="{Binding ExtractingConvertArgv.Background.UseTransparency}"
+                                Color="{Binding ExtractingConvertArgv.Background.Color, Mode=TwoWay}" />
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <coreUI:InfoButton K="Info_Transparent" />
+                                <TextBlock
+                                    Margin="10,0,0,0"
+                                    VerticalAlignment="Center"
+                                    FontSize="11"
+                                    Foreground="{ThemeResource Foreground2}"
+                                    Text="{corePremium:X T=ConceptText}"
+                                    Visibility="{Binding Data.Window.License.Status.IsTrial, Source={StaticResource Proxy}}" />
+                            </StackPanel>
+                        </Grid>
+                        <!--  [PNG] Interlaced  -->
+                        <Grid ColumnDefinitions="*,Auto">
+                            <coreUI:CheckBoxEx Content="{core:SRE K=Image_Interlaced}" IsChecked="{Binding ExtractingConvertArgv.PngIsInterlaced, Mode=TwoWay}" />
+                            <coreUI:InfoButton Grid.Column="1" K="Info_Interlaced" />
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Spacing="10" Visibility="{Binding ExtractingConvertArgv.Family, ConverterParameter=Png8, Converter={StaticResource EnumComparisonToBoolConverter}}">
+                        <!--  [PNG8] Transparent  -->
+                        <Grid ColumnDefinitions="*,Auto">
+                            <coreUI:ColorPickerButton
+                                IsTransparent="{Binding ExtractingConvertArgv.Background.IsTransparent, Mode=TwoWay}"
+                                UseTransparency="{Binding ExtractingConvertArgv.Background.UseTransparency}"
+                                Color="{Binding ExtractingConvertArgv.Background.Color, Mode=TwoWay}" />
+                            <coreUI:InfoButton Grid.Column="1" K="Info_Transparent" />
+                        </Grid>
+                        <!--  [PNG8] Interlaced  -->
+                        <Grid ColumnDefinitions="*,Auto">
+                            <coreUI:CheckBoxEx Content="{core:SRE K=Image_Interlaced}" IsChecked="{Binding ExtractingConvertArgv.Png8IsInterlaced, Mode=TwoWay}" />
+                            <coreUI:InfoButton Grid.Column="1" K="Info_Interlaced" />
+                        </Grid>
+                        <!--  [PNG8] Colors  -->
+                        <Grid
+                            Margin="0,5,0,0"
+                            VerticalAlignment="Center"
+                            ColumnDefinitions="Auto,*,Auto"
+                            ColumnSpacing="10">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontSize="11"
+                                FontWeight="SemiBold"
+                                Text="{core:SRE K=Features_Colors}" />
+                            <ComboBox
+                                Grid.Column="1"
+                                HorizontalAlignment="Stretch"
+                                DisplayMemberPath="Value"
+                                ItemsSource="{Binding ExtractingConvertArgv.Png8Colors}"
+                                SelectedIndex="{Binding ExtractingConvertArgv.Png8ColorIndex, Mode=TwoWay}" />
+                            <coreUI:InfoButton Grid.Column="2" K="Info_NumberOfColors" />
+                        </Grid>
+                        <!--  [PNG8] Dither Method  -->
+                        <Grid
+                            Margin="0,10,0,0"
+                            VerticalAlignment="Center"
+                            ColumnDefinitions="Auto,*,Auto"
+                            ColumnSpacing="10">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontSize="11"
+                                FontWeight="SemiBold"
+                                Text="{core:SRE K=Features_DitherMethod}" />
+                            <ComboBox
+                                Grid.Column="1"
+                                HorizontalAlignment="Stretch"
+                                DisplayMemberPath="Value"
+                                ItemsSource="{Binding ExtractingConvertArgv.Png8DitherMethods}"
+                                SelectedIndex="{Binding ExtractingConvertArgv.Png8DitherMethodIndex, Mode=TwoWay}" />
+                            <coreUI:InfoButton Grid.Column="2" K="Info_DitherMethod" />
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Spacing="10" Visibility="{Binding ExtractingConvertArgv.Family, ConverterParameter=Gif, Converter={StaticResource EnumComparisonToBoolConverter}}">
+                        <!--  [GIF] Transparent  -->
+                        <Grid ColumnDefinitions="*,Auto">
+                            <coreUI:ColorPickerButton
+                                IsTransparent="{Binding ExtractingConvertArgv.Background.IsTransparent, Mode=TwoWay}"
+                                UseTransparency="{Binding ExtractingConvertArgv.Background.UseTransparency}"
+                                Color="{Binding ExtractingConvertArgv.Background.Color, Mode=TwoWay}" />
+                            <coreUI:InfoButton Grid.Column="1" K="Info_Transparent" />
+                        </Grid>
+                        <!--  [GIF] Colors  -->
+                        <Grid
+                            Margin="0,5,0,0"
+                            VerticalAlignment="Center"
+                            ColumnDefinitions="Auto,*,Auto"
+                            ColumnSpacing="10">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontSize="11"
+                                FontWeight="SemiBold"
+                                Text="{core:SRE K=Features_Colors}" />
+                            <ComboBox
+                                Grid.Column="1"
+                                HorizontalAlignment="Stretch"
+                                DisplayMemberPath="Value"
+                                ItemsSource="{Binding ExtractingConvertArgv.GifColors}"
+                                SelectedIndex="{Binding ExtractingConvertArgv.GifColorIndex, Mode=TwoWay}" />
+                            <coreUI:InfoButton Grid.Column="2" K="Info_NumberOfColors" />
+                        </Grid>
+                        <!--  [GIF] Dither Method  -->
+                        <Grid
+                            Margin="0,10,0,0"
+                            VerticalAlignment="Center"
+                            ColumnDefinitions="Auto,*,Auto"
+                            ColumnSpacing="10">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontSize="11"
+                                FontWeight="SemiBold"
+                                Text="{core:SRE K=Features_DitherMethod}" />
+                            <ComboBox
+                                Grid.Column="1"
+                                HorizontalAlignment="Stretch"
+                                DisplayMemberPath="Value"
+                                ItemsSource="{Binding ExtractingConvertArgv.GifDitherMethods}"
+                                SelectedIndex="{Binding ExtractingConvertArgv.GifDitherMethodIndex, Mode=TwoWay}" />
+                            <coreUI:InfoButton Grid.Column="2" K="Info_DitherMethod" />
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Visibility="{Binding ExtractingConvertArgv.Family, ConverterParameter=Bmp, Converter={StaticResource EnumComparisonToBoolConverter}}">
+                        <!--  [BMP] Transparent  -->
+                        <Grid ColumnDefinitions="*,Auto">
+                            <coreUI:ColorPickerButton
+                                IsTransparent="{Binding ExtractingConvertArgv.Background.IsTransparent, Mode=TwoWay}"
+                                UseTransparency="{Binding ExtractingConvertArgv.Background.UseTransparency}"
+                                Color="{Binding ExtractingConvertArgv.Background.Color, Mode=TwoWay}" />
+                            <coreUI:InfoButton Grid.Column="1" K="Info_Transparent" />
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Visibility="{Binding ExtractingConvertArgv.Family, ConverterParameter=Avif, Converter={StaticResource EnumComparisonToBoolConverter}}">
+                        <!--  [AVIF] Transparent  -->
+                        <Grid ColumnDefinitions="*,Auto">
+                            <coreUI:ColorPickerButton
+                                IsTransparent="{Binding ExtractingConvertArgv.Background.IsTransparent, Mode=TwoWay}"
+                                UseTransparency="{Binding ExtractingConvertArgv.Background.UseTransparency}"
+                                Color="{Binding ExtractingConvertArgv.Background.Color, Mode=TwoWay}" />
+                            <coreUI:InfoButton Grid.Column="1" K="Info_Transparent" />
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Spacing="10" Visibility="{Binding ExtractingConvertArgv.Family, ConverterParameter=Webp, Converter={StaticResource EnumComparisonToBoolConverter}}">
+                        <!--  [WEBP] WebPMethod  -->
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontSize="11"
+                                FontWeight="SemiBold"
+                                Text="{core:SRE K=Features_Method}" />
+                            <Slider
+                                Grid.Column="1"
+                                HorizontalAlignment="Stretch"
+                                LargeChange="1"
+                                Maximum="6"
+                                Minimum="0"
+                                SmallChange="1"
+                                StepFrequency="1"
+                                Value="{Binding ExtractingConvertArgv.WebpMethod, Mode=TwoWay}" />
+                            <coreUI:InfoButton Grid.Column="2" K="Info_WebpMethod" />
+                        </Grid>
+
+                        <!--  [WEBP] Transparent  -->
+                        <Grid ColumnDefinitions="*,Auto">
+                            <coreUI:ColorPickerButton
+                                IsTransparent="{Binding ExtractingConvertArgv.Background.IsTransparent, Mode=TwoWay}"
+                                UseTransparency="{Binding ExtractingConvertArgv.Background.UseTransparency}"
+                                Color="{Binding ExtractingConvertArgv.Background.Color, Mode=TwoWay}" />
+                            <coreUI:InfoButton Grid.Column="1" K="Info_Transparent" />
+                        </Grid>
+
+                        <!--  [WEBP] Lossless vs Lossy panel  -->
+                        <Border
+                            Margin="0,5,0,0"
+                            Padding="10"
+                            Background="{ThemeResource FieldsetBackground}"
+                            CornerRadius="5">
+                            <coreUI:AZ IsA="{Binding ExtractingConvertArgv.WebpIsLossless}">
+                                <coreUI:AZ.A>
+                                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontSize="11"
+                                            FontWeight="SemiBold"
+                                            Text="{core:SRE K=Features_ImageType}" />
+                                        <ComboBox
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Stretch"
+                                            DisplayMemberPath="Value"
+                                            ItemsSource="{Binding ExtractingConvertArgv.WebpImageHints}"
+                                            SelectedIndex="{Binding ExtractingConvertArgv.WebpImageHintIndex, Mode=TwoWay}" />
+                                        <coreUI:InfoButton Grid.Column="2" K="Info_WebpImageHint" />
+                                    </Grid>
+                                </coreUI:AZ.A>
+                                <coreUI:AZ.B>
+                                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontSize="11"
+                                            FontWeight="SemiBold"
+                                            Text="{core:SRE K=Quality}" />
+                                        <Slider
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Stretch"
+                                            LargeChange="1"
+                                            Maximum="100"
+                                            Minimum="1"
+                                            SmallChange="1"
+                                            StepFrequency="1"
+                                            Value="{Binding ExtractingConvertArgv.Quality, Mode=TwoWay}" />
+                                        <coreUI:InfoButton Grid.Column="2" K="Info_Quality" />
+                                    </Grid>
+                                </coreUI:AZ.B>
+                            </coreUI:AZ>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Visibility="{Binding ExtractingConvertArgv.Family, ConverterParameter=Pcx, Converter={StaticResource EnumComparisonToBoolConverter}}">
+                        <!--  [PCX] BACKGROUND COLOR  -->
+                        <Grid ColumnDefinitions="*,Auto">
+                            <coreUI:ColorPickerButton Color="{Binding ExtractingConvertArgv.Background.Color, Mode=TwoWay}" />
+                            <coreUI:InfoButton Grid.Column="1" K="Info_BackgroundColor" />
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+
+                <coreUI:IconButton
+                    HorizontalAlignment="Right"
+                    Command="{Binding Data.MakeDefaultAdvancedConfigsCommand, Source={StaticResource Proxy}}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                    Icon="&#xE72C;"
+                    Size="SM"
+                    ToolTipService.ToolTip="{core:SRE K=MakeDefault}" />
+            </StackPanel>
+        </Flyout>
+    </apps:MainWindowConverterPage.Resources>
+
+    <Grid Loaded="DropBoxGrid_Loaded">
+        <coreUI:AZ IsA="{Binding ExtractingItems.IsEmpty}">
+            <coreUI:AZ.A>
+                <Grid
+                    Padding="10"
+                    BorderBrush="{ThemeResource Border}"
+                    BorderThickness="1"
+                    CornerRadius="5">
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Spacing="5">
+                        <coreUI:IconButton
+                            HorizontalAlignment="Center"
+                            Command="{Binding AddVideosCommand}"
+                            Icon="&#xE714;"
+                            IsEnabled="{Binding Status.IsNotLoading}"
+                            ScaleFactor="4"
+                            Variant="Outline" />
+
+                        <TextBlock
+                            FontSize="20"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding Meta.AddMediaText}" />
+
+                        <TextBlock
+                            FontSize="14"
+                            Foreground="{ThemeResource Foreground2}"
+                            HorizontalTextAlignment="Center"
+                            Text="{core:SRE K=OrDragAndDrop}" />
+
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="14"
+                            Foreground="{ThemeResource Foreground2}"
+                            Text="{Binding Meta.ExtensionsText}" />
+                    </StackPanel>
+                </Grid>
+            </coreUI:AZ.A>
+            <coreUI:AZ.B>
+                <Grid RowDefinitions="*,Auto">
+                    <ListView
+                        Padding="0,5,0,160"
+                        Background="{ThemeResource ListViewBackground}"
+                        ContainerContentChanging="FileListView_ContainerContentChanging"
+                        CornerRadius="5,5,0,0"
+                        ItemsSource="{Binding ExtractingItems}"
+                        SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    Padding="5,10"
+                                    ColumnDefinitions="128,*,400"
+                                    ColumnSpacing="10"
+                                    RowDefinitions="Auto">
+                                    <Grid VerticalAlignment="Top">
+                                        <Border
+                                            Width="128"
+                                            Height="72"
+                                            Background="{ThemeResource DockBackground}"
+                                            CornerRadius="5">
+                                            <coreUI:AZ IsA="{Binding InputInfo.HasVideo}">
+                                                <coreUI:AZ.A>
+                                                    <Image
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Source="{Binding Thumbnail.ImagePath}"
+                                                        Stretch="UniformToFill"
+                                                        UseLayoutRounding="False" />
+                                                </coreUI:AZ.A>
+                                                <coreUI:AZ.B>
+                                                    <FontIcon FontSize="32" Glyph="&#xE8D6;" />
+                                                </coreUI:AZ.B>
+                                            </coreUI:AZ>
+                                        </Border>
+
+                                        <coreUI:IconButton
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Command="{Binding Data.PlayCommand, Source={StaticResource Proxy}}"
+                                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                            Icon="&#xE768;"
+                                            IsArcCorner="True"
+                                            IsTheme="True" />
+                                    </Grid>
+
+                                    <Grid
+                                        Grid.Column="1"
+                                        ColumnDefinitions="*,Auto"
+                                        RowDefinitions="Auto,*,Auto">
+                                        <StackPanel Spacing="5">
+                                            <TextBlock
+                                                FontWeight="SemiBold"
+                                                MaxLines="2"
+                                                Text="{Binding InputInfo.Name}"
+                                                TextWrapping="Wrap" />
+
+                                            <StackPanel Orientation="Horizontal" Spacing="20">
+                                                <StackPanel Spacing="10">
+                                                    <coreUI:IconTextBlock
+                                                        Foreground="{ThemeResource Foreground2}"
+                                                        Icon="&#xE714;"
+                                                        Text="{Binding InputInfo.Container}" />
+
+                                                    <coreUI:IconTextBlock
+                                                        Foreground="{ThemeResource Foreground2}"
+                                                        Icon="&#xE823;"
+                                                        Text="{Binding InputInfo.Duration, Converter={StaticResource TimeSpanToStringConverter}}" />
+                                                </StackPanel>
+
+                                                <StackPanel Spacing="10">
+                                                    <coreUI:IconTextBlock
+                                                        Foreground="{ThemeResource Foreground2}"
+                                                        Icon="&#xE8A5;"
+                                                        Text="{Binding InputInfo.FileSize, Converter={StaticResource FileSizeToStringConverter}}" />
+
+                                                    <coreUI:IconTextBlock
+                                                        Foreground="{ThemeResource Foreground2}"
+                                                        Icon="&#xE9A6;"
+                                                        Text="{Binding InputInfo.Resolution}"
+                                                        Visibility="{Binding InputInfo.HasVideo}" />
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <StackPanel
+                                            Grid.Column="1"
+                                            VerticalAlignment="Top"
+                                            Orientation="Horizontal">
+                                            <coreUI:IconButton
+                                                Flyout="{StaticResource MediaItemMoreMenuFlyout}"
+                                                Icon="&#xE712;"
+                                                Variant="Text" />
+                                            <coreUI:IconButton
+                                                Command="{Binding Data.RemoveOneExtractItemCommand, Source={StaticResource Proxy}}"
+                                                CommandParameter="{Binding}"
+                                                Icon="&#xE711;"
+                                                IsEnabled0="{Binding Status.IsNotProcessing}"
+                                                IsEnabled1="{Binding Data.Status.IsNotBusy, Source={StaticResource Proxy}}"
+                                                Variant="Text" />
+                                        </StackPanel>
+
+                                        <Grid
+                                            Grid.Row="2"
+                                            Grid.ColumnSpan="2"
+                                            HorizontalAlignment="Right">
+                                            <coreUI:AZ
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                IsA="{Binding Message, Converter={StaticResource InvertedIsNullOrEmptyStringConverter}}"
+                                                IsB="{Binding Status.IsReady}"
+                                                IsC="{Binding Status.IsProcessInQueue}">
+                                                <coreUI:AZ.A>
+                                                    <TextBlock
+                                                        FontSize="12"
+                                                        Foreground="{ThemeResource Failure}"
+                                                        Text="{Binding Message}" />
+                                                </coreUI:AZ.A>
+                                                <coreUI:AZ.B>
+                                                    <FontIcon Foreground="{ThemeResource Foreground2}" Glyph="&#xF141;" />
+                                                </coreUI:AZ.B>
+                                                <coreUI:AZ.C>
+                                                    <FontIcon Foreground="{ThemeResource Foreground2}" Glyph="&#xF143;" />
+                                                </coreUI:AZ.C>
+                                            </coreUI:AZ>
+
+                                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                                <coreUI:IconTextButton
+                                                    Command="{Binding Data.Window.RevealInFileExplorerCommand, Source={StaticResource Proxy}}"
+                                                    CommandParameter="{Binding OutputInfo.FullName}"
+                                                    Icon="&#xE8E5;"
+                                                    Text="{core:SRE K=RevealInFileExplorer}"
+                                                    Variant="Text"
+                                                    Visibility="{Binding Status.IsProcessed}" />
+
+                                                <coreUI:ProgressRingEx
+                                                    DisplayText="True"
+                                                    IsProcessed="{Binding Status.IsProcessed}"
+                                                    IsProcessing="{Binding Status.IsProcessing}"
+                                                    Percent="{Binding Percent}"
+                                                    Text="{Binding RemainText}" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+
+                                    <StackPanel
+                                        Grid.Column="2"
+                                        Padding="10"
+                                        Background="{ThemeResource FieldsetBackground}"
+                                        CornerRadius="5"
+                                        Spacing="10">
+                                        <StackPanel Spacing="5">
+                                            <TextBlock
+                                                FontSize="11"
+                                                FontWeight="Bold"
+                                                Text="{core:SRE K=StartAt}" />
+
+                                            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="5">
+                                                <coreUI:TextBoxComp
+                                                    HorizontalContentAlignment="Stretch"
+                                                    PostfixText=" :h"
+                                                    Text="{Binding ExtractingConvertArgv.TimeIntervalHourStr, Mode=TwoWay}" />
+
+                                                <coreUI:TextBoxComp
+                                                    Grid.Column="1"
+                                                    HorizontalContentAlignment="Stretch"
+                                                    PostfixText=" :m"
+                                                    Text="{Binding ExtractingConvertArgv.TimeIntervalMinuteStr, Mode=TwoWay}" />
+
+                                                <coreUI:TextBoxComp
+                                                    Grid.Column="2"
+                                                    HorizontalContentAlignment="Stretch"
+                                                    PostfixText=" :s"
+                                                    Text="{Binding ExtractingConvertArgv.TimeIntervalSecondStr, Mode=TwoWay}" />
+
+                                                <coreUI:TextBoxComp
+                                                    Grid.Column="3"
+                                                    HorizontalContentAlignment="Stretch"
+                                                    PostfixText=":ms"
+                                                    Text="{Binding ExtractingConvertArgv.TimeIntervalMilisecondStr, Mode=TwoWay}" />
+                                            </Grid>
+                                        </StackPanel>
+
+                                        <Grid ColumnDefinitions="*,*" ColumnSpacing="5">
+                                            <StackPanel Spacing="5">
+                                                <TextBlock
+                                                    FontSize="12"
+                                                    FontWeight="Bold"
+                                                    Text="{core:SRE K=NumberOfFrames}" />
+
+                                                <NumberBox
+                                                    HorizontalAlignment="Stretch"
+                                                    Minimum="0"
+                                                    Value="{Binding ExtractingConvertArgv.NumberOfFramesToExtract, Mode=TwoWay}" />
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Column="1" Spacing="5">
+                                                <TextBlock
+                                                    FontSize="12"
+                                                    FontWeight="Bold"
+                                                    Text="{core:SRE K=FrameInterval}" />
+
+                                                <coreUI:TextBoxComp
+                                                    HorizontalAlignment="Stretch"
+                                                    PostfixText=":ms"
+                                                    Text="{Binding ExtractingConvertArgv.FrameIntervalMs, Mode=TwoWay}" />
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <Grid ColumnDefinitions="*,*" ColumnSpacing="5">
+                                            <Grid>
+                                                <coreUI:IconTextButton
+                                                    HorizontalAlignment="Left"
+                                                    Command="{Binding Data.ApplyToAllExtractItemCommand, Source={StaticResource Proxy}}"
+                                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                                    Icon="&#xE895;"
+                                                    IsEnabled0="{Binding Status.IsNotProcessing}"
+                                                    IsEnabled1="{Binding Status.IsNotBusy}"
+                                                    Text="{core:SRE K=Features_ApplyToAll}"
+                                                    Variant="Text" />
+
+                                                <coreUI:IconButton
+                                                    HorizontalAlignment="Right"
+                                                    Flyout="{StaticResource AdvancedConverterConfigFlyout}"
+                                                    Icon="&#xE713;"
+                                                    IsEnabled0="{Binding Status.IsNotProcessing}"
+                                                    IsEnabled1="{Binding Status.IsNotBusy}"
+                                                    Variant="Text" />
+                                            </Grid>
+
+                                            <coreUI:AZ Grid.Column="1" IsA="{Binding Status.IsNotProcessing}">
+                                                <coreUI:AZ.A>
+                                                    <coreUI:IconTextButton
+                                                        Command="{Binding Data.ExtractOneCommand, Source={StaticResource Proxy}}"
+                                                        CommandParameter="{Binding}"
+                                                        Icon="&#xE768;"
+                                                        IsEnabled="{Binding Status.IsNotLoading}"
+                                                        Text="{core:SRE K=Export}" />
+                                                </coreUI:AZ.A>
+                                                <coreUI:AZ.B>
+                                                    <coreUI:IconTextButton
+                                                        Command="{Binding Data.CancelOneCommand, Source={StaticResource Proxy}}"
+                                                        CommandParameter="{Binding}"
+                                                        Icon="&#xE71A;"
+                                                        IsEnabled="{Binding Status.IsNotLoading}"
+                                                        Text="{core:SRE K=Stop}" />
+                                                </coreUI:AZ.B>
+                                            </coreUI:AZ>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <Grid
+                        Grid.Row="1"
+                        Height="50"
+                        Padding="10,0"
+                        Background="{ThemeResource WindowBackground}"
+                        BorderBrush="{ThemeResource Border}"
+                        BorderThickness="0,1,0,0"
+                        ColumnDefinitions="Auto,*,Auto,280">
+                        <coreUI:IconTextButton
+                            Command="{Binding AddVideosCommand}"
+                            Icon="&#xE710;"
+                            IsEnabled="{Binding Status.IsNotBusy}"
+                            Text="{core:SRE K=AddVideos}" />
+
+                        <coreUI:IconTextButton
+                            Grid.Column="2"
+                            Command="{Binding ClearVideosCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                            Icon="&#xE74D;"
+                            IsEnabled="{Binding Status.IsNotBusy}"
+                            Text="{core:SRE K=ClearAll}" />
+
+                        <StackPanel
+                            Grid.Column="3"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal"
+                            Spacing="10">
+                            <coreUI:IconTextBlock
+                                Width="120"
+                                Icon="&#xE916;"
+                                Text="{Binding Stopwatch.Elapsed, Converter={StaticResource TimeSpanToStringConverter}}" />
+
+                            <coreUI:IconTextBlock
+                                Width="120"
+                                Icon="&#xE8A5;"
+                                Text0="{Binding ProcessedCount}"
+                                Text1="/"
+                                Text2="{Binding ExtractingItems.Count}" />
+                        </StackPanel>
+                    </Grid>
+
+                    <StackPanel
+                        Width="280"
+                        Margin="10"
+                        Padding="10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Background="{ThemeResource WindowBackground}"
+                        BorderBrush="{ThemeResource Border}"
+                        BorderThickness="1"
+                        CornerRadius="5"
+                        Spacing="10">
+                        <Grid VerticalAlignment="Center" ColumnDefinitions="*,Auto">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontSize="11"
+                                FontWeight="SemiBold"
+                                Text="{core:SRE K=Output}" />
+
+                            <coreUI:CheckBoxEx
+                                Grid.Column="1"
+                                Content="{core:SRE K=Features_SameFolderAsInput}"
+                                FlowDirection="RightToLeft"
+                                IsChecked="{Binding MediaData.IsOutputFolderSameInputFolder, Mode=TwoWay}"
+                                IsEnabled0="{Binding AnyItemsProcessing, Converter={StaticResource InvertedBoolConverter}}"
+                                IsEnabled1="{Binding Status.IsNotProcessing}" />
+                        </Grid>
+
+                        <coreUI:TextBoxComp
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            IsEnabled0="{Binding MediaData.IsOutputFolderSameInputFolder, Converter={StaticResource InvertedBoolConverter}}"
+                            IsEnabled1="{Binding AnyItemsProcessing, Converter={StaticResource InvertedBoolConverter}}"
+                            IsEnabled2="{Binding Status.IsNotProcessing}"
+                            Text="{Binding MediaData.OutputPath}">
+                            <coreUI:TextBoxComp.TextBoxStyle>
+                                <Style TargetType="TextBox">
+                                    <Setter Property="IsReadOnly" Value="True" />
+                                </Style>
+                            </coreUI:TextBoxComp.TextBoxStyle>
+                            <coreUI:TextBoxComp.ActionButton>
+                                <coreUI:IconButton Command="{Binding UpdateOutputPathCommand}" Icon="&#xE8DA;" />
+                            </coreUI:TextBoxComp.ActionButton>
+                        </coreUI:TextBoxComp>
+
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="5">
+                            <coreUI:IconButton Icon="&#xE712;" Variant="Text">
+                                <coreUI:IconButton.Flyout>
+                                    <MenuFlyout>
+                                        <coreUI:ToggleMenuFlyoutItemEx
+                                            IsChecked="{Binding MediaData.UseHardwareAcceleration, Mode=TwoWay}"
+                                            IsEnabled0="{Binding AnyItemsProcessing, Converter={StaticResource InvertedBoolConverter}}"
+                                            IsEnabled1="{Binding Status.IsNotProcessing}"
+                                            Text="{core:SRE K=Features_EnableHardwareAcceleration}" />
+                                        <coreUI:ToggleMenuFlyoutItemEx IsChecked="{Binding ShutdownWhenDone, Mode=TwoWay}" Text="{core:SRE K=ShutdownWhenCompleted}" />
+                                    </MenuFlyout>
+                                </coreUI:IconButton.Flyout>
+                            </coreUI:IconButton>
+
+                            <coreUI:AZ Grid.Column="1" IsA="{Binding Status.S, ConverterParameter=Processing;ProcessPaused, Converter={StaticResource EnumComparisonToBoolConverter}}">
+                                <coreUI:AZ.A>
+                                    <Grid ColumnDefinitions="*,*">
+                                        <coreUI:ABIconTextButton
+                                            BIcon="&#xE769;"
+                                            BText="{core:SRE K=Pause}"
+                                            Command="{Binding PauseAllCommand}"
+                                            Icon="&#xE72C;"
+                                            IsAOrB="{Binding Status.IsProcessPaused}"
+                                            IsEnabled="{Binding Status.IsNotLoading}"
+                                            Text="{core:SRE K=Resume}" />
+
+                                        <coreUI:IconTextButton
+                                            Grid.Column="1"
+                                            Command="{Binding StopAllCommand}"
+                                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                            Icon="&#xE71A;"
+                                            IsEnabled="{Binding Status.IsNotLoading}"
+                                            Text="{core:SRE K=Stop}" />
+                                    </Grid>
+                                </coreUI:AZ.A>
+                                <coreUI:AZ.B>
+                                    <coreUI:IconTextButton
+                                        Command="{Binding Data.ExtractAllCommand, Source={StaticResource Proxy}}"
+                                        Icon="&#xE768;"
+                                        IsEnabled0="{Binding AnyItemsProcessing, Converter={StaticResource InvertedBoolConverter}}"
+                                        IsEnabled1="{Binding Status.IsNotBusy}"
+                                        IsTheme="True"
+                                        Text="Export all" />
+                                </coreUI:AZ.B>
+                            </coreUI:AZ>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </coreUI:AZ.B>
+        </coreUI:AZ>
+    </Grid>
+</apps:MainWindowConverterPage>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c:WindowEx
+    x:Class="IOApp.Windows.GrabberWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="using:IOCore"
+    xmlns:cl="using:IOCore.License"
+    xmlns:cp="using:IOCore.Premium"
+    xmlns:cui="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mgc="using:XMedia.Grabber.Controls"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource WindowBackground}">
+        <Grid RowDefinitions="Auto,*">
+            <cui:TitleBarEx Name="_tb" IsSubtitleVisible="False">
+                <cui:TitleBarEx.RightHeader>
+                    <cui:IconTextButton
+                        Command="{x:Bind ShowPremiumWindowCommand}"
+                        IsThemeEnabled="True"
+                        Scheme="Theme"
+                        Text="{x:Bind cp:PremiumCore.I.ConceptText}"
+                        Visibility="{x:Bind cl:IOLicense.I.Status.IsTrial, Mode=OneWay}" />
+                </cui:TitleBarEx.RightHeader>
+            </cui:TitleBarEx>
+            <mgc:MultiGrabber Grid.Row="1" PlayCommand="{x:Bind PlayCommand}" />
+        </Grid>
+    </Grid>
+</c:WindowEx>

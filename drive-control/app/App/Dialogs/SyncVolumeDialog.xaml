@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<dialogs:VolumeFeatureDialog
+    x:Class="IOApp.Dialogs.SyncVolumeDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:core="using:IOCore"
+    xmlns:coreDialogs="using:IOCore.Dialogs"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dialogs="using:IOApp.Dialogs"
+    xmlns:features="using:IOApp.Features"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance Type=dialogs:SyncVolumeDialog}"
+    mc:Ignorable="d">
+
+    <dialogs:VolumeFeatureDialog.Resources>
+        <dialogs:SyncVolumeDialogProxy x:Name="Proxy" Data="{Binding}" />
+    </dialogs:VolumeFeatureDialog.Resources>
+
+    <Grid>
+        <Grid
+            Width="800"
+            Height="540"
+            Padding="10"
+            RowDefinitions="Auto,*,Auto"
+            RowSpacing="10">
+            <coreUI:IconTextBlock
+                Icon="&#xF413;"
+                Size="XL"
+                Text="{core:SRE K=CopyPCToUSBs}" />
+
+            <Grid
+                Grid.Row="1"
+                ColumnDefinitions="*,Auto,*"
+                ColumnSpacing="10">
+                <coreUI:AZ IsA="{Binding VolumeItem, Converter={StaticResource IsNullConverter}}">
+                    <coreUI:AZ.A>
+                        <Grid Height="140">
+                            <Rectangle
+                                Stroke="{ThemeResource Border}"
+                                StrokeDashArray="4 4"
+                                StrokeThickness="2" />
+                            <FontIcon
+                                FontSize="52"
+                                Foreground="{ThemeResource Foreground2}"
+                                Glyph="&#xE88E;" />
+                        </Grid>
+                    </coreUI:AZ.A>
+                    <coreUI:AZ.B>
+                        <Grid
+                            Height="70"
+                            Background="{ThemeResource ItemSelectedBackground}"
+                            ColumnSpacing="10"
+                            CornerRadius="5"
+                            DataContext="{Binding VolumeItem}">
+                            <Grid
+                                Padding="10"
+                                ColumnDefinitions="50,*,Auto"
+                                CornerRadius="5">
+                                <Grid
+                                    Height="50"
+                                    Background="{ThemeResource Foreground2}"
+                                    CornerRadius="2">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Text="{Binding Name}" />
+                                </Grid>
+
+                                <StackPanel Grid.Column="1" Margin="10">
+                                    <Grid ColumnDefinitions="Auto,*,Auto">
+                                        <TextBlock FontSize="12" Text="{Binding VolumeName}" />
+                                        <TextBlock
+                                            Grid.Column="2"
+                                            VerticalAlignment="Top"
+                                            FontSize="12"
+                                            Text="{Binding FileSystem}" />
+                                    </Grid>
+
+                                    <StackPanel VerticalAlignment="Top">
+                                        <TextBlock FontSize="12">
+                                            <Run Text="{core:SRE K=Free}" />
+                                            <Run Text=": " />
+                                            <Run Text="{Binding FreeSpace, Converter={StaticResource FileSizeToStringConverter}}" />
+                                            <Run Text=" / " />
+                                            <Run Text="{Binding Size, Converter={StaticResource FileSizeToStringConverter}}" />
+                                        </TextBlock>
+                                        <TextBlock
+                                            FontSize="12"
+                                            FontStyle="Italic"
+                                            Foreground="{ThemeResource Foreground2}">
+                                            <Run Text="{core:SRE K=Used}" />
+                                            <Run Text=": " />
+                                            <Run Text="{Binding UsedSize, Converter={StaticResource FileSizeToStringConverter}}" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <Border
+                                    Grid.Column="2"
+                                    Height="20"
+                                    Padding="10,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    Background="{ThemeResource Theme}"
+                                    CornerRadius="10"
+                                    Visibility="{Binding SecureType, ConverterParameter=Unsecured, Converter={StaticResource IsEqualEnumsConverter}}">
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        Foreground="{ThemeResource ThemeForeground}"
+                                        Text="{Binding SecureTypeText}" />
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </coreUI:AZ.B>
+                </coreUI:AZ>
+
+                <FontIcon
+                    Grid.Column="1"
+                    FontSize="32"
+                    Glyph="&#xEA62;" />
+
+                <Grid Grid.Column="2" RowDefinitions="Auto,*">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <TextBlock VerticalAlignment="Center">
+                            <Run Text="{Binding VolumeItems.Items.Count, Converter={StaticResource VolumeCounterConverter}}" />
+                            <Run Text=" : " />
+                            <Run Text="{Binding VolumeItems.CheckedCount}" />
+                            <Run Text=" / " />
+                            <Run Text="{Binding VolumeItems.Items.Count}" />
+                        </TextBlock>
+
+                        <CheckBox
+                            Grid.Column="2"
+                            MinWidth="40"
+                            FlowDirection="RightToLeft"
+                            IsChecked="{Binding VolumeItems.IsChecked, Mode=TwoWay}"
+                            IsEnabled="{Binding Status.IsNotBusy}" />
+                    </Grid>
+
+                    <ListView
+                        Grid.Row="1"
+                        Background="{ThemeResource ListViewBackground}"
+                        CornerRadius="5"
+                        ItemsSource="{Binding VolumeItems.Items}"
+                        SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Padding="5,10">
+                                    <Grid ColumnDefinitions="50,*,Auto" CornerRadius="5">
+                                        <Grid
+                                            Height="50"
+                                            Background="{ThemeResource Foreground2}"
+                                            CornerRadius="2">
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Text="{Binding Target.Name}" />
+                                        </Grid>
+
+                                        <Grid
+                                            Grid.Column="1"
+                                            Margin="10"
+                                            RowDefinitions="Auto,Auto,Auto">
+                                            <Grid ColumnDefinitions="Auto,*,Auto">
+                                                <TextBlock FontSize="12" Text="{Binding Target.VolumeName}" />
+                                                <TextBlock
+                                                    Grid.Column="2"
+                                                    VerticalAlignment="Top"
+                                                    FontSize="12"
+                                                    Text="{Binding Target.FileSystem}" />
+                                            </Grid>
+
+                                            <StackPanel Grid.Row="1" VerticalAlignment="Top">
+                                                <TextBlock FontSize="12">
+                                                    <Run Text="{core:SRE K=Free}" />
+                                                    <Run Text=": " />
+                                                    <Run Text="{Binding Target.FreeSpace, Converter={StaticResource FileSizeToStringConverter}}" />
+                                                    <Run Text=" / " />
+                                                    <Run Text="{Binding Target.Size, Converter={StaticResource FileSizeToStringConverter}}" />
+                                                </TextBlock>
+
+                                                <TextBlock
+                                                    FontSize="12"
+                                                    FontStyle="Italic"
+                                                    Foreground="{ThemeResource Foreground2}">
+                                                    <Run Text="{core:SRE K=Used}" />
+                                                    <Run Text=": " />
+                                                    <Run Text="{Binding Target.UsedSize, Converter={StaticResource FileSizeToStringConverter}}" />
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <Grid Grid.Column="2" RowDefinitions="Auto,*,Auto">
+                                            <CheckBox
+                                                MinWidth="20"
+                                                HorizontalAlignment="Right"
+                                                FlowDirection="RightToLeft"
+                                                IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+
+                                            <features:FileBadge Grid.Row="2" DataContext="{Binding Target}" />
+                                        </Grid>
+                                    </Grid>
+
+                                    <coreUI:AZ
+                                        IsA="{Binding Target.Status.IsProcessing}"
+                                        IsB="{Binding Target.Status.IsProcessed}"
+                                        IsC="{Binding Target.Status.S, ConverterParameter=ProcessStopped;ProcessFailed, Converter={StaticResource IsEqualEnumsConverter}}">
+                                        <coreUI:AZ.A>
+                                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                                <FontIcon FontSize="12" Glyph="&#xF413;" />
+                                                <TextBlock FontSize="12" Text="{Binding Target.Info}" />
+                                            </StackPanel>
+                                        </coreUI:AZ.A>
+                                        <coreUI:AZ.B>
+                                            <TextBlock
+                                                FontSize="12"
+                                                Foreground="{ThemeResource Success}"
+                                                Text="{Binding Target.Status.T}" />
+                                        </coreUI:AZ.B>
+                                        <coreUI:AZ.C>
+                                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                                <TextBlock
+                                                    VerticalAlignment="Center"
+                                                    FontSize="12"
+                                                    Foreground="{ThemeResource Failure}"
+                                                    Text="{Binding Target.Message, ConverterParameter=40, Converter={StaticResource TrimStringConverter}}" />
+                                                <coreUI:InfoButton Desc="{Binding Target.Message}" />
+                                            </StackPanel>
+                                        </coreUI:AZ.C>
+                                    </coreUI:AZ>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </Grid>
+
+            <StackPanel
+                Grid.Row="2"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal"
+                Spacing="10">
+                <coreUI:InfoButton K="Info_Sync" />
+
+                <coreUI:IconTextButton
+                    Command="{Binding SyncCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                    Icon="&#xE895;"
+                    IsEnabled0="{Binding VolumeItems.IsAnyChecked}"
+                    IsEnabled1="{Binding Status.IsNotBusy}"
+                    IsEnabled2="{Binding VolumeItem, Converter={StaticResource InvertedIsNullConverter}}"
+                    IsTheme="True"
+                    Text="{core:SRE K=Sync}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</dialogs:VolumeFeatureDialog>

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<core:WindowEx
+    x:Class="IOApp.CoreWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:apps="using:IOApp"
+    xmlns:core="using:IOCore"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:notifyIcon="using:H.NotifyIcon"
+    mc:Ignorable="d">
+
+    <Grid d:DataContext="{d:DesignInstance Type=apps:CoreWindow}">
+        <Grid.Resources>
+            <apps:CoreWindowProxy x:Name="Proxy" Data="{Binding}" />
+        </Grid.Resources>
+
+        <notifyIcon:TaskbarIcon
+            x:Name="TaskbarIcon"
+            x:FieldModifier="public"
+            ContextMenuMode="SecondWindow"
+            IconSource="ms-appx:///App/Externals/icon.ico"
+            LeftClickCommand="{Binding TaskbarIconActionCommand}"
+            LeftClickCommandParameter="ShowWindow"
+            NoLeftClickDelay="True"
+            ToolTipText="{Binding AppWindow.Title}">
+            <notifyIcon:TaskbarIcon.ContextFlyout>
+                <MenuFlyout AreOpenCloseAnimationsEnabled="False">
+                    <MenuFlyoutItem
+                        Command="{Binding Data.TaskbarIconActionCommand, Source={StaticResource Proxy}}"
+                        CommandParameter="Volumes"
+                        Text="{Binding Data.VolumeText, Source={StaticResource Proxy}}">
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon Glyph="&#xEB05;" />
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem
+                        Width="250"
+                        Command="{Binding Data.TaskbarIconActionCommand, Source={StaticResource Proxy}}"
+                        CommandParameter="Disks"
+                        Text="{Binding Data.DiskText, Source={StaticResource Proxy}}">
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon Glyph="&#xEDA2;" />
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem
+                        Command="{Binding Data.TaskbarIconActionCommand, Source={StaticResource Proxy}}"
+                        CommandParameter="EjectAll"
+                        IsEnabled="{Binding Data.License.Status.IsPremium, Source={StaticResource Proxy}}"
+                        Text="{Binding Data.EjectAllText, Source={StaticResource Proxy}}">
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon Glyph="&#xF847;" />
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutSeparator />
+                    <MenuFlyoutItem
+                        Command="{Binding Data.TaskbarIconActionCommand, Source={StaticResource Proxy}}"
+                        CommandParameter="Premium"
+                        Text="{core:SRE K=Premium}"
+                        Visibility="{Binding Data.License.Status.IsTrial, Source={StaticResource Proxy}}">
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon Glyph="&#xE728;" />
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem
+                        Command="{Binding Data.TaskbarIconActionCommand, Source={StaticResource Proxy}}"
+                        CommandParameter="ExitApp"
+                        Text="{core:SRE K=Exit}">
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon Glyph="&#xF3B1;" />
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                </MenuFlyout>
+            </notifyIcon:TaskbarIcon.ContextFlyout>
+        </notifyIcon:TaskbarIcon>
+    </Grid>
+</core:WindowEx>

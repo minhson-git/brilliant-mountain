@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<core:DialogEx
+    x:Class="IOApp.Dialogs.DownloaderDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:core="using:IOCore"
+    xmlns:coreHelpers="using:IOCore.Helpers"
+    xmlns:coreLibs="using:IOCore.Libs"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dialogs="using:IOApp.Dialogs"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance Type=dialogs:DownloaderDialog}"
+    mc:Ignorable="d">
+    <core:DialogEx.Resources>
+        <coreLibs:ValueConverterGroup x:Key="InvertedIsNullOrEmptyStringToVisibilityConverter">
+            <coreLibs:IsNullOrEmptyStringConverter IsInverted="True" />
+            <coreLibs:BoolToVisibilityConverter />
+        </coreLibs:ValueConverterGroup>
+
+        <coreLibs:ValueConverterGroup x:Key="GreaterThanComparisionToVisibilityConverter">
+            <coreLibs:ComparisonConverter Comparison="GreaterThan" />
+            <coreLibs:BoolToVisibilityConverter />
+        </coreLibs:ValueConverterGroup>
+
+        <coreLibs:ValueConverterGroup x:Key="TimeSpanGreaterThanComparisionToVisibilityConverter">
+            <coreLibs:TimeSpanConverter Unit="TotalSeconds" />
+            <coreLibs:ComparisonConverter Comparison="GreaterThan" />
+            <coreLibs:BoolToVisibilityConverter />
+        </coreLibs:ValueConverterGroup>
+    </core:DialogEx.Resources>
+
+    <Grid Width="500" Height="250">
+        <Grid
+            Padding="10,30,10,10"
+            RowDefinitions="Auto,*"
+            RowSpacing="10">
+            <coreUI:TextBoxComp
+                HorizontalAlignment="Stretch"
+                KeyDown="UrlTextBoxComp_KeyDown"
+                Text="{Binding UrlText, Mode=TwoWay}">
+                <coreUI:TextBoxComp.TextBoxStyle>
+                    <Style TargetType="TextBox">
+                        <Setter Property="PlaceholderText" Value="{coreHelpers:SRE K=Url}" />
+                    </Style>
+                </coreUI:TextBoxComp.TextBoxStyle>
+                <coreUI:TextBoxComp.PostfixButton>
+                    <coreUI:IconButton
+                        Command="{Binding PasteCommand}"
+                        Icon="&#xE77F;"
+                        IsEnabled="{x:Bind Status.IsNotBusy}" />
+                </coreUI:TextBoxComp.PostfixButton>
+                <coreUI:TextBoxComp.ActionButton>
+                    <coreUI:IconButton
+                        Name="ScanIconButton"
+                        Command="{Binding ScanCommand}"
+                        Icon="&#xE71E;"
+                        IsEnabled="{Binding Status.IsNotBusy, Mode=OneWay}"
+                        IsLoading="{Binding Status.IsLoading, Mode=OneWay}" />
+                </coreUI:TextBoxComp.ActionButton>
+            </coreUI:TextBoxComp>
+
+            <coreUI:AZ Grid.Row="1" IsA="{Binding PreviewedMediaItem, Converter={StaticResource IsNullConverter}}">
+                <coreUI:AZ.A>
+                    <coreUI:EmptyList />
+                </coreUI:AZ.A>
+                <coreUI:AZ.B>
+                    <Grid RowDefinitions="*,Auto">
+                        <Grid
+                            VerticalAlignment="Center"
+                            ColumnDefinitions="198,*"
+                            ColumnSpacing="10">
+                            <Grid
+                                Width="198"
+                                Height="108"
+                                Background="{ThemeResource HudBackground}">
+                                <FontIcon FontSize="40" Glyph="&#xEA69;" />
+                                <Image
+                                    Width="198"
+                                    Height="108"
+                                    Source="{Binding PreviewedMediaItem.ThumbnailUrl}"
+                                    Stretch="Uniform" />
+                                <Border
+                                    Margin="2"
+                                    Padding="4,2"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    Background="#b0000000">
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="#fff"
+                                        Text="{Binding PreviewedMediaItem.Duration, Converter={StaticResource TimeSpanToStringConverter}}"
+                                        Visibility="{Binding PreviewedMediaItem.Duration, ConverterParameter=0, Converter={StaticResource TimeSpanGreaterThanComparisionToVisibilityConverter}}" />
+                                </Border>
+                            </Grid>
+
+                            <StackPanel Grid.Column="1" Spacing="5">
+                                <TextBlock
+                                    MaxLines="3"
+                                    Text="{Binding PreviewedMediaItem.Title}"
+                                    TextWrapping="Wrap" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock
+                                        Margin="0,0,10,0"
+                                        FontSize="12"
+                                        Foreground="{ThemeResource Foreground2}"
+                                        Text="{Binding PreviewedMediaItem.Info}"
+                                        Visibility="{Binding PreviewedMediaItem.Info, Converter={StaticResource InvertedIsNullOrEmptyStringToVisibilityConverter}}" />
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{ThemeResource Foreground2}"
+                                        Text="{Binding PreviewedMediaItem.Size, Converter={StaticResource FileSizeToStringConverter}}"
+                                        Visibility="{Binding PreviewedMediaItem.Size, ConverterParameter=0, Converter={StaticResource GreaterThanComparisionToVisibilityConverter}}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+
+                        <coreUI:AZ
+                            Grid.Row="1"
+                            IsA="{Binding Status.IsProcessing}"
+                            IsB="{Binding Status.IsProcessed}">
+                            <coreUI:AZ.A>
+                                <Grid ColumnDefinitions="300,*" ColumnSpacing="10">
+                                    <coreUI:ProgressRingEx
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        DisplayText="{Binding PreviewedMediaItem.Percent, ConverterParameter=100, Converter={StaticResource EqualToComparisonConverter}}"
+                                        IsProcessing="{Binding Status.IsProcessing}"
+                                        Percent="{Binding PreviewedMediaItem.Percent}" />
+
+                                    <coreUI:IconTextButton
+                                        Grid.Column="1"
+                                        Command="{Binding DownloadCommand}"
+                                        Icon="&#xE71A;"
+                                        IsTheme="True"
+                                        Text="{coreHelpers:SRE K=Cancel}" />
+                                </Grid>
+                            </coreUI:AZ.A>
+                            <coreUI:AZ.B>
+                                <Grid ColumnDefinitions="300,*" ColumnSpacing="10">
+                                    <coreUI:IconButton
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Command="{Binding Window.RevealInFileExplorerCommand}"
+                                        CommandParameter="{Binding PreviewedMediaItem.OutputInfo.FullName}"
+                                        Icon="&#xE8DA;"
+                                        IsEnabled="{Binding PreviewedMediaItem.OutputInfo.Exists}"
+                                        Variant="Text" />
+
+                                    <coreUI:IconTextButton
+                                        Grid.Column="1"
+                                        Command="{Binding OpenCommand}"
+                                        Icon="&#xE8B5;"
+                                        IsTheme="True"
+                                        Text="{coreHelpers:SRE K=Open}" />
+                                </Grid>
+                            </coreUI:AZ.B>
+                            <coreUI:AZ.C>
+                                <Grid ColumnDefinitions="300,*">
+                                    <coreUI:ComboBoxEx
+                                        HorizontalAlignment="Stretch"
+                                        DisplayMemberPath="Value"
+                                        IsEnabled="{Binding Window.Status.IsNotProcessing}"
+                                        ItemsSource="{Binding PreviewedStreamItems}"
+                                        SelectedIndex="{Binding PreviewedStreamIndex, Mode=TwoWay}"
+                                        Visibility="{Binding PreviewedStreamItems.IsNotEmpty}">
+                                        <coreUI:ComboBoxEx.ItemContainerStyle>
+                                            <Style TargetType="ComboBoxItem">
+                                                <Setter Property="coreHelpers:BindingHelper.IsEnabled" Value="IsEnabled" />
+                                            </Style>
+                                        </coreUI:ComboBoxEx.ItemContainerStyle>
+                                    </coreUI:ComboBoxEx>
+                                    <coreUI:ComboBoxEx
+                                        HorizontalAlignment="Stretch"
+                                        DisplayMemberPath="Value"
+                                        IsEnabled="{Binding Window.Status.IsNotProcessing}"
+                                        ItemsSource="{Binding QualityItems}"
+                                        SelectedIndex="{Binding QualityIndex, Mode=TwoWay}"
+                                        Visibility="{Binding PreviewedStreamItems.IsEmpty}">
+                                        <coreUI:ComboBoxEx.ItemContainerStyle>
+                                            <Style TargetType="ComboBoxItem">
+                                                <Setter Property="coreHelpers:BindingHelper.IsEnabled" Value="IsEnabled" />
+                                            </Style>
+                                        </coreUI:ComboBoxEx.ItemContainerStyle>
+                                    </coreUI:ComboBoxEx>
+
+                                    <coreUI:AZ Grid.Column="1" IsA="{Binding AudioLanguageItems.Count, ConverterParameter=1, Converter={StaticResource GreaterThanComparisonConverter}}">
+                                        <coreUI:AZ.A>
+                                            <Grid ColumnDefinitions="*,Auto">
+                                                <coreUI:ComboBoxEx
+                                                    HorizontalAlignment="Stretch"
+                                                    DisplayMemberPath="Value"
+                                                    ItemsSource="{Binding AudioLanguageItems}"
+                                                    SelectedIndex="{Binding AudioLanguageIndex, Mode=TwoWay}">
+                                                    <coreUI:ComboBoxEx.ItemContainerStyle>
+                                                        <Style TargetType="ComboBoxItem">
+                                                            <Setter Property="coreHelpers:BindingHelper.IsEnabled" Value="IsEnabled" />
+                                                        </Style>
+                                                    </coreUI:ComboBoxEx.ItemContainerStyle>
+                                                </coreUI:ComboBoxEx>
+
+                                                <coreUI:IconButton
+                                                    Grid.Column="1"
+                                                    Command="{Binding DownloadCommand}"
+                                                    Icon="&#xE896;"
+                                                    IsTheme="True" />
+                                            </Grid>
+                                        </coreUI:AZ.A>
+                                        <coreUI:AZ.B>
+                                            <coreUI:IconTextButton
+                                                HorizontalAlignment="Stretch"
+                                                Command="{Binding DownloadCommand}"
+                                                Icon="&#xE896;"
+                                                IsTheme="True"
+                                                Text="{coreHelpers:SRE K=Download}" />
+                                        </coreUI:AZ.B>
+                                    </coreUI:AZ>
+                                </Grid>
+                            </coreUI:AZ.C>
+                        </coreUI:AZ>
+                    </Grid>
+                </coreUI:AZ.B>
+            </coreUI:AZ>
+        </Grid>
+    </Grid>
+</core:DialogEx>

@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ap:HomePage
+    x:Class="IOApp.Pages.Playlist"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:af="using:IOApp.Features"
+    xmlns:ag="using:IOApp.Gens"
+    xmlns:ap="using:IOApp.Pages"
+    xmlns:cc="using:IOCore.Converters"
+    xmlns:cui="using:IOCore.UI"
+    xmlns:cuib="using:IOCore.UI.Behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <ap:HomePage.Resources>
+        <ap:PlaylistProxy x:Name="Proxy" _="{x:Bind}" />
+
+        <cc:TextFormatConverter x:Key="AddToPlaylistNameTextFormat" Format="{ag:SR K=AddVideosAudiosToPlaylist}" />
+
+        <Flyout x:Name="CreatePlaylistFlyout" Placement="Bottom">
+            <cui:TextBoxEx
+                Width="240"
+                Loaded="CreatePlaylistTextBoxComp_Loaded"
+                Text="{x:Bind PlaylistName, Mode=TwoWay}">
+                <cui:TextBoxEx.ActionButton>
+                    <cui:IconTextButton
+                        Command="{x:Bind CreatePlaylistCommand}"
+                        Icon="&#xE8FB;"
+                        IsThemeEnabled="True"
+                        Scheme="Theme" />
+                </cui:TextBoxEx.ActionButton>
+            </cui:TextBoxEx>
+        </Flyout>
+
+        <cui:MenuFlyoutEx
+            x:Name="PlaylistItemMenuFlyoutEx"
+            d:DataContext="{d:DesignInstance Type=af:PlaylistItem}"
+            Placement="Bottom">
+            <MenuFlyoutItem
+                Command="{Binding _.EditingModeCommand, Source={StaticResource Proxy}}"
+                CommandParameter="{Binding}"
+                Text="{ag:SR K=Rename}">
+                <MenuFlyoutItem.Icon>
+                    <FontIcon Glyph="&#xE8AC;" />
+                </MenuFlyoutItem.Icon>
+            </MenuFlyoutItem>
+            <MenuFlyoutItem
+                Command="{Binding _.RemovePlaylistCommand, Source={StaticResource Proxy}}"
+                CommandParameter="{Binding}"
+                Foreground="{ThemeResource Failure}"
+                Text="{ag:SR K=Remove}">
+                <MenuFlyoutItem.Icon>
+                    <FontIcon Glyph="&#xE894;" />
+                </MenuFlyoutItem.Icon>
+            </MenuFlyoutItem>
+        </cui:MenuFlyoutEx>
+    </ap:HomePage.Resources>
+
+    <Grid RowDefinitions="Auto,*" RowSpacing="10">
+        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="5">
+            <ListView
+                IsEnabled="{x:Bind Status.IsNotLoading, Mode=OneWay}"
+                ItemsSource="{x:Bind PlaylistItems}"
+                ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                ScrollViewer.HorizontalScrollMode="Enabled"
+                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollMode="Disabled"
+                SelectedItem="{x:Bind SelectedPlaylistItem, Mode=TwoWay}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsStackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="af:PlaylistItem">
+                        <Grid MaxWidth="120">
+                            <cui:AZ cuib:HoverFx.IsEnabled="True" IsA="{x:Bind IsEditing, Mode=OneWay}">
+                                <cui:AZ.A>
+                                    <cui:TextBoxEx
+                                        LostFocus="RenamePlaylistTextBox_LostFocus"
+                                        Tag="{x:Bind}"
+                                        Text="{x:Bind Name, Mode=TwoWay}" />
+                                </cui:AZ.A>
+                                <cui:AZ.B>
+                                    <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="5">
+                                        <FontIcon
+                                            VerticalAlignment="Center"
+                                            FontSize="12"
+                                            Glyph="{x:Bind Icon, Mode=OneWay}" />
+                                        <TextBlock Grid.Column="1" VerticalAlignment="Center">
+                                            <Run FontSize="12" Text="{x:Bind Name, Mode=OneWay}" />
+                                            <LineBreak />
+                                            <Run
+                                                FontSize="8"
+                                                Foreground="{ThemeResource Foreground2}"
+                                                Text="{x:Bind Paths.Count, Mode=OneWay, Converter={StaticResource ItemCounter}}" />
+                                        </TextBlock>
+                                        <cui:IconButton
+                                            Grid.Column="2"
+                                            Flyout="{StaticResource PlaylistItemMenuFlyoutEx}"
+                                            Icon="&#xe712;"
+                                            Size="SM"
+                                            Variant="Text"
+                                            Visibility="{x:Bind Remark, Mode=OneWay, Converter={StaticResource IsNull}}" />
+                                    </Grid>
+                                </cui:AZ.B>
+                            </cui:AZ>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <cui:IconButton
+                Grid.Column="1"
+                Flyout="{StaticResource CreatePlaylistFlyout}"
+                Icon="&#xe710;"
+                IsEnabled="{x:Bind Status.IsNotLoading, Mode=OneWay}"
+                Variant="Text" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <cui:AZ IsA="{x:Bind RefinedPlayerItems.IsEmpty, Mode=OneWay}">
+                <cui:AZ.A>
+                    <Button
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="Transparent"
+                        Command="{x:Bind AddFilesCommand}"
+                        CornerRadius="10"
+                        IsEnabled="{x:Bind Status.IsNotLoading, Mode=OneWay}">
+                        <StackPanel VerticalAlignment="Center" Spacing="5">
+                            <Grid
+                                Width="64"
+                                Height="64"
+                                HorizontalAlignment="Center">
+                                <FontIcon
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="48"
+                                    Glyph="&#xea69;" />
+                                <FontIcon
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    FontSize="16"
+                                    Glyph="&#xECC8;" />
+                            </Grid>
+                            <TextBlock HorizontalAlignment="Stretch" HorizontalTextAlignment="Center">
+                                <Run Text="{x:Bind SelectedPlaylistItem.Name, Mode=OneWay, Converter={StaticResource AddToPlaylistNameTextFormat}}" />
+                                <LineBreak />
+                                <Run
+                                    FontSize="12"
+                                    Foreground="{ThemeResource Foreground2}"
+                                    Text="{ag:SR K=OrDragAndDrop}" />
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                </cui:AZ.A>
+                <cui:AZ.B>
+                    <Grid RowDefinitions="Auto,*" RowSpacing="10">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontWeight="SemiBold"
+                                Text="{x:Bind SelectedPlaylistItem.Name, Mode=OneWay}" />
+                            <StackPanel
+                                Grid.Column="1"
+                                Orientation="Horizontal"
+                                Spacing="10">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontSize="12"
+                                    Text="{x:Bind RefinedPlayerItems.Count, Mode=OneWay, Converter={StaticResource ItemCounter}}" />
+                                <cui:IconButton
+                                    VerticalAlignment="Center"
+                                    cuib:Enable.Value1="{x:Bind Status.IsNotLoading, Mode=OneWay}"
+                                    cuib:Enable.Value2="{x:Bind PlayerItemsListViewBase.SelectedIndex, Mode=OneWay, ConverterParameter=0, Converter={StaticResource GreaterThanOrEqualTo}}"
+                                    Command="{x:Bind RemoveSelectedFilesCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                    Icon="&#xE74D;"
+                                    Size="SM"
+                                    Variant="Text" />
+                                <cui:IconButton
+                                    VerticalAlignment="Center"
+                                    Command="{x:Bind AddFilesCommand}"
+                                    Icon="&#xE710;"
+                                    IsEnabled="{x:Bind Status.IsNotLoading, Mode=OneWay}"
+                                    Size="SM" />
+                                <cui:IconButton
+                                    VerticalAlignment="Center"
+                                    cuib:Enable.Value1="{x:Bind Status.IsNotLoading, Mode=OneWay}"
+                                    cuib:Enable.Value2="{x:Bind RefinedPlayerItems.IsNotEmpty, Mode=OneWay}"
+                                    Command="{x:Bind PlayAllCommand}"
+                                    Icon="&#xF5B0;"
+                                    Size="SM" />
+                            </StackPanel>
+                        </Grid>
+                        <ListView
+                            Name="PlayerItemsListViewBase"
+                            Grid.Row="1"
+                            Padding="0"
+                            ContainerContentChanging="PlayerItemsListViewBase_ContainerContentChanging"
+                            IsEnabled="{x:Bind Status.IsNotLoading, Mode=OneWay}"
+                            ItemsSource="{x:Bind RefinedPlayerItems.ViewItems}"
+                            SelectionMode="Extended">
+                            <ListView.ItemContainerStyle>
+                                <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="Padding" Value="0" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="af:PlayerItem">
+                                    <af:RecentPlayerItemControl Item="{x:Bind}" OnHandle="PlayerItemControl_OnHandle" />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </cui:AZ.B>
+            </cui:AZ>
+        </Grid>
+    </Grid>
+</ap:HomePage>

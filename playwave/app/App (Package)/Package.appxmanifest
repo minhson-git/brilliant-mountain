@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2" xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5" xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" IgnorableNamespaces="uap uap2 uap3 rescap">
+	<Identity Name="BrilliantMountain.PlayWave" Publisher="CN=6726E6D6-A623-4738-A302-750BB4BD421E" Version="1.0.19.0" />
+	<mp:PhoneIdentity PhoneProductId="7e6bd226-7e49-49f6-8e22-c4a9d3f5e45b" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+	<Properties>
+		<DisplayName>PlayWave</DisplayName>
+		<PublisherDisplayName>Brilliant Mountain</PublisherDisplayName>
+		<Logo>Images\StoreLogo.png</Logo>
+	</Properties>
+	<Dependencies>
+		<TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
+		<TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
+	</Dependencies>
+
+	<Resources>
+		<Resource Language="en-US" />
+		<Resource Language="zh-Hant" />
+		<Resource Language="ja-JP" />
+		<Resource Language="vi-VN" />
+	</Resources>
+
+	<Applications>
+		<Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
+			<uap:VisualElements DisplayName="PlayWave" Description="Music Player" BackgroundColor="transparent" Square150x150Logo="Images\Square150x150Logo.png" Square44x44Logo="Images\Square44x44Logo.png">
+				<uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png" Square71x71Logo="Images\SmallTile.png" Square310x310Logo="Images\LargeTile.png">
+					<uap:ShowNameOnTiles>
+						<uap:ShowOn Tile="square150x150Logo" />
+						<uap:ShowOn Tile="wide310x150Logo" />
+						<uap:ShowOn Tile="square310x310Logo" />
+					</uap:ShowNameOnTiles>
+				</uap:DefaultTile>
+				<uap:SplashScreen Image="Images\SplashScreen.png" />
+				<uap:InitialRotationPreference>
+					<uap:Rotation Preference="landscape" />
+					<uap:Rotation Preference="portrait" />
+					<uap:Rotation Preference="landscapeFlipped" />
+					<uap:Rotation Preference="portraitFlipped" />
+				</uap:InitialRotationPreference>
+			</uap:VisualElements>
+			<Extensions>
+				<uap:Extension Category="windows.protocol">
+					<uap:Protocol Name="playwave">
+						<uap:DisplayName>PlayWave</uap:DisplayName>
+					</uap:Protocol>
+				</uap:Extension>
+				<uap3:Extension Category="windows.appExecutionAlias" EntryPoint="Windows.FullTrustApplication">
+					<uap3:AppExecutionAlias>
+						<desktop:ExecutionAlias Alias="BrilliantMountain.PlayWave.exe" />
+					</uap3:AppExecutionAlias>
+				</uap3:Extension>
+				<uap3:Extension Category="windows.fileTypeAssociation">
+					<uap3:FileTypeAssociation Name="audio" Parameters="&quot;%1&quot;">
+						<uap:SupportedFileTypes>
+							<uap:FileType>.ac3</uap:FileType>
+							<uap:FileType>.amr</uap:FileType>
+							<uap:FileType>.3ga</uap:FileType>
+							<uap:FileType>.caf</uap:FileType>
+							<uap:FileType>.dts</uap:FileType>
+							<uap:FileType>.dff</uap:FileType>
+							<uap:FileType>.dsf</uap:FileType>
+							<uap:FileType>.mlp</uap:FileType>
+							<uap:FileType>.mid</uap:FileType>
+							<uap:FileType>.midi</uap:FileType>
+							<uap:FileType>.tta</uap:FileType>
+							<uap:FileType>.voc</uap:FileType>
+							<uap:FileType>.weba</uap:FileType>
+							<uap:FileType>.aac</uap:FileType>
+							<uap:FileType>.aiff</uap:FileType>
+							<uap:FileType>.aifc</uap:FileType>
+							<uap:FileType>.aif</uap:FileType>
+							<uap:FileType>.au</uap:FileType>
+							<uap:FileType>.flac</uap:FileType>
+							<uap:FileType>.mp3</uap:FileType>
+							<uap:FileType>.mp2</uap:FileType>
+							<uap:FileType>.wav</uap:FileType>
+							<uap:FileType>.wma</uap:FileType>
+							<uap:FileType>.wv</uap:FileType>
+						</uap:SupportedFileTypes>
+						<uap2:SupportedVerbs>
+							<uap3:Verb Id="Open" Parameters="&quot;%1&quot; /Open">Open with PlayWave</uap3:Verb>
+							<uap3:Verb Id="ConvertToMp3" Parameters="&quot;%1&quot; /ConvertToMp3">Convert to MP3 with PlayWave</uap3:Verb>
+						</uap2:SupportedVerbs>
+					</uap3:FileTypeAssociation>
+				</uap3:Extension>
+				<uap3:Extension Category="windows.fileTypeAssociation">
+					<uap3:FileTypeAssociation Name="video" Parameters="&quot;%1&quot;">
+						<uap:SupportedFileTypes>
+							<uap:FileType>.dat</uap:FileType>
+							<uap:FileType>.f4v</uap:FileType>
+							<uap:FileType>.flv</uap:FileType>
+							<uap:FileType>.hevc</uap:FileType>
+							<uap:FileType>.mxf</uap:FileType>
+							<uap:FileType>.ogg</uap:FileType>
+							<uap:FileType>.ogv</uap:FileType>
+							<uap:FileType>.oga</uap:FileType>
+							<uap:FileType>.ogx</uap:FileType>
+							<uap:FileType>.ogm</uap:FileType>
+							<uap:FileType>.spx</uap:FileType>
+							<uap:FileType>.opus</uap:FileType>
+							<uap:FileType>.rm</uap:FileType>
+							<uap:FileType>.ra</uap:FileType>
+							<uap:FileType>.rmvb</uap:FileType>
+							<uap:FileType>.ram</uap:FileType>
+							<uap:FileType>.swf</uap:FileType>
+							<uap:FileType>.ts</uap:FileType>
+							<uap:FileType>.tsv</uap:FileType>
+							<uap:FileType>.tsa</uap:FileType>
+							<uap:FileType>.m2t</uap:FileType>
+							<uap:FileType>.vob</uap:FileType>
+							<uap:FileType>.webm</uap:FileType>
+							<uap:FileType>.3gp</uap:FileType>
+							<uap:FileType>.3g2</uap:FileType>
+							<uap:FileType>.3gpp</uap:FileType>
+							<uap:FileType>.3gp2</uap:FileType>
+							<uap:FileType>.3gpp2</uap:FileType>
+							<uap:FileType>.asf</uap:FileType>
+							<uap:FileType>.avi</uap:FileType>
+							<uap:FileType>.m2ts</uap:FileType>
+							<uap:FileType>.mts</uap:FileType>
+							<uap:FileType>.m4v</uap:FileType>
+							<uap:FileType>.mkv</uap:FileType>
+							<uap:FileType>.mov</uap:FileType>
+							<uap:FileType>.qt</uap:FileType>
+							<uap:FileType>.mp4</uap:FileType>
+							<uap:FileType>.m4a</uap:FileType>
+							<uap:FileType>.m4p</uap:FileType>
+							<uap:FileType>.m4b</uap:FileType>
+							<uap:FileType>.m4r</uap:FileType>
+							<uap:FileType>.mpeg</uap:FileType>
+							<uap:FileType>.mpg</uap:FileType>
+							<uap:FileType>.wmv</uap:FileType>
+							<uap:FileType>.wm</uap:FileType>
+						</uap:SupportedFileTypes>
+						<uap2:SupportedVerbs>
+							<uap3:Verb Id="Open" Parameters="&quot;%1&quot; /Open">Open with PlayWave</uap3:Verb>
+							<uap3:Verb Id="ConvertToMp3" Parameters="&quot;%1&quot; /ConvertToMp3">Convert to MP3 with PlayWave</uap3:Verb>
+							<uap3:Verb Id="ConvertToMp4" Parameters="&quot;%1&quot; /ConvertToMp4">Convert to MP4 with PlayWave</uap3:Verb>
+						</uap2:SupportedVerbs>
+					</uap3:FileTypeAssociation>
+				</uap3:Extension>
+			</Extensions>
+		</Application>
+	</Applications>
+	<Capabilities>
+		<rescap:Capability Name="runFullTrust" />
+	</Capabilities>
+</Package>

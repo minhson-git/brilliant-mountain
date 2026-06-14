@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<corePremium:PremiumDialog
+    x:Class="IOApp.Dialogs.MiniPremiumDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:coreHelpers="using:IOCore.Helpers"
+    xmlns:coreLibs="using:IOCore.Libs"
+    xmlns:corePremium="using:IOCore.Premium"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dialogs="using:IOApp.Dialogs"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance Type=dialogs:MiniPremiumDialog}"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+    <corePremium:PremiumDialog.Resources>
+        <dialogs:MiniPremiumDialogProxy x:Name="Proxy" Data="{Binding}" />
+
+        <coreLibs:BoolToBrushConverter
+            x:Key="HighlightBackgroundBrushConverter"
+            FalseBrush="Transparent"
+            TrueBrush="#22ffffff" />
+    </corePremium:PremiumDialog.Resources>
+    <Grid>
+        <Grid
+            Padding="20"
+            VerticalAlignment="Top"
+            RowDefinitions="Auto,*,Auto"
+            RowSpacing="16">
+            <StackPanel>
+                <Image
+                    Width="48"
+                    Height="48"
+                    Source="{Binding Window.Icon}" />
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="SemiBold"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding PremiumCore.AppName}" />
+                <TextBlock
+                    FontSize="14"
+                    HorizontalTextAlignment="Center"
+                    Text="{coreHelpers:SRE K=Premium_ActiveAllPremiumFeatures}"
+                    TextWrapping="WrapWholeWords" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="1">
+                <ItemsControl HorizontalAlignment="Center" ItemsSource="{Binding PremiumCore.AddOnItems}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" Spacing="8" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button
+                                Width="104"
+                                Height="90"
+                                Padding="0"
+                                Background="{Binding Config.Highlight, Converter={StaticResource HighlightBackgroundBrushConverter}}"
+                                Command="{Binding Data.PurchaseCommand, Source={StaticResource Proxy}}"
+                                CommandParameter="{Binding}"
+                                CornerRadius="8"
+                                IsEnabled="{Binding Product, Converter={StaticResource InvertedIsNullConverter}}">
+                                <Grid Width="104" Height="90">
+                                    <StackPanel
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Spacing="4">
+                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                            <TextBlock
+                                                Margin="0,0,5,0"
+                                                HorizontalAlignment="Center"
+                                                FontSize="18"
+                                                Foreground="{ThemeResource Foreground2}"
+                                                Text="{Binding BasePrice}"
+                                                TextDecorations="Strikethrough"
+                                                Visibility="{Binding IsOnSale}" />
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                FontSize="20"
+                                                FontWeight="Bold"
+                                                Foreground="#fff"
+                                                Text="{Binding Price}" />
+                                        </StackPanel>
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            FontSize="12"
+                                            Foreground="#fff"
+                                            MaxLines="2"
+                                            Text="{Binding Config.Title}"
+                                            TextAlignment="Center"
+                                            TextWrapping="WrapWholeWords" />
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2">
+                <TextBlock
+                    FontSize="12"
+                    Foreground="{ThemeResource Foreground2}"
+                    HorizontalTextAlignment="Center"
+                    Text="{coreHelpers:SRE K=Premium_PlanSubtitle}"
+                    TextWrapping="WrapWholeWords" />
+                <HyperlinkButton
+                    HorizontalAlignment="Center"
+                    Command="{Binding RestorePurchaseCommand}"
+                    Content="{coreHelpers:SRE K=Premium_RestorePurchase}"
+                    FontSize="12"
+                    Foreground="{ThemeResource ThemeSecondary}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</corePremium:PremiumDialog>

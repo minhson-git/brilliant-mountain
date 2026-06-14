@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<StackPanel
+    x:Class="IOApp.Features.ListMenuLayout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid
+        Height="32"
+        Margin="0,0,0,5"
+        ColumnDefinitions="*,Auto"
+        ColumnSpacing="15">
+        <TextBlock
+            VerticalAlignment="Center"
+            FontWeight="SemiBold"
+            Text="{x:Bind Title, Mode=OneWay}" />
+        <ContentPresenter
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            Content="{x:Bind TitlePanel, Mode=OneWay}" />
+    </Grid>
+    <Border Background="{ThemeResource PageBackground}">
+        <TextBlock
+            Margin="15,10"
+            MaxLines="2"
+            Text="{x:Bind EmptyText, Mode=OneWay}"
+            TextWrapping="WrapWholeWords"
+            Visibility="{x:Bind IsEmpty, Mode=OneWay, Converter={StaticResource Bool}}" />
+    </Border>
+    <ContentPresenter Content="{x:Bind ContentPanel, Mode=OneWay}" Visibility="{x:Bind IsEmpty, Mode=OneWay, Converter={StaticResource InvertedBool}}" />
+</StackPanel>

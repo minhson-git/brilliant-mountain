@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<dialogs:DialogEx
+    x:Class="IOApp.Dialogs.ImportDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dialogs="using:IOCore.Dialogs"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    KeyboardAcceleratorPlacementMode="Hidden"
+    mc:Ignorable="d">
+
+    <Grid Width="500">
+        <Grid RowDefinitions="32,Auto">
+            <Grid Padding="10,0">
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                    <!--<Border Background="{ThemeResource Failure}" Padding="5,0" CornerRadius="3" Margin="0,0,5,0"
+                            Visibility="{Binding FileItem.IsExist, Converter={StaticResource InverseBoolConverter}}">
+                        <TextBlock Text="{coreHelpers:SRE K=Missing}" FontWeight="Bold" FontSize="10" Foreground="#fff" VerticalAlignment="Center"/>
+                    </Border>-->
+                    <TextBlock
+                        FontSize="14"
+                        FontWeight="SemiBold"
+                        Text="{Binding FileItem.InputFileOrFolderName}"
+                        ToolTipService.ToolTip="{Binding FileItem.InputFileOrFolderName}" />
+                </StackPanel>
+            </Grid>
+
+            <StackPanel Grid.Row="1" Padding="10">
+                <StackPanel>
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{ThemeResource Foreground2}"
+                        Text="{Binding FileItem.InputFileOrFolderPath}"
+                        ToolTipService.ToolTip="{Binding FileItem.InputFileOrFolderPath}" />
+                    <!--<StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="20" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <FontIcon Glyph="&#xE823;" FontSize="12" Foreground="{ThemeResource Foreground2}"/>
+                            <TextBlock Text="{Binding FileItem.InputLastWriteTimeText}" FontSize="12" Foreground="{ThemeResource Foreground2}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Visibility="{Binding FileItem.IsFile}">
+                            <FontIcon Glyph="&#xE8A5;" FontSize="12" Foreground="{ThemeResource Foreground2}"/>
+                            <TextBlock Text="{Binding FileItem.InputSize, Converter={StaticResource FileSizeToStringConverter}}" FontSize="12" Foreground="{ThemeResource Foreground2}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10" Margin="0,5,0,0" Visibility="{Binding FileItem.IsExist}">
+                        <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,5,0,0">
+                            <coreUI:IconTextButton Icon="&#xE8E5;" Text="{coreHelpers:SRE K=RevealInFileExplorer}" Variant="Text" Tag="{Binding FileItem.InputFileOrFolderPath}" Click="RevealInFileExplorer_Click"/>
+                            <featureControls:FileBadge DataContext="{Binding FileItem}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <ToggleButton Grid.Column="1" Name="AdvancedSettingToggleButton" Width="32" Height="32" Padding="0" BorderThickness="0" FlowDirection="RightToLeft" IsEnabled="{Binding FileItem.IsEnabled}">
+                            <FontIcon Glyph="&#xE713;" FontSize="16"/>
+                        </ToggleButton>
+                    </Grid>-->
+
+                    <StackPanel
+                        Margin="0,10,0,0"
+                        Padding="10,10,10,0"
+                        HorizontalAlignment="Stretch"
+                        BorderBrush="{ThemeResource Border}"
+                        BorderThickness="1"
+                        CornerRadius="5"
+                        Visibility="{Binding ElementName=AdvancedSettingToggleButton, Path=IsChecked}">
+                        <!--<Grid ColumnDefinitions="Auto,*" VerticalAlignment="Center" ColumnSpacing="10">
+                            <TextBlock Text="{coreHelpers:SRE K=Features_Output}" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
+                            <Grid Grid.Column="1" ColumnDefinitions="*,Auto">
+                                <TextBox Name="OutputFolderPathTextBox" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="7,7,0,0" CornerRadius="3,0,0,3" FontSize="12" IsReadOnly="True"/>
+                                <coreUI:IconButton Grid.Column="1" x:Name="OutputFolderButton" Icon="&#xE8DA;" Corner="Right" Click="OutputFolderButton_Click" IsEnabled="{Binding FileItem.IsEnabled}"/>
+                            </Grid>
+                        </Grid>
+
+                        <controls:UniformGrid Orientation="Horizontal" Columns="2" ColumnSpacing="0" RowSpacing="0" Margin="0,5,0,0">
+                            <CheckBox Name="OutputSameFolderInputCheckBox" Content="{coreHelpers:SRE K=Features_SameFolderAsInput}" Click="OutputSameFolderInputCheckBox_Click"
+                                      IsEnabled="{Binding FileItem.IsEnabled}"/>
+                            <CheckBox Name="DeleteInputFilesCheckBox" Content="{coreHelpers:SRE K=Features_DeleteInputFiles}"
+                                      IsEnabled="{Binding FileItem.IsEnabled}"/>
+                            <CheckBox Name="OverwriteExistingOutputFilesCheckBox" Content="{coreHelpers:SRE K=Features_OverwriteExistingOutputFiles}"
+                                      IsEnabled="{Binding FileItem.IsEnabled}"/>
+                            <Grid ColumnDefinitions="*,Auto" Visibility="{Binding FileItem.FileType, ConverterParameter=Normal, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}">
+                                <CheckBox Name="MakeBaseFolderIfNeededCheckBox" Content="{coreHelpers:SRE K=Features_MakeBaseFolderIfNeeded}" IsEnabled="{Binding FileItem.IsEnabled}"/>
+                                <coreUI:InfoButton Grid.Column="1" K="Info_MakeBaseFolderIfNeeded"/>
+                            </Grid>
+                        </controls:UniformGrid>
+
+                        <controls:UniformGrid Orientation="Horizontal" Columns="2" ColumnSpacing="0" RowSpacing="0"
+                                              Visibility="{Binding FileItem.FileType, ConverterParameter=Normal, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}">
+                            <Grid Margin="0,0,0,10" RowDefinitions="Auto,Auto" RowSpacing="2">
+                                <TextBlock Text="{coreHelpers:SRE K=Password}" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <PasswordBox Grid.Row="1" Name="DecodePasswordPasswordBox" IsEnabled="{Binding FileItem.IsEnabled}"/>
+                            </Grid>
+                        </controls:UniformGrid>-->
+
+                        <!--<StackPanel Visibility="{Binding FileItem.FileType, ConverterParameter=Normal, Converter={StaticResource EnumComparisonToBoolConverter}}">
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                                <TextBlock Text="{coreHelpers:SRE K=Features_Extension}" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Column="1" Name="OuputExtensionComboBox" HorizontalAlignment="Stretch" IsEnabled="{Binding FileItem.IsEnabled}"/>
+                                <coreUI:InfoButton Grid.Column="2" K="Info_OutputExtension"/>
+                            </Grid>
+                            <StackPanel Margin="0,10,0,0" Visibility="{Binding ElementName=OuputExtensionComboBox, Path=SelectedItem.Tag, ConverterParameter=Zip, Converter={StaticResource EnumComparisonToBoolConverter}}">
+                                <controls:UniformGrid Orientation="Horizontal" Columns="2" ColumnSpacing="10" RowSpacing="0">
+                                    <Grid RowDefinitions="Auto,Auto" RowSpacing="2">
+                                        <TextBlock Text="{coreHelpers:SRE K=Password}" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <PasswordBox Grid.Row="1" Name="EncodePasswordPasswordBox" IsEnabled="{Binding FileItem.IsEnabled}"/>
+                                    </Grid>
+                                    <Grid RowDefinitions="Auto,Auto" RowSpacing="2" Visibility="{Binding ElementName=UsePasswordConfirmationToggleSwitch, Path=IsOn}">
+                                        <TextBlock Text="{coreHelpers:SRE K=ConfirmPassword}" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <PasswordBox Grid.Row="1" Name="ConfirmEncodePasswordPasswordBox"/>
+                                    </Grid>
+                                </controls:UniformGrid>
+                                <ToggleSwitch Name="UsePasswordConfirmationToggleSwitch" IsOn="False"
+                                              OnContent="{coreHelpers:SRE K=Features_UsePasswordConfirmation}" OffContent="{coreHelpers:SRE K=Features_UsePasswordConfirmation}"/>
+                            </StackPanel>
+                        </StackPanel>-->
+
+                    </StackPanel>
+                </StackPanel>
+
+                <Grid
+                    Margin="0,10,0,0"
+                    ColumnDefinitions="85,*"
+                    ColumnSpacing="10">
+                    <StackPanel>
+                        <Grid VerticalAlignment="Center" Visibility="{Binding Status.S, ConverterParameter=Loading|Processing, Converter={StaticResource EnumComparisonToBoolConverter}}">
+                            <ProgressRing
+                                Width="32"
+                                Height="32"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="{ThemeResource ProgressRingForeground}" />
+                        </Grid>
+
+                        <!--<coreUI:IconTextButton Text="{coreHelpers:SRE K=Close}" Click="CloseButton_Click"
+                                                     Visibility="{Binding Status, ConverterParameter=Loading|Processing, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"/>-->
+                    </StackPanel>
+                    <!--<coreUI:IconTextButton IsTheme="True" Grid.Column="1" Tag="{Binding FileItem.FileType}" Icon="&#xF156;" Text="{coreHelpers:SRE K=Features_Compress}" Click="ProcessOneButton_Click"
+                                                      Visibility="{Binding FileItem.FileType, ConverterParameter=Normal, Converter={StaticResource EnumComparisonToBoolConverter}}" IsEnabled="{Binding FileItem.IsEnabled}"/>
+                    <coreUI:IconTextButton IsTheme="True" Grid.Column="1" Tag="{Binding FileItem.FileType}" Icon="&#xED25;" Text="{coreHelpers:SRE K=Features_Extract}" Click="ProcessOneButton_Click"
+                                                      Visibility="{Binding FileItem.FileType, ConverterParameter=Normal, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}" IsEnabled="{Binding FileItem.IsEnabled}"/>-->
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</dialogs:DialogEx>

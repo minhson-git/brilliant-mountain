@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<apps:MainWindowPremiumPage
+    x:Class="IOApp.Pages.Premium"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:apps="using:IOApp"
+    xmlns:coreHelpers="using:IOCore.Helpers"
+    xmlns:coreLibs="using:IOCore.Libs"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="using:IOApp.Pages"
+    d:DataContext="{d:DesignInstance Type=pages:Premium}"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+    <apps:MainWindowPremiumPage.Resources>
+        <pages:PremiumProxy x:Name="Proxy" Data="{Binding}" />
+
+        <coreLibs:BoolToResourceStringConverter
+            x:Key="BoolToResourceStringConverter"
+            FalseValue="PurchaseNow"
+            TrueValue="SubscribeNow" />
+        <pages:StoreIdToGradientConverter x:Key="StoreIdToGradientConverter" />
+    </apps:MainWindowPremiumPage.Resources>
+
+    <Grid>
+        <ScrollViewer
+            HorizontalScrollBarVisibility="Auto"
+            HorizontalScrollMode="Enabled"
+            VerticalScrollBarVisibility="Auto"
+            VerticalScrollMode="Enabled">
+            <ScrollViewer.Background>
+                <ImageBrush ImageSource="ms-appx:///Externals/premium-bg.jpg" Stretch="UniformToFill" />
+            </ScrollViewer.Background>
+
+            <Grid VerticalAlignment="Top" RowDefinitions="Auto,Auto">
+                <StackPanel Spacing="20">
+                    <StackPanel Margin="0,20,0,0">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="30"
+                            FontWeight="SemiBold"
+                            Foreground="White"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding PremiumCore.AppName}" />
+                        <TextBlock
+                            FontSize="18"
+                            Foreground="White"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding PremiumCore.Intro}"
+                            TextWrapping="WrapWholeWords" />
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="800"
+                        HorizontalAlignment="Center"
+                        Spacing="5">
+                        <Grid ColumnDefinitions="*,100,100">
+                            <TextBlock
+                                FontSize="20"
+                                FontWeight="SemiBold"
+                                Foreground="#fff"
+                                Text="Compare plans" />
+                            <TextBlock
+                                Grid.Column="1"
+                                HorizontalAlignment="Center"
+                                FontSize="20"
+                                FontWeight="SemiBold"
+                                Foreground="#fff"
+                                Text="{coreHelpers:SRE K=Free}" />
+                            <TextBlock
+                                Grid.Column="2"
+                                HorizontalAlignment="Center"
+                                FontSize="20"
+                                FontWeight="SemiBold"
+                                Foreground="#fff"
+                                Text="{coreHelpers:SRE K=Premium}" />
+                        </Grid>
+
+                        <ItemsControl ItemsSource="{Binding FeatureExs}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid
+                                        Padding="0,10"
+                                        BorderBrush="White"
+                                        BorderThickness="0,0,0,1"
+                                        ColumnDefinitions="50,*,100,100">
+                                        <FontIcon
+                                            FontSize="18"
+                                            Foreground="#fff"
+                                            Glyph="{Binding Icon}" />
+
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock
+                                                FontSize="18"
+                                                Foreground="#fff"
+                                                Text="{Binding Title}" />
+                                            <TextBlock
+                                                Foreground="#cfff"
+                                                Text="{Binding Headline}"
+                                                TextWrapping="WrapWholeWords" />
+                                        </StackPanel>
+
+                                        <FontIcon
+                                            Grid.Column="2"
+                                            FontSize="10"
+                                            Foreground="#fff"
+                                            Glyph="&#xEF2D;" />
+
+                                        <FontIcon
+                                            Grid.Column="3"
+                                            HorizontalAlignment="Center"
+                                            FontSize="24"
+                                            Foreground="#fff"
+                                            Glyph="&#xE8FB;" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="1"
+                    Width="1000"
+                    HorizontalAlignment="Center"
+                    Spacing="15">
+                    <StackPanel Margin="0,40,0,0" HorizontalAlignment="Center">
+                        <TextBlock
+                            FontSize="30"
+                            FontWeight="SemiBold"
+                            Foreground="White"
+                            HorizontalTextAlignment="Center"
+                            Text="{coreHelpers:SRE K=Premium_PlanTitle}" />
+                        <TextBlock
+                            MaxWidth="800"
+                            FontSize="18"
+                            Foreground="White"
+                            HorizontalTextAlignment="Center"
+                            Text="{coreHelpers:SRE K=Premium_PlanSubtitle}"
+                            TextWrapping="WrapWholeWords" />
+                    </StackPanel>
+
+                    <StackPanel Spacing="5">
+                        <ItemsControl HorizontalAlignment="Center" ItemsSource="{Binding PremiumCore.AddOnItems}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" Spacing="20" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel
+                                        Width="300"
+                                        Padding="15"
+                                        BorderBrush="{Binding Config, Converter={StaticResource StoreIdToGradientConverter}}"
+                                        BorderThickness="1"
+                                        CornerRadius="10"
+                                        Spacing="10">
+                                        <TextBlock
+                                            HorizontalAlignment="Stretch"
+                                            FontSize="24"
+                                            FontWeight="SemiBold"
+                                            Foreground="#fff"
+                                            Text="{Binding Title}" />
+
+                                        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                            <TextBlock
+                                                Margin="0,0,5,0"
+                                                VerticalAlignment="Bottom"
+                                                FontSize="18"
+                                                Foreground="{ThemeResource Foreground2}"
+                                                Text="{Binding BasePrice}"
+                                                TextDecorations="Strikethrough"
+                                                Visibility="{Binding IsOnSale}" />
+                                            <TextBlock
+                                                VerticalAlignment="Bottom"
+                                                FontSize="24"
+                                                FontWeight="SemiBold"
+                                                Foreground="#fff"
+                                                Text="{Binding Price}" />
+
+                                            <TextBlock
+                                                VerticalAlignment="Bottom"
+                                                FontSize="16"
+                                                Foreground="#fff">
+                                                <Run Text="/" />
+                                                <Run Text="{Binding Config.Title}" />
+                                            </TextBlock>
+                                        </StackPanel>
+
+                                        <TextBlock
+                                            HorizontalAlignment="Left"
+                                            FontSize="16"
+                                            Foreground="{ThemeResource Foreground2}"
+                                            Text="{Binding Config.Subtitle}"
+                                            TextWrapping="WrapWholeWords" />
+
+                                        <Button
+                                            Height="44"
+                                            HorizontalAlignment="Stretch"
+                                            Background="{Binding Config.StoreId, Converter={StaticResource StoreIdToGradientConverter}}"
+                                            Command="{Binding Data.PurchaseCommand, Source={StaticResource Proxy}}"
+                                            CommandParameter="{Binding}"
+                                            CornerRadius="22"
+                                            IsEnabled="{Binding Product, Converter={StaticResource InvertedIsNullConverter}}">
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                FontSize="18"
+                                                Foreground="#000"
+                                                Text="{Binding Product.IsSubscription, Converter={StaticResource BoolToResourceStringConverter}}" />
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <HyperlinkButton
+                                HorizontalAlignment="Center"
+                                Content="{coreHelpers:SRE K=Premium_HowToCancelSubscription}"
+                                FontSize="16"
+                                Foreground="{ThemeResource Foreground2}"
+                                NavigateUri="{Binding PremiumCore.CancelSubscriptionUri}" />
+                            <HyperlinkButton
+                                HorizontalAlignment="Center"
+                                Command="{Binding RestorePurchaseCommand}"
+                                Content="{coreHelpers:SRE K=Premium_RestorePurchase}"
+                                FontSize="16" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                Foreground="{ThemeResource Theme}"
+                                Text="{coreHelpers:SRE K=Premium_LicenseExpired}"
+                                Visibility="{Binding Window.LicenseStatus.IsPurchasedAndExpired}" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+        <coreUI:IconButton
+            Margin="20"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding Window.TryGoBackCommand}"
+            Foreground="White"
+            Icon="&#xE72B;"
+            IsArcCorner="True"
+            Size="XL"
+            Variant="Text" />
+    </Grid>
+</apps:MainWindowPremiumPage>

@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<core:WindowEx
+    x:Class="IOApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:apps="using:IOApp"
+    xmlns:core="using:IOCore"
+    xmlns:coreHelpers="using:IOCore.Helpers"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:features="using:IOApp.Features"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="using:IOApp.Pages"
+    mc:Ignorable="d">
+
+    <Grid d:DataContext="{d:DesignInstance Type=apps:MainWindow}" Background="{ThemeResource Background}">
+        <Grid.Resources>
+            <apps:MainWindowProxy x:Name="Proxy" Data="{Binding}" />
+        </Grid.Resources>
+        <Grid RowDefinitions="Auto,*">
+            <coreUI:TitleBarEx
+                Name="_titleBar"
+                IsIconVisible="False"
+                IsSubtitleVisible="False"
+                IsTitleVisible="False">
+                <coreUI:TitleBarEx.LeftHeader>
+                    <StackPanel
+                        Margin="10,0,0,0"
+                        Orientation="Horizontal"
+                        Spacing="5">
+                        <coreUI:IconButton
+                            Command="{Binding AddFilesCommand}"
+                            Icon="&#xE8E5;"
+                            IsEnabled="{Binding Status.IsNotBusy}"
+                            Size="XL" />
+                    </StackPanel>
+                </coreUI:TitleBarEx.LeftHeader>
+                <coreUI:TitleBarEx.Content>
+                    <coreUI:CustomNavigation
+                        Name="_homeNavigation"
+                        VerticalAlignment="Bottom"
+                        IsEnabled="{Binding Status.IsNotBusy}">
+                        <coreUI:CustomNavigation.Items>
+                            <coreUI:CustomPageItem Icon="&#xe8f1;" Type="{coreHelpers:X Type=pages:Home}" />
+                        </coreUI:CustomNavigation.Items>
+                    </coreUI:CustomNavigation>
+                </coreUI:TitleBarEx.Content>
+                <coreUI:TitleBarEx.RightHeader>
+                    <StackPanel Orientation="Horizontal" Spacing="5">
+                        <coreUI:AZ UseHoverTransition="True" Visibility="{Binding LicenseStatus.IsTrial}">
+                            <Button
+                                Height="36"
+                                Command="{Binding NavigateToCommand}"
+                                CommandParameter="{coreHelpers:X Type=pages:Premium}"
+                                CornerRadius="18">
+                                <Button.Content>
+                                    <TextBlock FontWeight="SemiBold" Text="{coreHelpers:SRE K=UnlockPremiumFeatures}" />
+                                </Button.Content>
+                                <Button.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.ThemeDictionaries>
+                                            <ResourceDictionary x:Key="Default">
+                                                <StaticResource x:Key="ButtonForeground" ResourceKey="Background" />
+                                                <StaticResource x:Key="ButtonBackground" ResourceKey="Foreground" />
+                                                <StaticResource x:Key="ButtonForegroundPointerOver" ResourceKey="Background" />
+                                                <StaticResource x:Key="ButtonBackgroundPointerOver" ResourceKey="Foreground" />
+                                                <StaticResource x:Key="ButtonForegroundPressed" ResourceKey="Background" />
+                                                <StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="Foreground" />
+                                            </ResourceDictionary>
+                                        </ResourceDictionary.ThemeDictionaries>
+                                    </ResourceDictionary>
+                                </Button.Resources>
+                            </Button>
+                        </coreUI:AZ>
+                        <coreUI:IconButton
+                            Name="PromotionAppItemButton"
+                            Command="{Binding Menu.ShowPromotionCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                            Icon="&#xE91C;"
+                            Variant="Text"
+                            Visibility="{Binding PromotionAppItems.IsNotEmpty}" />
+                        <coreUI:IconButton
+                            Command="{Binding Menu.ShowMenuCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                            Icon="&#xe700;"
+                            Variant="Text" />
+                    </StackPanel>
+                </coreUI:TitleBarEx.RightHeader>
+            </coreUI:TitleBarEx>
+
+            <Grid Grid.Row="1">
+                <coreUI:NavigationViewEx
+                    Name="_navigationView"
+                    BorderThickness="0"
+                    IsBackButtonVisible="Collapsed"
+                    IsPaneToggleButtonVisible="False"
+                    IsPaneVisible="False"
+                    IsSettingsVisible="False"
+                    IsTitleBarAutoPaddingEnabled="True"
+                    PaneDisplayMode="Top">
+                    <coreUI:NavigationViewEx.MenuItems>
+                        <NavigationViewItem Tag="IOApp.Pages.Home" />
+                        <NavigationViewItem Tag="IOApp.Pages.Premium" Visibility="Collapsed" />
+                        <NavigationViewItem Tag="IOApp.Pages.MediaPlayerLite" Visibility="Collapsed" />
+                    </coreUI:NavigationViewEx.MenuItems>
+
+                    <Frame Name="_frame" />
+                </coreUI:NavigationViewEx>
+            </Grid>
+        </Grid>
+    </Grid>
+</core:WindowEx>

@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c:AppEx
+    x:Class="IOApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="using:IOCore"
+    xmlns:cc="using:IOCore.Converters"
+    xmlns:cme="using:IOCore.MarkupExtensions">
+    <c:AppEx.Resources>
+        <XamlControlsResources>
+            <XamlControlsResources.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///IOCore/AppEx.xaml" />
+
+                <ResourceDictionary>
+                    <Color x:Key="ThemeColor">#40FFA7</Color>
+                    <Color x:Key="ThemeSecondaryColor">#050761</Color>
+
+                    <SolidColorBrush x:Key="Theme" Color="{StaticResource ThemeColor}" />
+                    <SolidColorBrush x:Key="ThemeSecondary" Color="{StaticResource ThemeSecondaryColor}" />
+
+                    <SolidColorBrush x:Key="ThemeLighter" Color="{cme:ColorAdjustment Color={StaticResource ThemeColor}, BrightnessFactor=0.1}" />
+                    <SolidColorBrush x:Key="ThemeDarker" Color="{cme:ColorAdjustment Color={StaticResource ThemeColor}, BrightnessFactor=-0.1}" />
+                    <SolidColorBrush x:Key="ThemeDarkest" Color="{cme:ColorAdjustment Color={StaticResource ThemeColor}, BrightnessFactor=-0.9}" />
+
+
+                    <SolidColorBrush
+                        x:Key="ThemeOpacity"
+                        Opacity="0.04"
+                        Color="{StaticResource ThemeColor}" />
+
+                    <SolidColorBrush x:Key="ThemeForeground" Color="{cme:ColorAdjustment Color={StaticResource ThemeColor}, UseContrast=True}" />
+                    <SolidColorBrush x:Key="ThemeForegroundDisabled" Color="{cme:ColorAdjustment Color={StaticResource ThemeColor}, UseContrast=True}" />
+
+                    <!--    -->
+
+                    <SolidColorBrush x:Key="CheckBoxForegroundChecked" Color="White" />
+                    <SolidColorBrush x:Key="CheckBoxForegroundUnchecked" Color="White" />
+
+                    <SolidColorBrush x:Key="CheckBoxForegroundCheckedPointerOver" Color="{cme:ColorAdjustment Color=White, Opacity=0.4}" />
+                    <SolidColorBrush x:Key="CheckBoxForegroundUncheckedPointerOver" Color="{cme:ColorAdjustment Color=White, Opacity=0.4}" />
+
+                    <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundChecked" Color="Black" />
+                    <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundUnchecked" Color="White" />
+
+                    <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundCheckedPointerOver" Color="{cme:ColorAdjustment Color=Black, Opacity=0.4}" />
+
+                    <!--    -->
+
+                    <cc:ValueConverterGroup x:Key="ProcessingToSelectionModeConverter">
+                        <cc:BoolToObjectConverter>
+                            <cc:BoolToObjectConverter.TrueValue>
+                                <ListViewSelectionMode>None</ListViewSelectionMode>
+                            </cc:BoolToObjectConverter.TrueValue>
+                            <cc:BoolToObjectConverter.FalseValue>
+                                <ListViewSelectionMode>Single</ListViewSelectionMode>
+                            </cc:BoolToObjectConverter.FalseValue>
+                        </cc:BoolToObjectConverter>
+                    </cc:ValueConverterGroup>
+
+                    <ResourceDictionary.ThemeDictionaries>
+                        <ResourceDictionary x:Key="Default">
+                            <SolidColorBrush
+                                x:Key="HudBackground"
+                                Opacity="0.3"
+                                Color="#000000" />
+                            <SolidColorBrush
+                                x:Key="ItemBackground"
+                                Opacity="0.1"
+                                Color="#fff" />
+                            <SolidColorBrush
+                                x:Key="ItemSelectedBackground"
+                                Opacity="0.2"
+                                Color="#fff" />
+                        </ResourceDictionary>
+                        <ResourceDictionary x:Key="Dark">
+                            <SolidColorBrush
+                                x:Key="HudBackground"
+                                Opacity="0.3"
+                                Color="#000000" />
+                            <SolidColorBrush
+                                x:Key="ItemBackground"
+                                Opacity="0.1"
+                                Color="#fff" />
+                            <SolidColorBrush
+                                x:Key="ItemSelectedBackground"
+                                Opacity="0.2"
+                                Color="#fff" />
+                        </ResourceDictionary>
+                        <ResourceDictionary x:Key="Light">
+                            <SolidColorBrush
+                                x:Key="HudBackground"
+                                Opacity="0.3"
+                                Color="#ffffff" />
+                            <SolidColorBrush
+                                x:Key="ItemBackground"
+                                Opacity="0.1"
+                                Color="#000" />
+                            <SolidColorBrush
+                                x:Key="ItemSelectedBackground"
+                                Opacity="0.2"
+                                Color="#000" />
+                        </ResourceDictionary>
+                    </ResourceDictionary.ThemeDictionaries>
+                </ResourceDictionary>
+            </XamlControlsResources.MergedDictionaries>
+        </XamlControlsResources>
+    </c:AppEx.Resources>
+</c:AppEx>

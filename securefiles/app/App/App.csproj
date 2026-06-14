@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+		<TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+		<RootNamespace>IOApp</RootNamespace>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<Platforms>x86;x64;ARM64</Platforms>
+		<RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+		<UseWinUI>true</UseWinUI>
+		<Nullable>enable</Nullable>
+		<DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+		<DefineConstants>$(DefineConstants);USE_THUMBNAIL;USE_TINY_VIEWER;USE_TINY_PLAYER</DefineConstants>
+
+		<!--<PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
+		<PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
+		<PublishTrimmed Condition="'$(Configuration)' == 'Debug'">True</PublishTrimmed>
+		<PublishTrimmed Condition="'$(Configuration)' != 'Debug'">True</PublishTrimmed>-->
+		<!--<EnableTrimAnalyzer>True</EnableTrimAnalyzer>
+			<TrimmerVerbosity>Diagnostic</TrimmerVerbosity>
+			<TrimmerDumpTrimAnalysis>True</TrimmerDumpTrimAnalysis>-->
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Manifest Include="$(ApplicationManifest)" />
+		<AdditionalFiles Include="NativeMethods.txt" />
+
+		<ProjectReference Include="..\..\..\..\iocore\IOCore.csproj" />
+		<ProjectReference Include="..\..\..\..\iodata\IOData.csproj" />
+		<ProjectReference Include="..\..\..\..\ioimage\IOImageViewer.csproj" />
+		<ProjectReference Include="..\..\..\..\iomedia\IOMediaPlayer.csproj" />
+
+		<PackageReference Include="CommunityToolkit.WinUI.Media" Version="8.2.250402" />
+		<PackageReference Include="H.NotifyIcon.WinUI" Version="2.3.0" />
+		<PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.205">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Usb.Events" Version="11.1.1" />
+
+		<None Update="Externals\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<Content Update="Externals\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+</Project>

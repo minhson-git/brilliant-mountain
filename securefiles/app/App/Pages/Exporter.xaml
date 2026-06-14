@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<apps:MainWindowPage
+    x:Class="IOApp.Pages.Exporter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:apps="using:IOApp"
+    xmlns:coreHelpers="using:IOCore.Helpers"
+    xmlns:coreLibs="using:IOCore.Libs"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="using:IOApp.Pages"
+    d:DataContext="{d:DesignInstance Type=pages:Exporter}"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <apps:MainWindowPage.Resources>
+        <coreLibs:ValueConverterGroup x:Key="IsNullToDoubleConverter">
+            <coreLibs:IsNullConverter />
+            <coreLibs:BoolToDoubleConverter FalseValue="0.6" TrueValue="1.0" />
+        </coreLibs:ValueConverterGroup>
+
+        <coreLibs:ValueConverterGroup x:Key="EnumComparisonToBoolToStringConverter">
+            <coreLibs:EnumComparisonToBoolConverter />
+            <coreLibs:BoolToStringConverter FalseValue="#ff6666" TrueValue="#00ff00" />
+        </coreLibs:ValueConverterGroup>
+    </apps:MainWindowPage.Resources>
+
+    <Grid Padding="10,0" RowDefinitions="Auto,*">
+        <Grid
+            Padding="0,10"
+            ColumnDefinitions="Auto,*,Auto"
+            ColumnSpacing="10">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <coreUI:IconButton
+                    Command="{Binding CloseExportCommand}"
+                    Icon="&#xE72B;"
+                    IsEnabled="{Binding Status.S, ConverterParameter=Loading|Processing, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"
+                    Variant="Text" />
+            </StackPanel>
+
+            <StackPanel
+                Grid.Column="2"
+                Orientation="Horizontal"
+                Spacing="10">
+                <StackPanel MinWidth="70">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="9"
+                        FontWeight="Bold"
+                        Foreground="{ThemeResource Foreground2}"
+                        Text="{coreHelpers:SRE K=Last}" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="13"
+                        Text="{Binding LastRun}" />
+                </StackPanel>
+                <StackPanel MinWidth="70">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="9"
+                        FontWeight="Bold"
+                        Foreground="{ThemeResource Foreground2}"
+                        Text="{coreHelpers:SRE K=Time}" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="13"
+                        Text="{Binding TimeRun}" />
+                </StackPanel>
+                <StackPanel MinWidth="70">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="9"
+                        FontWeight="Bold"
+                        Foreground="{ThemeResource Foreground2}"
+                        Text="{coreHelpers:SRE K=Files}" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="13"
+                        Text="{Binding FileItems.Count}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <!--  FILES  -->
+        <ListView
+            Name="FileListView"
+            Grid.Row="1"
+            Padding="0,2,0,300"
+            Background="{ThemeResource ListViewBackground}"
+            CornerRadius="5,5,0,0"
+            ItemsSource="{Binding FileItems}"
+            SelectionMode="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid
+                        Padding="0,10,3,10"
+                        ColumnDefinitions="*,200"
+                        ColumnSpacing="10"
+                        Opacity="{Binding ExportedFilePath, Converter={StaticResource IsNullToDoubleConverter}}">
+                        <StackPanel Spacing="5">
+                            <TextBlock
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                Text="{Binding OriginalInfo.Name}"
+                                ToolTipService.ToolTip="{Binding OriginalInfo.Name}" />
+                            <TextBlock
+                                FontSize="12"
+                                Foreground="{ThemeResource Foreground2}"
+                                Text="{Binding OriginalInfo.FullName}"
+                                ToolTipService.ToolTip="{Binding OriginalInfo.FullName}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <StackPanel
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal"
+                                Spacing="5">
+                                <coreUI:AZ IsA="{Binding Status.S, ConverterParameter=Processed, Converter={StaticResource EnumComparisonToBoolConverter}}">
+                                    <coreUI:AZ.A>
+                                        <coreUI:IconButton
+                                            Click="ActionButton_Click"
+                                            Icon="&#xe8e5;"
+                                            IsEnabled="{Binding Status.S, ConverterParameter=Loading|Processing, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"
+                                            Tag="RevealInExplorer"
+                                            Variant="Text" />
+                                    </coreUI:AZ.A>
+                                    <coreUI:AZ.B>
+                                        <coreUI:IconButton
+                                            Click="ActionButton_Click"
+                                            Icon="&#xE946;"
+                                            IsEnabled="{Binding Status.S, ConverterParameter=Loading|Processing, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"
+                                            Tag="Properties"
+                                            Variant="Text" />
+                                    </coreUI:AZ.B>
+                                </coreUI:AZ>
+
+                                <coreUI:IconButton
+                                    Click="ActionButton_Click"
+                                    Icon="&#xE711;"
+                                    IsEnabled="{Binding Status.S, ConverterParameter=Loading|Processing, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"
+                                    Tag="Remove"
+                                    Variant="Text" />
+                            </StackPanel>
+
+                            <StackPanel Height="20" HorizontalAlignment="Right">
+                                <ProgressRing
+                                    Width="20"
+                                    Height="20"
+                                    Foreground="{ThemeResource ProgressRingForeground}"
+                                    IsActive="True"
+                                    Visibility="{Binding Status.S, ConverterParameter=Processing, Converter={StaticResource EnumComparisonToBoolConverter}}" />
+                                <TextBlock Foreground="{Binding Status.S, ConverterParameter=Processed, Converter={StaticResource EnumComparisonToBoolToStringConverter}}" Text="{Binding MessageText}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!--  CONFIGS  -->
+        <StackPanel
+            Name="OutputConfigPanel"
+            Grid.Row="1"
+            Margin="10"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Background="{ThemeResource WindowBackground}"
+            BorderBrush="{ThemeResource Border}"
+            BorderThickness="1"
+            CornerRadius="10"
+            Orientation="Horizontal">
+
+            <!--  STANDARD OUTPUT  -->
+            <StackPanel Width="350" Padding="10">
+                <CheckBox
+                    Command="{Binding ToggleOverwriteCommand}"
+                    Content="{coreHelpers:SRE K=Features_OverwriteExistingOutputFilesOrFolder}"
+                    IsChecked="{Binding Overwrite}" />
+
+                <CheckBox
+                    Command="{Binding ToggleExportToOriginalCommand}"
+                    Content="{coreHelpers:SRE K=ExportToOriginalLocation}"
+                    IsChecked="{Binding ExportToOriginal}" />
+                <Grid
+                    VerticalAlignment="Center"
+                    ColumnDefinitions="Auto,*"
+                    ColumnSpacing="10">
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontSize="11"
+                        FontWeight="Bold"
+                        Text="{coreHelpers:SRE K=Features_OutputFolder}" />
+                    <Grid Grid.Column="1" ColumnDefinitions="*,Auto">
+                        <coreUI:TextBoxComp
+                            Padding="7,7,0,0"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            CornerRadius="3,0,0,3"
+                            FontSize="12"
+                            IsEnabled0="{Binding Window.Status.IsNotBusy}"
+                            IsEnabled1="{Binding ExportToOriginal, Converter={StaticResource InvertedBoolConverter}}"
+                            IsReadOnly="True"
+                            Text="{Binding OutputFolderPath}" />
+                        <coreUI:IconButton
+                            Grid.Column="1"
+                            Command="{Binding UpdateOutputFolderCommand}"
+                            Corner="Right"
+                            Icon="&#xE8DA;"
+                            IsEnabled0="{Binding Window.Status.IsNotBusy}"
+                            IsEnabled1="{Binding ExportToOriginal, Converter={StaticResource InvertedBoolConverter}}" />
+                    </Grid>
+                </Grid>
+
+                <ItemsControl ItemsSource="{Binding ExportOptions}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <RadioButton
+                                Checked="RadioButton_Checked"
+                                Content="{Binding Value}"
+                                FontSize="14"
+                                IsChecked="{Binding IsOn, Mode=TwoWay}"
+                                Tag="{Binding Key}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <StackPanel Margin="0,10,0,0">
+                    <coreUI:IconTextButton
+                        Command="{Binding ProcessCommand}"
+                        Icon="&#xE785;"
+                        IsEnabled="{Binding Window.Status.IsNotBusy}"
+                        IsTheme="True"
+                        Text="{coreHelpers:SRE K=Export}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</apps:MainWindowPage>

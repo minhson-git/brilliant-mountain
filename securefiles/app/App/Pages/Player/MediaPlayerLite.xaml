@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PlayerPage
+    x:Class="IOApp.Pages.MediaPlayerLite"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:coreAppManager="using:IOCore.AppManager"
+    xmlns:coreHelpers="using:IOCore.Helpers"
+    xmlns:coreLibs="using:IOCore.Libs"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="using:IOApp.Pages"
+    d:DataContext="{d:DesignInstance Type=pages:MediaPlayerLite}"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <pages:PlayerPage.Resources>
+        <pages:PlayerPageProxy x:Name="Proxy" Data="{Binding}" />
+        <coreLibs:BoolToDoubleConverter
+            x:Key="HudOpacityBoolToDoubleConverter"
+            FalseValue="0.0"
+            TrueValue="1.0" />
+
+        <Style x:Key="IconButtonStyle" TargetType="coreUI:IconButton">
+            <Setter Property="Size" Value="LG" />
+            <Setter Property="Corner" Value="None" />
+            <Setter Property="Variant" Value="Text" />
+        </Style>
+
+        <Style x:Key="IconTextButtonStyle" TargetType="coreUI:IconTextButton">
+            <Setter Property="Size" Value="LG" />
+            <Setter Property="Corner" Value="None" />
+            <Setter Property="Variant" Value="Text" />
+        </Style>
+
+        <Flyout x:Name="VolumeFlyout">
+            <Grid
+                Width="200"
+                ColumnDefinitions="Auto,*"
+                ColumnSpacing="10">
+                <coreUI:IconButton
+                    Command="{Binding MuteCommand}"
+                    Corner="None"
+                    Icon="{Binding PlayerEx.VolumeIcon}"
+                    Variant="Text" />
+                <Slider
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Maximum="{Binding PlayerEx.Player.Config.Player.VolumeMax}"
+                    Minimum="0"
+                    Value="{Binding PlayerEx.Player.Audio.Volume, Mode=TwoWay}" />
+            </Grid>
+            <Flyout.FlyoutPresenterStyle>
+                <Style TargetType="FlyoutPresenter">
+                    <Setter Property="Padding" Value="5" />
+                    <Setter Property="CornerRadius" Value="5" />
+                    <Setter Property="Background" Value="{ThemeResource FlyoutBackground}" />
+                </Style>
+            </Flyout.FlyoutPresenterStyle>
+        </Flyout>
+    </pages:PlayerPage.Resources>
+
+    <Grid>
+        <coreUI:AZ IsA="{Binding PlayerEx.Playlist.IsEmpty}">
+            <coreUI:AZ.A>
+                <coreUI:EmptyList />
+            </coreUI:AZ.A>
+            <coreUI:AZ.B>
+                <coreUI:GridEx Background="Transparent" PointerMoved="Container_PointerMoved">
+                    <coreUI:AZ
+                        DoubleTapped="Presenter_DoubleTapped"
+                        IsA="{Binding PlayerEx.Current.InputInfo.HasVideo}"
+                        Tapped="Presenter_Tapped">
+                        <coreUI:AZ.A>
+                            <ContentPresenter Loaded="Presenter_Loaded" />
+                        </coreUI:AZ.A>
+                        <coreUI:AZ.B>
+                            <FontIcon FontSize="128" Glyph="&#xEC4F;" />
+                        </coreUI:AZ.B>
+                    </coreUI:AZ>
+                    <Grid Opacity="{Binding IsHudVisible, Converter={StaticResource HudOpacityBoolToDoubleConverter}}">
+                        <coreUI:AZ IsA="{Binding Window.IsTiny}">
+                            <coreUI:AZ.A>
+                                <Grid
+                                    VerticalAlignment="Bottom"
+                                    Background="{ThemeResource HudBackground}"
+                                    ColumnDefinitions="Auto,*,Auto,Auto">
+                                    <coreUI:ABIconButton
+                                        BIcon="&#xE768;"
+                                        Command="{Binding PlayCommand}"
+                                        Corner="None"
+                                        Icon="&#xE769;"
+                                        IsAOrB="{Binding PlayerEx.Player.IsPlaying}"
+                                        IsEnabled="{Binding PlayerEx.Player.CanPlay}"
+                                        Size="LG"
+                                        Variant="Text" />
+                                    <Slider
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        IsEnabled="{Binding PlayerEx.Player.CanPlay}"
+                                        IsThumbToolTipEnabled="False"
+                                        Loaded="TimeSlider_Loaded"
+                                        Maximum="{Binding PlayerEx.Player.Duration, Converter={StaticResource SecondsFromTicksConverter}}"
+                                        Value="{Binding PlayerEx.Player.CurTime, Mode=TwoWay, Converter={StaticResource SecondsFromTicksConverter}}" />
+                                    <coreUI:IconButton
+                                        Grid.Column="2"
+                                        Flyout="{StaticResource VolumeFlyout}"
+                                        Icon="{Binding PlayerEx.VolumeIcon}"
+                                        IsEnabled="{Binding PlayerEx.Player.CanPlay}"
+                                        Style="{StaticResource IconButtonStyle}" />
+                                    <coreUI:ABIconButton
+                                        Grid.Column="3"
+                                        BIcon="&#xE747;"
+                                        Command="{Binding Window.TinyCommand}"
+                                        Corner="None"
+                                        Icon="&#xE744;"
+                                        IsAOrB="{Binding Window.IsTiny}"
+                                        IsTheme="{Binding Window.IsTiny}"
+                                        Size="LG"
+                                        Variant="Text" />
+                                </Grid>
+                            </coreUI:AZ.A>
+                            <coreUI:AZ.B>
+                                <Grid>
+                                    <Grid
+                                        VerticalAlignment="Top"
+                                        ColumnDefinitions="Auto,*,Auto"
+                                        RowDefinitions="32,Auto">
+                                        <Border
+                                            Grid.ColumnSpan="3"
+                                            Height="20"
+                                            Margin="5"
+                                            Padding="10,0"
+                                            HorizontalAlignment="Center"
+                                            Background="#55000000"
+                                            CornerRadius="10">
+                                            <TextBlock
+                                                VerticalAlignment="Center"
+                                                FontSize="12"
+                                                Foreground="#fff"
+                                                Text="{Binding PlayerEx.Current.InputInfo.Name}" />
+                                        </Border>
+                                        <StackPanel
+                                            Grid.Row="1"
+                                            Background="{ThemeResource HudBackground}"
+                                            Orientation="Horizontal">
+                                            <coreUI:IconButton
+                                                Command="{Binding Window.TryGoBackCommand}"
+                                                Icon="&#xE72B;"
+                                                IsEnabled="{Binding Status.IsNotLoading}"
+                                                Style="{StaticResource IconButtonStyle}" />
+                                        </StackPanel>
+                                    </Grid>
+                                    <StackPanel VerticalAlignment="Bottom">
+                                        <Grid
+                                            Background="{ThemeResource HudBackground}"
+                                            BorderBrush="{ThemeResource Border}"
+                                            BorderThickness="0,1">
+                                            <StackPanel
+                                                HorizontalAlignment="Right"
+                                                Orientation="Horizontal"
+                                                Visibility="{Binding Window.License.Status.IsTrial}">
+                                                <coreAppManager:PromotionApp
+                                                    Corner="None"
+                                                    DataContext="{Binding PromotionAppItems.FirstOrDefault}"
+                                                    IsLite="True"
+                                                    Visibility="{Binding Data.PromotionAppItems.IsNotEmpty, Source={StaticResource Proxy}}" />
+                                                <coreUI:IconTextButton
+                                                    Command="{Binding Window.ShowPremiumDialogCommand}"
+                                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                                    Icon="&#xE734;"
+                                                    Style="{StaticResource IconTextButtonStyle}"
+                                                    Text="{coreHelpers:SRE K=Premium}"
+                                                    Visibility="{Binding Window.License.Status.IsTrial}" />
+                                            </StackPanel>
+                                        </Grid>
+                                        <StackPanel Background="{ThemeResource HudBackground}">
+                                            <Grid Padding="10,0" ColumnDefinitions="70,*,70">
+                                                <TextBlock
+                                                    VerticalAlignment="Center"
+                                                    Foreground="#fff"
+                                                    Text="{Binding PlayerEx.Player.CurTime, Converter={StaticResource TicksToStringConverter}}" />
+                                                <Slider
+                                                    Grid.Column="1"
+                                                    VerticalAlignment="Center"
+                                                    IsEnabled="{Binding PlayerEx.Player.CanPlay}"
+                                                    IsThumbToolTipEnabled="False"
+                                                    Loaded="TimeSlider_Loaded"
+                                                    Maximum="{Binding PlayerEx.Player.Duration, Converter={StaticResource SecondsFromTicksConverter}}"
+                                                    Value="{Binding PlayerEx.Player.CurTime, Mode=TwoWay, Converter={StaticResource SecondsFromTicksConverter}}" />
+                                                <TextBlock
+                                                    Grid.Column="2"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="#fff"
+                                                    HorizontalTextAlignment="Right"
+                                                    Text="{Binding PlayerEx.Player.Duration, Converter={StaticResource TicksToStringConverter}}" />
+                                            </Grid>
+                                            <Grid>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <coreUI:IconButton
+                                                        Flyout="{Binding SpeedMenuFlyout}"
+                                                        Icon="&#xEC49;"
+                                                        Style="{StaticResource IconButtonStyle}" />
+                                                </StackPanel>
+                                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                                    <coreUI:IconButton
+                                                        Command="{Binding BackwardCommand}"
+                                                        Icon="&#xE97A;"
+                                                        IsEnabled="{Binding PlayerEx.Player.CanPlay}"
+                                                        Style="{StaticResource IconButtonStyle}" />
+                                                    <coreUI:ABIconButton
+                                                        BIcon="&#xE768;"
+                                                        Command="{Binding PlayCommand}"
+                                                        Corner="None"
+                                                        Icon="&#xE769;"
+                                                        IsAOrB="{Binding PlayerEx.Player.Status, ConverterParameter=Playing, Converter={StaticResource EnumComparisonToBoolConverter}}"
+                                                        IsEnabled="{Binding PlayerEx.Player.CanPlay}"
+                                                        Size="LG"
+                                                        Variant="Text" />
+                                                    <coreUI:IconButton
+                                                        Command="{Binding ForwardCommand}"
+                                                        Icon="&#xEE35;"
+                                                        IsEnabled="{Binding PlayerEx.Player.CanPlay}"
+                                                        Style="{StaticResource IconButtonStyle}" />
+                                                </StackPanel>
+                                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                                    <coreUI:IconButton
+                                                        Command="{Binding RotateRightCommand}"
+                                                        Icon="&#xE7AD;"
+                                                        IsEnabled="{Binding PlayerEx.Player.CanPlay}"
+                                                        Style="{StaticResource IconButtonStyle}"
+                                                        Visibility="{Binding PlayerEx.Current.InputInfo.HasVideo}" />
+                                                    <coreUI:IconButton
+                                                        Flyout="{StaticResource VolumeFlyout}"
+                                                        Icon="{Binding PlayerEx.VolumeIcon}"
+                                                        IsEnabled="{Binding PlayerEx.Player.CanPlay}"
+                                                        Style="{StaticResource IconButtonStyle}" />
+                                                    <coreUI:ABIconButton
+                                                        BIcon="&#xE744;"
+                                                        Command="{Binding Window.TinyCommand}"
+                                                        Corner="None"
+                                                        Icon="&#xEA5F;"
+                                                        IsAOrB="{Binding Window.IsTiny}"
+                                                        IsTheme="{Binding Window.IsTiny}"
+                                                        Size="LG"
+                                                        Variant="Text" />
+                                                    <coreUI:ABIconButton
+                                                        BIcon="&#xE740;"
+                                                        Command="{Binding Window.FullScreenCommand}"
+                                                        Corner="None"
+                                                        Icon="&#xE73F;"
+                                                        IsAOrB="{Binding Window.IsFullScreen}"
+                                                        IsTheme="{Binding Window.IsFullScreen}"
+                                                        Size="LG"
+                                                        Variant="Text" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </coreUI:AZ.B>
+                        </coreUI:AZ>
+                    </Grid>
+                </coreUI:GridEx>
+            </coreUI:AZ.B>
+        </coreUI:AZ>
+    </Grid>
+</pages:PlayerPage>

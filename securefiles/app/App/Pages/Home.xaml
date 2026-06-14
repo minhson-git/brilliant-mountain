@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<apps:MainWindowPage
+    x:Class="IOApp.Pages.Home"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:apps="using:IOApp"
+    xmlns:coreHelpers="using:IOCore.Helpers"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:features="using:IOApp.Features"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="using:IOApp.Pages"
+    d:DataContext="{d:DesignInstance Type=pages:Home}"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <apps:MainWindowPage.Resources>
+        <MenuFlyout x:Name="MoreMenuFlyout" Placement="Bottom">
+            <MenuFlyoutItem Command="{Binding ExportCommand}" Text="{coreHelpers:SRE K=Features_ExportSelected}" />
+            <MenuFlyoutItem Command="{Binding BlurCommand}" Text="{coreHelpers:SRE K=Features_BlurSelected}" />
+            <MenuFlyoutItem Command="{Binding UnblurCommand}" Text="{coreHelpers:SRE K=Features_UnblurSelected}" />
+            <MenuFlyoutItem Command="{Binding RemoveCorruptedCommand}" Text="{coreHelpers:SRE K=Features_RemoveCorrupted}" />
+            <MenuFlyoutItem
+                Command="{Binding DeleteCommand}"
+                Foreground="{ThemeResource Failure}"
+                Text="{coreHelpers:SRE K=Features_PermanentlyDeleteSelected}" />
+        </MenuFlyout>
+    </apps:MainWindowPage.Resources>
+
+    <Grid Loaded="DragDropGrid_Loaded">
+        <coreUI:AZ IsA="{Binding IsNoSecureItems}">
+            <coreUI:AZ.A>
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="10">
+                    <FontIcon
+                        HorizontalAlignment="Center"
+                        FontSize="120"
+                        Glyph="&#xE8E5;" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="20"
+                        Text="{coreHelpers:SRE K=AddFilesOrFolders}" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="14"
+                        Foreground="{ThemeResource Foreground2}"
+                        Text="{coreHelpers:SRE K=OrDragAndDrop}" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="14"
+                        Foreground="{ThemeResource Foreground2}"
+                        Text="*, *" />
+                    <StackPanel Orientation="Horizontal">
+                        <coreUI:IconTextButton
+                            Width="150"
+                            Command="{Binding AddFolderCommand}"
+                            Corner="Left"
+                            Icon="&#xE8F4;"
+                            IsEnabled="{Binding Status.S, ConverterParameter=Loading, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"
+                            Text="{coreHelpers:SRE K=AddFolder}" />
+                        <coreUI:IconTextButton
+                            Width="150"
+                            Command="{Binding AddFilesCommand}"
+                            Corner="Right"
+                            Icon="&#xED0E;"
+                            IsEnabled="{Binding Status.S, ConverterParameter=Loading, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"
+                            IsTheme="True"
+                            Text="{coreHelpers:SRE K=AddFiles}" />
+                    </StackPanel>
+                </StackPanel>
+            </coreUI:AZ.A>
+            <coreUI:AZ.B>
+                <Grid RowDefinitions="Auto,*">
+                    <Grid Padding="15" ColumnDefinitions="Auto,*,Auto">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock VerticalAlignment="Center" Text="{Binding FileItems.Count, Converter={StaticResource ItemCounterConverter}}" />
+                        </StackPanel>
+
+                        <StackPanel
+                            Grid.Column="2"
+                            Orientation="Horizontal"
+                            Spacing="10">
+                            <ComboBox
+                                Width="140"
+                                HorizontalAlignment="Stretch"
+                                DisplayMemberPath="Value"
+                                IsEnabled="{Binding Status.S, ConverterParameter=Loading, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"
+                                ItemsSource="{Binding FileTypes}"
+                                SelectedIndex="{Binding FileTypeIndex, Mode=TwoWay}">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="ComboBoxItem">
+                                        <Setter Property="coreHelpers:BindingHelper.IsEnabled" Value="IsEnabled" />
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
+
+                            <ComboBox
+                                Width="140"
+                                HorizontalAlignment="Stretch"
+                                DisplayMemberPath="Value"
+                                IsEnabled="{Binding Status.S, ConverterParameter=Loading, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"
+                                ItemsSource="{Binding SortTypes}"
+                                SelectedIndex="{Binding SortTypeIndex, Mode=TwoWay}">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="ComboBoxItem">
+                                        <Setter Property="coreHelpers:BindingHelper.IsEnabled" Value="IsEnabled" />
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
+
+                            <Grid
+                                Width="200"
+                                BorderBrush="{ThemeResource Border}"
+                                BorderThickness="1"
+                                ColumnDefinitions="*"
+                                CornerRadius="5">
+                                <Border
+                                    Width="32"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center">
+                                    <FontIcon
+                                        HorizontalAlignment="Center"
+                                        FontSize="16"
+                                        Glyph="&#xE71E;" />
+                                </Border>
+                                <TextBox
+                                    Padding="32,5,0,5"
+                                    BorderThickness="0"
+                                    CornerRadius="5,0,0,5"
+                                    IsEnabled="{Binding Status.S, ConverterParameter=Loading, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"
+                                    PlaceholderText="{coreHelpers:SRE K=Search}"
+                                    TextChanged="SearchTextBox_TextChanged" />
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                    <GridView
+                        Grid.Row="1"
+                        Padding="10,0"
+                        ContainerContentChanging="FileGridView_ContainerContentChanging"
+                        IsEnabled="{Binding Status.S, ConverterParameter=Loading, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"
+                        ItemsSource="{Binding FileItems}"
+                        SelectionChanged="FileGridView_SelectionChanged"
+                        SelectionMode="Extended">
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="Margin" Value="5" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="GridViewItem">
+                                            <GridViewItemPresenter
+                                                Background="{ThemeResource ItemBackground}"
+                                                CornerRadius="10"
+                                                SelectedBackground="{ThemeResource ItemSelectedBackground}"
+                                                SelectedPointerOverBackground="{ThemeResource ItemSelectedBackground}" />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <features:FileControl
+                                    OnCensor="FileControl_OnBlur"
+                                    OnDelete="FileControl_OnDelete"
+                                    OnRemove="FileControl_OnRemove"
+                                    OnViewOrPlay="FileControl_OnPlay" />
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                </Grid>
+            </coreUI:AZ.B>
+        </coreUI:AZ>
+
+        <StackPanel
+            Padding="15,10,15,15"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal"
+            Spacing="5">
+            <Border
+                Padding="5"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Background="{ThemeResource Brand}"
+                CornerRadius="3"
+                Visibility="{Binding Window.License.Status.IsTrial}">
+                <coreUI:IconTextBlock
+                    FontSize="14"
+                    Foreground="#fff"
+                    Icon="&#xE8C9;"
+                    Spacing="10"
+                    Text="{Binding TrialLimitStickyText}" />
+            </Border>
+
+            <StackPanel
+                Width="270"
+                Padding="10"
+                Background="{ThemeResource WindowBackground}"
+                BorderBrush="{ThemeResource Border}"
+                BorderThickness="1"
+                CornerRadius="5"
+                Spacing="10">
+                <coreUI:IconTextButton
+                    Flyout="{StaticResource MoreMenuFlyout}"
+                    Icon="&#xE762;"
+                    IsEnabled="{Binding Status.S, ConverterParameter=Loading, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"
+                    Text="{coreHelpers:SRE K=Features_MoreActions}" />
+                <coreUI:IconTextButton
+                    Icon="&#xE896;"
+                    IsEnabled="{Binding Status.S, ConverterParameter=Loading, Converter={StaticResource InvertedEnumComparisonToBoolConverter}}"
+                    IsTheme="True"
+                    Text="{coreHelpers:SRE K=Features_Import}">
+                    <coreUI:IconTextButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <MenuFlyoutItem Command="{Binding AddFilesCommand}" Text="{coreHelpers:SRE K=AddFiles}" />
+                            <MenuFlyoutItem Command="{Binding AddFolderCommand}" Text="{coreHelpers:SRE K=AddFolder}" />
+                        </MenuFlyout>
+                    </coreUI:IconTextButton.Flyout>
+                </coreUI:IconTextButton>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</apps:MainWindowPage>

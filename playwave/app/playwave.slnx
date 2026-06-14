@@ -1,0 +1,21 @@
+﻿<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="App\App.csproj">
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="App (Package)\App (Package).wapproj" Type="c7167f0d-bc9f-4e6e-afe1-012c56b48db5">
+    <Deploy />
+  </Project>
+  <Project Path="..\..\..\iocore\project\IOCore.csproj">
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="..\..\..\iocore\Generator\ZGenerator.csproj" />
+  <Project Path="..\..\..\xmedia\project\XMedia.csproj">
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="..\..\..\iopatch\YoutubeDLSharp\YoutubeDLSharp\YoutubeDLSharp.csproj" />
+  <Project Path="..\..\..\iopatch\YoutubeExplode\YoutubeExplode.Converter\YoutubeExplode.Converter.csproj" />
+  <Project Path="..\..\..\iopatch\YoutubeExplode\YoutubeExplode\YoutubeExplode.csproj" />
+</Solution>

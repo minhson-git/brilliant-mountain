@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<aw:MainWindowPlayerPage
+    x:Class="IOApp.Pages.MediaPlayer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:af="using:IOApp.Features"
+    xmlns:ag="using:IOApp.Gens"
+    xmlns:aw="using:IOApp.Windows"
+    xmlns:cam="using:IOCore.AppManager"
+    xmlns:cc="using:IOCore.Converters"
+    xmlns:cl="using:IOCore.License"
+    xmlns:cme="using:IOCore.MarkupExtensions"
+    xmlns:cui="using:IOCore.UI"
+    xmlns:cuib="using:IOCore.UI.Behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mmpb="using:XMedia.Media.PlayerBase"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <aw:MainWindowPlayerPage.Resources>
+        <cc:BoolToDoubleConverter
+            x:Key="_0D0_1D0_BoolToDouble"
+            FalseValue="0.0"
+            TrueValue="0.9" />
+
+        <Flyout x:Name="VolumeFlyout">
+            <Grid
+                Width="200"
+                ColumnDefinitions="Auto,*"
+                ColumnSpacing="10">
+                <cui:IconButton
+                    Command="{x:Bind mmpb:PlayerEx.I.Player.Commands.ToggleMute}"
+                    Corner="None"
+                    Icon="{x:Bind mmpb:PlayerEx.I.VolumeIcon, Mode=OneWay}"
+                    Variant="Text" />
+                <Slider
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Maximum="{x:Bind mmpb:PlayerEx.I.Player.Config.Audio.VolumeMax, Mode=OneWay}"
+                    Minimum="0"
+                    Value="{x:Bind mmpb:PlayerEx.I.Player.Audio.Volume, Mode=TwoWay}" />
+            </Grid>
+        </Flyout>
+
+        <Flyout x:Name="PromotionAppItemsFlyout" Placement="Top">
+            <cam:PromotionApp
+                Width="360"
+                cuib:Visible.Value1="{x:Bind cl:IOLicense.I.Status.IsTrial, Mode=OneWay}"
+                cuib:Visible.Value2="{x:Bind cuib:Menu.PromotionAppItems.IsNotEmpty, Mode=OneWay}"
+                AppItem="{x:Bind cuib:Menu.PromotionAppItems.FirstItem, Mode=OneWay}" />
+            <Flyout.FlyoutPresenterStyle>
+                <Style TargetType="FlyoutPresenter">
+                    <Setter Property="Padding" Value="5" />
+                </Style>
+            </Flyout.FlyoutPresenterStyle>
+        </Flyout>
+    </aw:MainWindowPlayerPage.Resources>
+
+    <Grid>
+        <cui:AZ IsA="{x:Bind mmpb:PlayerEx.I.Playlist.IsEmpty, Mode=OneWay}">
+            <cui:AZ.A>
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="20">
+                    <FontIcon
+                        HorizontalAlignment="Center"
+                        FontSize="120"
+                        Glyph="&#xea69;" />
+                    <TextBlock
+                        FontSize="20"
+                        HorizontalTextAlignment="Center"
+                        Text="{ag:SR K=OpenVideosOrMusic}" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="14"
+                        Foreground="{ThemeResource Foreground2}"
+                        Text="{x:Bind mmpb:PlayerConfig.I.InputMediaExtensionText}"
+                        TextWrapping="WrapWholeWords" />
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <cui:IconButton
+                            Command="{x:Bind Window.NavigationView.TryGoBackCommand}"
+                            Corner="Left"
+                            Icon="&#xE80F;"
+                            IsEnabled="{x:Bind Status.IsNotLoading, Mode=OneWay}" />
+                        <cui:IconTextButton
+                            Width="200"
+                            Command="{x:Bind AddFilesCommand}"
+                            Corner="Right"
+                            Icon="&#xea69;"
+                            IsEnabled="{x:Bind Status.IsNotLoading, Mode=OneWay}"
+                            IsThemeEnabled="True"
+                            Scheme="Theme"
+                            Text="{ag:SR K=OpenFiles}" />
+                    </StackPanel>
+                </StackPanel>
+            </cui:AZ.A>
+            <cui:AZ.B>
+                <Grid
+                    cuib:Idle.IsEnabled="True"
+                    cuib:Idle.IsLocked="{x:Bind mmpb:PlayerEx.I.Suspending, Mode=OneWay}"
+                    cuib:Idle.Sleeping="{x:Bind OnSleeping}"
+                    cuib:Idle.Waking="{x:Bind OnWaking}"
+                    Background="Transparent"
+                    RightTapped="Container_RightTapped">
+                    <cui:RotatedImage
+                        IsPlaying="{x:Bind mmpb:PlayerEx.I.Current.IsPlaying, Mode=OneWay}"
+                        Path="{cme:StaticPath Name=disk.svg}"
+                        Size="64" />
+                    <Grid Opacity="{x:Bind IsHudVisible, Mode=OneWay, Converter={StaticResource _0D0_1D0_BoolToDouble}}" RowDefinitions="*,Auto">
+                        <Grid
+                            Margin="15"
+                            HorizontalAlignment="Center"
+                            RowDefinitions="Auto,*,Auto"
+                            RowSpacing="15">
+
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                <Border
+                                    Width="24"
+                                    Height="24"
+                                    CornerRadius="5">
+                                    <cui:AZ IsA="{x:Bind mmpb:PlayerEx.I.Current.InputInfo.IsCorrupted, Mode=OneWay}" IsB="{x:Bind mmpb:PlayerEx.I.Current.InputInfo.HasVideo, Mode=OneWay}">
+                                        <cui:AZ.A>
+                                            <FontIcon FontSize="16" Glyph="&#xE814;" />
+                                        </cui:AZ.A>
+                                        <cui:AZ.B>
+                                            <Image
+                                                Width="24"
+                                                Height="24"
+                                                Source="{x:Bind mmpb:PlayerEx.I.Current.Thumbnail.ImagePath, Mode=OneWay, Converter={StaticResource PathToResource}}"
+                                                Stretch="UniformToFill" />
+                                        </cui:AZ.B>
+                                        <cui:AZ.C>
+                                            <FontIcon FontSize="16" Glyph="&#xE8D6;" />
+                                        </cui:AZ.C>
+                                    </cui:AZ>
+                                </Border>
+                                <TextBlock
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Text="{x:Bind mmpb:PlayerEx.I.Current.InputInfo.Name, Mode=OneWay}"
+                                    ToolTipService.ToolTip="{x:Bind mmpb:PlayerEx.I.Current.InputInfo.Name, Mode=OneWay}" />
+                            </Grid>
+
+                            <Grid
+                                Grid.Row="1"
+                                VerticalAlignment="Bottom"
+                                Background="{ThemeResource WindowBackground}"
+                                BorderBrush="{ThemeResource Border}"
+                                BorderThickness="1"
+                                CornerRadius="5"
+                                RowDefinitions="Auto,*"
+                                Visibility="{x:Bind mmpb:PlayerData.I.IsListVisible, Mode=OneWay, Converter={StaticResource Bool}}">
+                                <Grid Margin="5" ColumnDefinitions="*,Auto,Auto">
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Text="{x:Bind mmpb:PlayerEx.I.Playlist.Count, Mode=OneWay, Converter={StaticResource ItemCounter}}" />
+                                    <cui:IconButton
+                                        Grid.Column="2"
+                                        Command="{x:Bind AddFilesCommand}"
+                                        Icon="&#xE710;"
+                                        Variant="Text" />
+                                </Grid>
+                                <cui:ListViewEx
+                                    Grid.Row="1"
+                                    Padding="0,0,0,5"
+                                    ContainerContentChanging="ListViewBase_ContainerContentChanging"
+                                    IsItemClickEnabled="True"
+                                    ItemClick="ListViewBase_ItemClick"
+                                    ItemsSource="{x:Bind mmpb:PlayerEx.I.Playlist}"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                    ScrollViewer.HorizontalScrollMode="Disabled"
+                                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                    ScrollViewer.VerticalScrollMode="Auto"
+                                    SingleSelectionFollowsFocus="False">
+                                    <cui:ListViewEx.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListViewItem">
+                                                        <ListViewItemPresenter
+                                                            RevealBackground="{ThemeResource Background}"
+                                                            SelectedBackground="{ThemeResource FieldsetBackground}"
+                                                            SelectedPointerOverBackground="{ThemeResource FieldsetBackground}" />
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </cui:ListViewEx.ItemContainerStyle>
+                                    <cui:ListViewEx.ItemTemplate>
+                                        <DataTemplate x:DataType="af:PlayerItem">
+                                            <af:RecentPlayerItemControl
+                                                Item="{x:Bind}"
+                                                UseMoreButton="False"
+                                                UsePlayFeature="False" />
+                                        </DataTemplate>
+                                    </cui:ListViewEx.ItemTemplate>
+                                </cui:ListViewEx>
+                            </Grid>
+
+                            <StackPanel
+                                Grid.Row="2"
+                                Padding="5"
+                                HorizontalAlignment="Center"
+                                Background="{ThemeResource FieldsetBackground}"
+                                BorderBrush="{ThemeResource Border}"
+                                BorderThickness="1"
+                                CornerRadius="5"
+                                Orientation="Horizontal">
+                                <cui:IconButton
+                                    Command="{x:Bind Window.NavigationView.TryGoBackCommand}"
+                                    Icon="&#xE80F;"
+                                    IsEnabled="{x:Bind Status.IsNotLoading, Mode=OneWay}"
+                                    Variant="Text" />
+                                <cui:IconButton
+                                    Command="{x:Bind AddFilesCommand}"
+                                    Icon="&#xE8E5;"
+                                    IsEnabled="{x:Bind Status.IsNotLoading, Mode=OneWay}"
+                                    Variant="Text" />
+                                <cui:IconButton
+                                    Command="{x:Bind af:AppData.I.ShowGrabberCommand}"
+                                    Icon="&#xEBD3;"
+                                    IsEnabled="{x:Bind Status.IsNotLoading, Mode=OneWay}"
+                                    Variant="Text" />
+                                <cui:IconButton
+                                    Command="{x:Bind mmpb:PlayerData.I.DisplayListCommand}"
+                                    Icon="&#xE90B;"
+                                    IsThemeEnabled="{x:Bind mmpb:PlayerData.I.IsListVisible, Mode=OneWay}"
+                                    Scheme="Theme"
+                                    ToolTipService.ToolTip="L"
+                                    Variant="Text" />
+                                <cui:IconButton
+                                    Command="{x:Bind Window.ShowPremiumWindowCommand}"
+                                    Icon="&#xE734;"
+                                    Variant="Text"
+                                    Visibility="{x:Bind cl:IOLicense.I.Status.IsTrial, Mode=OneWay, Converter={StaticResource Bool}}" />
+                            </StackPanel>
+                        </Grid>
+
+                        <StackPanel
+                            Grid.Row="1"
+                            Padding="10"
+                            Background="{ThemeResource FieldsetBackground}"
+                            Spacing="5">
+                            <Grid>
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <cui:IconButton
+                                        Flyout="{x:Bind SpeedCheckableMenuFlyout}"
+                                        Icon="&#xEC4A;"
+                                        Variant="Text" />
+                                    <cui:IconButton
+                                        Flyout="{x:Bind SleepCheckableMenuFlyout}"
+                                        Icon="&#xE708;"
+                                        Variant="Text" />
+                                    <cui:IconTextBlock
+                                        Margin="15,0,0,0"
+                                        Icon="&#xE708;"
+                                        Text="{x:Bind SleepTimer.InvertedElapsed, Mode=OneWay, Converter={StaticResource ToTimeText}}"
+                                        Visibility="{x:Bind SleepTimer.Stopwatch.Timer.IsRunning, Mode=OneWay, Converter={StaticResource Bool}}" />
+                                </StackPanel>
+
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    FontSize="12">
+                                    <Run Text="{x:Bind mmpb:PlayerEx.I.Player.CurTime, Mode=OneWay, Converter={StaticResource ToTimeText}}" />
+                                    <Run Text="/" />
+                                    <Run Text="{x:Bind mmpb:PlayerEx.I.Player.Duration, Mode=OneWay, Converter={StaticResource ToTimeText}}" />
+                                </TextBlock>
+                            </Grid>
+
+                            <Slider
+                                Margin="0,-5,0,0"
+                                IsEnabled="{x:Bind mmpb:PlayerEx.I.Player.CanPlay, Mode=OneWay}"
+                                IsThumbToolTipEnabled="False"
+                                Loaded="TimeSlider_FirstLoaded"
+                                Maximum="{x:Bind mmpb:PlayerEx.I.Player.Duration, Mode=OneWay, Converter={StaticResource ToTimeTotalSeconds}}"
+                                Value="{x:Bind mmpb:PlayerEx.I.Player.CurTime, Mode=OneWay, Converter={StaticResource ToTimeTotalSeconds}}" />
+
+                            <Grid>
+                                <StackPanel
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                                    <cui:IconButton
+                                        Command="{x:Bind PreviousCommand}"
+                                        Icon="&#xE892;"
+                                        IsEnabled="{x:Bind mmpb:PlayerEx.I.HasPrevious, Mode=OneWay}"
+                                        Variant="Text" />
+                                    <cui:IconButton
+                                        Command="{x:Bind mmpb:PlayerEx.I.Player.Commands.SeekBackward}"
+                                        Icon="&#xE97A;"
+                                        IsEnabled="{x:Bind mmpb:PlayerEx.I.Player.CanPlay, Mode=OneWay}"
+                                        Variant="Text" />
+                                    <cui:ABIconButton
+                                        CheckedIcon="&#xE769;"
+                                        Command="{x:Bind mmpb:PlayerEx.I.Player.Commands.TogglePlayPause}"
+                                        Icon="&#xE768;"
+                                        IsArcCorner="True"
+                                        IsChecked="{x:Bind mmpb:PlayerEx.I.Current.IsPlaying, Mode=OneWay}"
+                                        IsEnabled="{x:Bind mmpb:PlayerEx.I.Player.CanPlay, Mode=OneWay}"
+                                        Size="XL"
+                                        Variant="Text" />
+                                    <cui:IconButton
+                                        Command="{x:Bind mmpb:PlayerEx.I.Player.Commands.SeekForward}"
+                                        Icon="&#xEE35;"
+                                        IsEnabled="{x:Bind mmpb:PlayerEx.I.Player.CanPlay, Mode=OneWay}"
+                                        Variant="Text" />
+                                    <cui:IconButton
+                                        Command="{x:Bind NextCommand}"
+                                        Icon="&#xE893;"
+                                        IsEnabled="{x:Bind mmpb:PlayerEx.I.HasNext, Mode=OneWay}"
+                                        Variant="Text" />
+                                </StackPanel>
+
+                                <StackPanel
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                                    <cui:IconButton
+                                        Flyout="{x:Bind PlayEndedCheckableMenuFlyout}"
+                                        Icon="{x:Bind PlayEndedCheckableMenuFlyout.CheckedItem.OriginalIcon, Mode=OneWay}"
+                                        Variant="Text" />
+                                    <cui:IconButton
+                                        Flyout="{StaticResource VolumeFlyout}"
+                                        Icon="{x:Bind mmpb:PlayerEx.I.VolumeIcon, Mode=OneWay}"
+                                        IsEnabled="{x:Bind mmpb:PlayerEx.I.Player.CanPlay, Mode=OneWay}"
+                                        Variant="Text" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </cui:AZ.B>
+        </cui:AZ>
+    </Grid>
+</aw:MainWindowPlayerPage> 

@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:ViewerPage
+    x:Class="IOApp.Pages.ImageViewer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:coreAppManager="using:IOCore.AppManager"
+    xmlns:coreHelpers="using:IOCore.Helpers"
+    xmlns:coreLibs="using:IOCore.Libs"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="using:CommunityToolkit.WinUI.Media"
+    xmlns:pages="using:IOApp.Pages"
+    d:DataContext="{d:DesignInstance Type=pages:ImageViewer}"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <pages:ViewerPage.Resources>
+        <coreLibs:BoolToDoubleConverter
+            x:Key="HudOpacityBoolToDoubleConverter"
+            FalseValue="0.0"
+            TrueValue="1.0" />
+
+        <Style x:Key="IconButtonStyle" TargetType="coreUI:IconButton">
+            <Setter Property="Size" Value="LG" />
+            <Setter Property="Variant" Value="Text" />
+            <Setter Property="IsArcCorner" Value="True" />
+        </Style>
+
+        <Style x:Key="IconTextButtonStyle" TargetType="coreUI:IconTextButton">
+            <Setter Property="Size" Value="LG" />
+            <Setter Property="Variant" Value="Text" />
+        </Style>
+
+        <Flyout x:Name="PromotionAppItemsFlyout" Placement="Top">
+            <Flyout.FlyoutPresenterStyle>
+                <Style TargetType="FlyoutPresenter">
+                    <Setter Property="Padding" Value="10" />
+                    <Setter Property="CornerRadius" Value="5" />
+                    <Setter Property="Background" Value="{ThemeResource FlyoutBackground}" />
+                </Style>
+            </Flyout.FlyoutPresenterStyle>
+            <coreAppManager:PromotionApp Width="360" DataContext="{Binding PromotionAppItems.FirstOrDefault}" />
+        </Flyout>
+    </pages:ViewerPage.Resources>
+
+    <Grid RowDefinitions="*,Auto">
+        <Grid>
+            <coreUI:AZ IsA="{Binding Presenter.Album.IsEmpty}">
+                <coreUI:AZ.A>
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Spacing="20">
+                        <FontIcon
+                            HorizontalAlignment="Center"
+                            FontSize="120"
+                            Glyph="&#xE7C5;" />
+                        <TextBlock
+                            FontSize="20"
+                            HorizontalTextAlignment="Center"
+                            Text="{coreHelpers:SRE K=OpenImages}" />
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="14"
+                            Foreground="{ThemeResource Foreground2}"
+                            Text="{Binding InputTypes}" />
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <coreUI:IconButton
+                                Command="{Binding Window.TryGoBackCommand}"
+                                Corner="Left"
+                                Icon="&#xE80F;" />
+                            <coreUI:IconTextButton
+                                Width="160"
+                                Command="{Binding AddFilesCommand}"
+                                Corner="Right"
+                                Icon="&#xE7C5;"
+                                IsEnabled="{Binding Status.IsNotLoading}"
+                                IsTheme="True"
+                                Text="{coreHelpers:SRE K=OpenImages}" />
+                        </StackPanel>
+                    </StackPanel>
+                </coreUI:AZ.A>
+                <coreUI:AZ.B>
+                    <coreUI:GridEx
+                        Background="Transparent"
+                        PointerMoved="Container_PointerMoved"
+                        SizeChanged="Container_SizeChanged">
+                        <Grid Loaded="Host_Loaded" />
+                        <Grid Opacity="{Binding IsHudVisible, Converter={StaticResource HudOpacityBoolToDoubleConverter}}">
+                            <Grid Margin="0,36,0,0" RowDefinitions="Auto,*,Auto">
+                                <Grid Margin="15,0" ColumnDefinitions="Auto,*,Auto">
+                                    <StackPanel Orientation="Horizontal" Visibility="{Binding Window.IsTiny, Converter={StaticResource InvertedBoolConverter}}">
+                                        <coreUI:IconButton
+                                            Command="{Binding ReloadCommand}"
+                                            Icon="&#xE72C;"
+                                            IsEnabled="{Binding Status.IsNotLoading}"
+                                            Style="{StaticResource IconButtonStyle}" />
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontSize="14"
+                                            MaxLines="2"
+                                            Text="{Binding Presenter.Current.InputInfo.Name}"
+                                            TextWrapping="Wrap" />
+                                    </StackPanel>
+
+                                    <StackPanel
+                                        Grid.ColumnSpan="3"
+                                        Padding="5"
+                                        HorizontalAlignment="Center"
+                                        Background="{ThemeResource HudBackground}"
+                                        BorderBrush="{ThemeResource Border}"
+                                        BorderThickness="1"
+                                        CornerRadius="25"
+                                        Orientation="Horizontal"
+                                        Visibility="{Binding Window.IsTiny, Converter={StaticResource InvertedBoolConverter}}">
+                                        <coreUI:IconButton
+                                            Command="{Binding ClockwiseRotationCommand}"
+                                            Icon="&#xE7AD;"
+                                            IsEnabled="{Binding Status.IsNotLoading}"
+                                            Style="{StaticResource IconButtonStyle}"
+                                            ToolTipService.ToolTip="{coreHelpers:SRE K=Features_RotateWithShortcut}" />
+                                        <coreUI:IconButton
+                                            Command="{Binding HorizontalFlipCommand}"
+                                            Icon="&#xF583;"
+                                            Style="{StaticResource IconButtonStyle}"
+                                            ToolTipService.ToolTip="{coreHelpers:SRE K=Features_Flip}" />
+                                        <coreUI:IconButton
+                                            Command="{Binding VerticalFlipCommand}"
+                                            Icon="&#xF589;"
+                                            Style="{StaticResource IconButtonStyle}"
+                                            ToolTipService.ToolTip="{coreHelpers:SRE K=Features_Flop}" />
+                                        <coreUI:IconButton
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Top"
+                                            Command="{Binding ResetCommand}"
+                                            Icon="&#xE75C;"
+                                            IsEnabled="{Binding Presenter.Viewer.Transformation.IsModified}"
+                                            Style="{StaticResource IconButtonStyle}"
+                                            ToolTipService.ToolTip="{coreHelpers:SRE K=Reset}" />
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                        <coreUI:ABIconButton
+                                            BIcon="&#xE718;"
+                                            Command="{Binding Window.TinyCommand}"
+                                            Icon="&#xE718;"
+                                            IsAOrB="{Binding Window.IsTiny}"
+                                            IsArcCorner="True"
+                                            IsTheme="{Binding Window.IsTiny}"
+                                            Size="LG"
+                                            Variant="Text" />
+                                        <coreUI:ABIconButton
+                                            BIcon="&#xE740;"
+                                            Command="{Binding Window.FullScreenCommand}"
+                                            Icon="&#xE73F;"
+                                            IsAOrB="{Binding Window.IsFullScreen}"
+                                            IsArcCorner="True"
+                                            IsTheme="{Binding Window.IsFullScreen}"
+                                            Size="LG"
+                                            Variant="Text" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <StackPanel
+                                    Grid.Row="1"
+                                    Margin="15,0,0,0"
+                                    Padding="5"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Background="{ThemeResource HudBackground}"
+                                    BorderBrush="{ThemeResource Border}"
+                                    BorderThickness="1"
+                                    CornerRadius="25">
+                                    <coreUI:IconButton
+                                        Command="{Binding Window.TryGoBackCommand}"
+                                        Icon="&#xE80F;"
+                                        IsEnabled="{Binding Status.IsNotLoading}"
+                                        Style="{StaticResource IconButtonStyle}" />
+                                    <coreUI:IconButton
+                                        Command="{Binding Window.ShowPremiumDialogCommand}"
+                                        Icon="&#xE734;"
+                                        Style="{StaticResource IconButtonStyle}"
+                                        Visibility="{Binding Window.License.Status.IsTrial}" />
+                                </StackPanel>
+
+                                <Grid
+                                    Grid.Row="2"
+                                    ColumnDefinitions="Auto,*,Auto"
+                                    Visibility="{Binding Window.IsTiny, Converter={StaticResource InvertedBoolConverter}}">
+                                    <Grid.Background>
+                                        <media:BackdropBlurBrush Amount="16" />
+                                    </Grid.Background>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <coreUI:ABIconButton
+                                            BIcon="&#xE8B9;"
+                                            Command="{Binding DisplayListCommand}"
+                                            Icon="&#xE91B;"
+                                            IsAOrB="{Binding ViewerPackageStorage.IsListVisible}"
+                                            IsArcCorner="True"
+                                            Size="LG"
+                                            ToolTipService.ToolTip="L"
+                                            Variant="Text" />
+                                    </StackPanel>
+
+                                    <StackPanel
+                                        Grid.Column="2"
+                                        Padding="5"
+                                        HorizontalAlignment="Right"
+                                        Orientation="Horizontal">
+                                        <TextBlock Margin="10,0" VerticalAlignment="Center">
+                                            <Run Text="{Binding Presenter.Viewer.Transformation.Scale}" /><Run Text="%" />
+                                        </TextBlock>
+                                        <coreUI:IconButton
+                                            Command="{Binding ResetZoomCommand}"
+                                            Icon="&#xE71E;"
+                                            Style="{StaticResource IconButtonStyle}"
+                                            ToolTipService.ToolTip="{coreHelpers:SRE K=Features_ZoomToFitWithShortcut}" />
+                                        <coreUI:IconButton
+                                            HoldCommand="{Binding ZoomOutCommand}"
+                                            Icon="&#xE71F;"
+                                            Style="{StaticResource IconButtonStyle}"
+                                            ToolTipService.ToolTip="{coreHelpers:SRE K=Features_ZoomOutWithShortcut}" />
+                                        <coreUI:IconButton
+                                            HoldCommand="{Binding ZoomInCommand}"
+                                            Icon="&#xE8A3;"
+                                            Style="{StaticResource IconButtonStyle}"
+                                            ToolTipService.ToolTip="{coreHelpers:SRE K=Features_ZoomInWithShortcut}" />
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </coreUI:GridEx>
+                </coreUI:AZ.B>
+            </coreUI:AZ>
+        </Grid>
+        <coreUI:AZ
+            Grid.Row="1"
+            IsVisible0="{Binding Presenter.Album.IsNotEmpty}"
+            IsVisible1="{Binding ViewerPackageStorage.IsListVisible}"
+            IsVisible2="{Binding Window.IsTiny, Converter={StaticResource InvertedBoolConverter}}">
+            <coreUI:ListViewEx
+                Padding="0,14"
+                AllowDrop="True"
+                BorderBrush="{ThemeResource Border}"
+                BorderThickness="0,1,0,0"
+                CanReorderItems="{Binding Status.IsNotBusy}"
+                ContainerContentChanging="ListViewEx_ContainerContentChanging"
+                IsItemClickEnabled="True"
+                ItemClick="ListViewEx_ItemClick"
+                ItemsSource="{Binding Presenter.Album}"
+                Loaded="ListViewEx_Loaded"
+                ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                ScrollViewer.HorizontalScrollMode="Auto"
+                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollMode="Disabled"
+                SingleSelectionFollowsFocus="False">
+                <coreUI:ListViewEx.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsStackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </coreUI:ListViewEx.ItemsPanel>
+                <coreUI:ListViewEx.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <ListViewItemPresenter SelectedBackground="{ThemeResource Theme}" SelectedPointerOverBackground="{ThemeResource Theme}" />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </coreUI:ListViewEx.ItemContainerStyle>
+                <coreUI:ListViewEx.ItemTemplate>
+                    <DataTemplate>
+                        <Grid
+                            Height="96"
+                            MinWidth="88"
+                            MaxWidth="192"
+                            Padding="6,4"
+                            ToolTipService.Placement="Top"
+                            ToolTipService.ToolTip="{Binding InputInfo.Name}">
+                            <Image
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="{Binding Thumbnail.ImagePath}"
+                                Stretch="Uniform"
+                                UseLayoutRounding="False" />
+                        </Grid>
+                    </DataTemplate>
+                </coreUI:ListViewEx.ItemTemplate>
+            </coreUI:ListViewEx>
+        </coreUI:AZ>
+    </Grid>
+</pages:ViewerPage>

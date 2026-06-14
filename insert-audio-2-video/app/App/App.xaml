@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<core:AppEx
+    x:Class="IOApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:core="using:IOCore">
+    <core:AppEx.Resources>
+        <XamlControlsResources>
+            <XamlControlsResources.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///IOCore/CoreTheme.xaml" />
+                <ResourceDictionary Source="ms-appx:///AppTheme.xaml" />
+            </XamlControlsResources.MergedDictionaries>
+        </XamlControlsResources>
+    </core:AppEx.Resources>
+</core:AppEx>

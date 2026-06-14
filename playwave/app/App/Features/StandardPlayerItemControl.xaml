@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<af:PlayerItemGrid
+    x:Class="IOApp.Features.StandardPlayerItemControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:af="using:IOApp.Features"
+    xmlns:cc="using:IOCore.Converters"
+    xmlns:cui="using:IOCore.UI"
+    xmlns:cuib="using:IOCore.UI.Behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="272"
+    Padding="8"
+    RowDefinitions="Auto,144,Auto"
+    RowSpacing="8"
+    mc:Ignorable="d">
+
+    <af:PlayerItemGrid.Resources>
+        <cc:BoolToResourceBrushConverter
+            x:Key="FavoriteBoolToResourceBrush"
+            FalseValue="Foreground"
+            TrueValue="Theme" />
+    </af:PlayerItemGrid.Resources>
+
+    <Grid ColumnDefinitions="*,Auto,Auto">
+        <TextBlock
+            VerticalAlignment="Center"
+            FontSize="12"
+            Foreground="{ThemeResource Foreground2}"
+            Text="{x:Bind Item.InputInfo.FileSize, Mode=OneWay, Converter={StaticResource FileSizeToText}}"
+            Visibility="{x:Bind Item.InputInfo.IsCorrupted, Mode=OneWay, Converter={StaticResource InvertedBool}}" />
+        <cui:ABIconButton
+            Grid.Column="1"
+            CheckedIcon="&#xEB52;"
+            Command="{x:Bind FavoriteCommand}"
+            Foreground="{x:Bind Item.IsFavorite, Mode=OneWay, Converter={StaticResource FavoriteBoolToResourceBrush}}"
+            Icon="&#xEB51;"
+            IsChecked="{x:Bind Item.IsFavorite, Mode=OneWay}"
+            IsEnabled="{x:Bind Item.Status.IsNotLoading, Mode=OneWay}"
+            Variant="Text"
+            Visibility="{x:Bind Item.InputInfo.IsCorrupted, Mode=OneWay, Converter={StaticResource InvertedBool}}" />
+        <cui:IconButton
+            Grid.Column="2"
+            Command="{x:Bind ShowMenuCommand}"
+            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+            Icon="&#xe712;"
+            IsEnabled="{x:Bind Item.Status.IsNotLoading, Mode=OneWay}"
+            Variant="Text" />
+    </Grid>
+
+    <Grid
+        Grid.Row="1"
+        Width="256"
+        Height="144"
+        Background="{ThemeResource Background}"
+        CornerRadius="6">
+        <StackPanel
+            Padding="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Visibility="{x:Bind Item.InputInfo.IsCorrupted, Mode=OneWay, Converter={StaticResource Bool}}">
+            <FontIcon
+                HorizontalAlignment="Center"
+                FontSize="64"
+                Foreground="{ThemeResource Foreground2}"
+                Glyph="&#xE814;" />
+            <TextBlock
+                HorizontalAlignment="Center"
+                FontSize="10"
+                MaxLines="2"
+                Text="{x:Bind Item.InputInfo.Name, Mode=OneWay}"
+                TextWrapping="Wrap" />
+        </StackPanel>
+
+        <Grid
+            cuib:Tap.IsEnabled="True"
+            cuib:Tap.LCommand="{x:Bind LTapCommand}"
+            cuib:Tap.LCommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+            cuib:Tap.LDoubleCommand="{x:Bind LDoubleTapCommand}"
+            cuib:Tap.LDoubleCommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+            Visibility="{x:Bind Item.InputInfo.IsCorrupted, Mode=OneWay, Converter={StaticResource InvertedBool}}">
+            <cui:AZ IsA="{x:Bind Item.InputInfo.HasVideo, Mode=OneWay}">
+                <cui:AZ.A>
+                    <Image
+                        Width="256"
+                        Height="144"
+                        Source="{x:Bind Item.Thumbnail.ImagePath, Mode=OneWay, Converter={StaticResource PathToResource}}"
+                        Stretch="UniformToFill" />
+                </cui:AZ.A>
+                <cui:AZ.B>
+                    <FontIcon
+                        FontSize="64"
+                        Foreground="{ThemeResource Foreground2}"
+                        Glyph="&#xE8D6;" />
+                </cui:AZ.B>
+            </cui:AZ>
+            <Border
+                Margin="8"
+                Padding="6,4"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Background="{ThemeResource Background}"
+                CornerRadius="4">
+                <TextBlock
+                    FontSize="12"
+                    Foreground="{ThemeResource Foreground2}"
+                    Text="{x:Bind Item.InputInfo.Duration, Mode=OneWay, Converter={StaticResource ToTimeText}}" />
+            </Border>
+        </Grid>
+    </Grid>
+
+    <Grid Grid.Row="2" ColumnDefinitions="*,Auto">
+        <TextBlock
+            VerticalAlignment="Center"
+            FontSize="14"
+            Text="{x:Bind Item.InputInfo.Name, Mode=OneWay, ConverterParameter=64, Converter={StaticResource TrimText}}"
+            ToolTipService.ToolTip="{x:Bind Item.InputInfo.Name, Mode=OneWay}" />
+        <cui:ABIconButton
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            CheckedIcon="&#xE769;"
+            Command="{x:Bind PreviewCommand}"
+            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+            Icon="&#xE768;"
+            IsChecked="{x:Bind Item.IsPlaying, Mode=OneWay}"
+            IsEnabled="{x:Bind Item.Status.IsNotLoading, Mode=OneWay}"
+            Variant="Text"
+            Visibility="{x:Bind Item.InputInfo.IsCorrupted, Mode=OneWay, Converter={StaticResource InvertedBool}}" />
+    </Grid>
+</af:PlayerItemGrid>

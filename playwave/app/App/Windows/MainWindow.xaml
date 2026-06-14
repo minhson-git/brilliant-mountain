@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c:WindowEx
+    x:Class="IOApp.Windows.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ag="using:IOApp.Gens"
+    xmlns:ap="using:IOApp.Pages"
+    xmlns:c="using:IOCore"
+    xmlns:cme="using:IOCore.MarkupExtensions"
+    xmlns:cui="using:IOCore.UI"
+    xmlns:cuib="using:IOCore.UI.Behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource Background}">
+        <Grid RowDefinitions="Auto,*">
+            <cui:TitleBarEx
+                Name="_tb"
+                IsLeftHeaderVisible="{x:Bind cui:UI.InvertedAny(NavigationView.CurrentPageType, 'IOApp.Pages.MediaPlayer', 'IOApp.Pages.EchoShield'), Mode=OneWay}"
+                IsSubtitleVisible="False"
+                IsTitleVisible="False"
+                Visibility="{x:Bind cui:UI.VisibleIfInvertedAny(NavigationView.CurrentPageType, 'IOApp.Pages.MediaPlayer', 'IOApp.Pages.EchoShield'), Mode=OneWay}">
+                <cui:TitleBarEx.LeftHeader>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <cui:IconButton
+                            Command="{x:Bind AddFilesCommand}"
+                            Icon="&#xE768;"
+                            IsEnabled="{x:Bind Status.IsNotBusy, Mode=OneWay}"
+                            IsThemeEnabled="True"
+                            Scheme="Theme" />
+                        <cui:IconButton
+                            Command="{x:Bind ShowGrabberWindowCommand}"
+                            Icon="&#xEBD3;"
+                            IsEnabled="{x:Bind Status.IsNotBusy, Mode=OneWay}"
+                            ToolTipService.ToolTip="{ag:SR K=MusicGrabber}" />
+                    </StackPanel>
+                </cui:TitleBarEx.LeftHeader>
+                <cui:TitleBarEx.RightHeader>
+                    <cui:IconButton
+                        Command="{x:Bind ShowSearchFilterCommand}"
+                        Icon="&#xE71E;"
+                        IsEnabled="{x:Bind Status.IsNotBusy, Mode=OneWay}"
+                        IsThemeEnabled="{x:Bind IsSearchFilterVisible}"
+                        Scheme="Theme"
+                        Variant="Text" />
+                </cui:TitleBarEx.RightHeader>
+            </cui:TitleBarEx>
+
+            <cui:NavigationViewEx
+                Name="_nv"
+                Grid.Row="1"
+                cuib:DragDrop.Dropped="{x:Bind OnDropped}"
+                BorderThickness="0"
+                IsBackButtonVisible="Collapsed"
+                IsPaneToggleButtonVisible="False"
+                IsPaneVisible="False"
+                IsSettingsVisible="False"
+                IsTitleBarAutoPaddingEnabled="True"
+                PaneDisplayMode="Top">
+                <cui:NavigationViewEx.MenuItems>
+                    <cui:NavigationViewItemEx PageType="{cme:X T=ap:Home}" />
+                    <cui:NavigationViewItemEx PageType="{cme:X T=ap:MediaPlayer}" Visibility="Collapsed" />
+                </cui:NavigationViewEx.MenuItems>
+
+                <Frame Name="_f" />
+            </cui:NavigationViewEx>
+        </Grid>
+    </Grid>
+</c:WindowEx>

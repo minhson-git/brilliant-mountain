@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<cd:DialogEx
+    x:Class="IOApp.Dialogs.AddToPlaylistDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:af="using:IOApp.Features"
+    xmlns:ag="using:IOApp.Gens"
+    xmlns:cd="using:IOCore.Dialogs"
+    xmlns:cui="using:IOCore.UI"
+    xmlns:cuib="using:IOCore.UI.Behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <cui:StandardLayout Title="{ag:SR K=AddToPlaylist}">
+        <cui:StandardLayout.Panel>
+            <Grid
+                MinHeight="300"
+                RowDefinitions="*,Auto"
+                RowSpacing="10">
+                <ItemsRepeater MaxWidth="300" ItemsSource="{x:Bind PlaylistItems}">
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate x:DataType="af:PlaylistItem">
+                            <cui:AZ cuib:HoverFx.IsEnabled="True">
+                                <Grid
+                                    Padding="5"
+                                    Background="{ThemeResource Foreground_0_2}"
+                                    ColumnDefinitions="Auto,Auto,*,Auto"
+                                    ColumnSpacing="10">
+                                    <cui:ABIconButton
+                                        VerticalAlignment="Center"
+                                        CheckedIcon="&#xE735;"
+                                        Corner="None"
+                                        Icon="&#xEB52;"
+                                        IsChecked="{x:Bind Id, Mode=OneWay, ConverterParameter=1, Converter={StaticResource InvertedIsEquals}}"
+                                        Size="SM"
+                                        Variant="Text" />
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock Text="{x:Bind Name, Mode=OneWay}" />
+                                        <TextBlock
+                                            FontSize="8"
+                                            Foreground="{ThemeResource Foreground2}"
+                                            Text="{x:Bind Paths.Count, Mode=OneWay, Converter={StaticResource ItemCounter}}" />
+                                    </StackPanel>
+                                    <cui:ABIconButton
+                                        Grid.Column="3"
+                                        VerticalAlignment="Center"
+                                        CheckedIcon="&#xe73d;"
+                                        Corner="None"
+                                        DataContext="{x:Bind}"
+                                        Icon="&#xe739;"
+                                        IsChecked="{x:Bind IsActivated, Mode=TwoWay, Converter={StaticResource InvertedBool}}"
+                                        IsEnabled="{x:Bind IsEnabled, Mode=OneWay}"
+                                        Size="SM"
+                                        Tapped="CollectionItemButton_Tapped"
+                                        Variant="Text" />
+                                </Grid>
+                            </cui:AZ>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+                <cui:IconTextButton
+                    Grid.Row="1"
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Center"
+                    Command="{x:Bind SaveCommand}"
+                    Text="{ag:SR K=Save}" />
+            </Grid>
+        </cui:StandardLayout.Panel>
+    </cui:StandardLayout>
+</cd:DialogEx>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<core:WindowEx
+    x:Class="IOApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:apps="using:IOApp"
+    xmlns:cl="using:IOCore.License"
+    xmlns:cme="using:IOCore.MarkupExtensions"
+    xmlns:core="using:IOCore"
+    xmlns:cui="using:IOCore.UI"
+    xmlns:cuib="using:IOCore.UI.Behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dialogs="using:IOCore.Dialogs"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="using:IOApp.Pages"
+    mc:Ignorable="d">
+
+    <Grid d:DataContext="{d:DesignInstance Type=apps:MainWindow}">
+        <Grid RowDefinitions="Auto,*">
+            <cui:TitleBarEx Name="_tb" IsSubtitleVisible="False">
+                <cui:TitleBarEx.RightHeader>
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <cui:IconTextButton
+                            Command="{x:Bind dialogs:DialogService.ShowPremiumCommand}"
+                            IsThemeEnabled="True"
+                            Scheme="Theme"
+                            Text="{cme:SR K=Premium,
+                                          UseCase=UpperCase}"
+                            Visibility="{x:Bind cl:IOLicense.I.Status.IsTrial, Mode=OneWay}" />
+                        <cui:IconButton
+                            Name="PromotionAppItemButton"
+                            cuib:Menu.AutoPromotionVisibility="True"
+                            cuib:Menu.IsPromotionProvider="True"
+                            Icon="&#xF133;"
+                            Variant="NoBorder" />
+
+                        <cui:IconButton
+                            cuib:Menu.IsMenuProvider="True"
+                            Icon="&#xE713;"
+                            Variant="NoBorder" />
+                    </StackPanel>
+                </cui:TitleBarEx.RightHeader>
+            </cui:TitleBarEx>
+
+            <cui:NavigationViewEx
+                Name="_nv"
+                Grid.Row="1"
+                IsPaneVisible="False">
+                <cui:NavigationViewEx.MenuItems>
+                    <cui:NavigationViewItemEx PageType="{cme:X T=pages:Home}" />
+                </cui:NavigationViewEx.MenuItems>
+
+                <Frame Name="_f" />
+            </cui:NavigationViewEx>
+        </Grid>
+    </Grid>
+</core:WindowEx>

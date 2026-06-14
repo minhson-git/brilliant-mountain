@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<core:WindowEx
+    x:Class="IOApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:apps="using:IOApp"
+    xmlns:core="using:IOCore"
+    xmlns:coreHelpers="using:IOCore.Helpers"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid d:DataContext="{d:DesignInstance Type=apps:MainWindow}">
+        <Grid.Resources>
+            <apps:MainWindowProxy x:Name="Proxy" Data="{Binding}" />
+        </Grid.Resources>
+
+        <Grid Background="{ThemeResource WindowBackground}" RowDefinitions="Auto,*">
+            <coreUI:TitleBarEx Name="_titleBar" IsSubtitleVisible="False">
+                <coreUI:TitleBarEx.LeftHeader>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <coreUI:IconButton
+                            Command="{Binding Menu.ShowMenuCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                            Icon="&#xE712;"
+                            Variant="Text" />
+                        <coreUI:IconButton
+                            Command="{Binding ShowSupportDialogCommand}"
+                            Icon="&#xED15;"
+                            Variant="Text" />
+                        <coreUI:IconButton
+                            Name="PromotionAppItemButton"
+                            Command="{Binding Menu.ShowPromotionCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                            Icon="&#xE719;"
+                            Variant="Text"
+                            Visibility="{Binding PromotionAppItems.IsNotEmpty}" />
+                    </StackPanel>
+                </coreUI:TitleBarEx.LeftHeader>
+                <coreUI:TitleBarEx.RightHeader>
+                    <coreUI:IconTextButton
+                        Command="{Binding ShowPremiumDialogCommand}"
+                        Icon="&#xE728;"
+                        IsTheme="True"
+                        Text="{coreHelpers:SRE K=Premium}"
+                        Visibility="{Binding LicenseStatus.IsTrial}" />
+                </coreUI:TitleBarEx.RightHeader>
+            </coreUI:TitleBarEx>
+
+            <coreUI:NavigationViewEx
+                Name="_navigationView"
+                Grid.Row="1"
+                BorderThickness="1"
+                IsBackButtonVisible="Collapsed"
+                IsSettingsVisible="False"
+                IsTitleBarAutoPaddingEnabled="True"
+                PaneDisplayMode="LeftCompact">
+                <coreUI:NavigationViewEx.MenuItems>
+                    <NavigationViewItem Content="{coreHelpers:SRE K=CleanJunkFiles}" Tag="IOApp.Pages.JunkFiles">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xEA99;" />
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem Content="{coreHelpers:SRE K=CleanDuplicateFiles}" Tag="IOApp.Pages.DuplicateFiles">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE7C4;" />
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem Content="{coreHelpers:SRE K=CleanLargeFiles}" Tag="IOApp.Pages.LargeFiles">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE8D5;" />
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                </coreUI:NavigationViewEx.MenuItems>
+
+                <Frame Name="_frame" Background="{ThemeResource PageBackground}" />
+            </coreUI:NavigationViewEx>
+        </Grid>
+    </Grid>
+</core:WindowEx>

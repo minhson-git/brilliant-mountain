@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<UserControl
+    x:Class="IOApp.Features.FileBadge"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:features="using:IOApp.Features"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance Type=features:VolumeItem}"
+    mc:Ignorable="d">
+
+    <coreUI:AZ IsA="{Binding SecureType, ConverterParameter=Unsecured, Converter={StaticResource IsEqualEnumsConverter}}">
+        <coreUI:AZ.A>
+            <Grid
+                Height="24"
+                Padding="12,0,0,0"
+                HorizontalAlignment="Left"
+                Background="{ThemeResource Theme}"
+                ColumnDefinitions="Auto,24"
+                ColumnSpacing="6"
+                CornerRadius="12">
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontSize="10"
+                    FontWeight="Bold"
+                    Text="{Binding SecureTypeText}" />
+                <Border
+                    Grid.Column="1"
+                    Background="{ThemeResource Theme}"
+                    CornerRadius="12">
+                    <FontIcon FontSize="10" Glyph="&#xE785;" />
+                </Border>
+            </Grid>
+        </coreUI:AZ.A>
+        <coreUI:AZ.B>
+            <Grid
+                Height="24"
+                Padding="12,0,0,0"
+                HorizontalAlignment="Left"
+                Background="{ThemeResource Border}"
+                ColumnDefinitions="Auto,24"
+                ColumnSpacing="6"
+                CornerRadius="12">
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontSize="10"
+                    FontWeight="Bold"
+                    Text="{Binding SecureTypeText}" />
+                <Border
+                    Grid.Column="1"
+                    Background="{ThemeResource Border}"
+                    CornerRadius="12">
+                    <FontIcon FontSize="10" Glyph="&#xE72E;" />
+                </Border>
+            </Grid>
+        </coreUI:AZ.B>
+    </coreUI:AZ>
+</UserControl>

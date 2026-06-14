@@ -1,0 +1,16 @@
+<Project>
+  <PropertyGroup>
+    <AppName>PlayWave</AppName>
+    <ToS>ToSMediaFull</ToS>
+
+    <EnableHook>true</EnableHook>
+    <EnableTrayIcon>true</EnableTrayIcon>
+    <EnableData>true</EnableData>
+
+    <EnableWMI>true</EnableWMI>
+
+    <EnableMediaMidi>true</EnableMediaMidi>
+    <EnableMediaPlayer>true</EnableMediaPlayer>
+    <EnableMediaGrabber>true</EnableMediaGrabber>
+  </PropertyGroup>
+</Project>

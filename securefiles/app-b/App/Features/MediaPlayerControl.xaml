@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<coreUI:UserControlEx
+    x:Class="IOApp.Features.MediaPlayerControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:core="using:IOCore"
+    xmlns:coreLibs="using:IOCore.Libs"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:features="using:IOApp.Features"
+    xmlns:fl="using:FlyleafLib.Controls.WinUI"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="using:IOApp.Pages"
+    d:DataContext="{d:DesignInstance Type=features:MediaPlayerControl}"
+    mc:Ignorable="d">
+    <coreUI:UserControlEx.Resources>
+        <coreLibs:BoolToDoubleConverter
+            x:Key="HudOpacityBoolToDoubleConverter"
+            FalseValue="0.0"
+            TrueValue="1.0" />
+
+        <coreLibs:BoolToResourceBrushConverter
+            x:Key="FavoriteBoolToResourceBrushConverter"
+            FalseKey="White"
+            TrueKey="Theme" />
+    </coreUI:UserControlEx.Resources>
+    <Grid Background="{ThemeResource Theme}" CornerRadius="10">
+        <Border Grid.RowSpan="2" Background="#99000000" />
+        <Grid
+            Padding="8"
+            RowDefinitions="Auto,Auto"
+            RowSpacing="8">
+            <Grid Width="304" Height="171">
+                <coreUI:AZ
+                    DoubleTapped="Container_DoubleTapped"
+                    PointerMoved="Container_PointerMoved"
+                    Tapped="Container_Tapped">
+                    <Grid Background="Transparent">
+                        <coreUI:AZ IsA="{x:Bind PlayerEx.Player.CanPlay, Mode=OneWay}">
+                            <coreUI:AZ.A>
+                                <Grid CornerRadius="6">
+                                    <ContentPresenter Loaded="Presenter_Loaded" Visibility="{x:Bind PlayerEx.Current.InputInfo.HasVideo, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                    <Image
+                                        Name="_diskImage"
+                                        Width="128"
+                                        Height="128"
+                                        Loaded="DiskImage_Loaded"
+                                        Visibility="{x:Bind PlayerEx.Current.InputInfo.HasVideo, Mode=OneWay, Converter={StaticResource InvertedBoolToVisibilityConverter}}">
+                                        <Image.Resources>
+                                            <Storyboard x:Name="DiskStoryBoard">
+                                                <DoubleAnimation
+                                                    x:Name="DiskDoubleAnimation"
+                                                    RepeatBehavior="Forever"
+                                                    Storyboard.TargetName="_diskImage"
+                                                    Storyboard.TargetProperty="(Image.RenderTransform).(RotateTransform.Angle)"
+                                                    From="0"
+                                                    To="359"
+                                                    Duration="0:0:10" />
+                                            </Storyboard>
+                                        </Image.Resources>
+                                        <Image.RenderTransform>
+                                            <RotateTransform CenterX="64" CenterY="64" />
+                                        </Image.RenderTransform>
+                                    </Image>
+                                </Grid>
+                            </coreUI:AZ.A>
+                            <coreUI:AZ.B>
+                                <Image
+                                    Width="128"
+                                    Height="128"
+                                    Source="{x:Bind Icon, Mode=OneWay}" />
+                            </coreUI:AZ.B>
+                        </coreUI:AZ>
+                    </Grid>
+                </coreUI:AZ>
+                <Grid
+                    Padding="8,8,8,0"
+                    Opacity="{x:Bind IsHudVisible, Mode=OneWay, Converter={StaticResource HudOpacityBoolToDoubleConverter}}"
+                    Visibility="{x:Bind PlayerEx.Player.CanPlay, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <Grid
+                        VerticalAlignment="Top"
+                        ColumnDefinitions="*,Auto"
+                        ColumnSpacing="5">
+                        <TextBlock Foreground="#fff" Text="{x:Bind PlayerEx.Current.InputInfo.Name, Mode=OneWay}" />
+                        <coreUI:IconButton
+                            Grid.Column="1"
+                            Background="Transparent"
+                            Command="{x:Bind SwitchMediaPlayerCommand}"
+                            Foreground="#fff"
+                            Icon="&#xE740;"
+                            Variant="Text"
+                            Visibility="{x:Bind PlayerEx.Player.CanPlay, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    </Grid>
+                    <coreUI:IconButton
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Command="{x:Bind PreviousCommand}"
+                        Foreground="#fff"
+                        Icon="&#xE892;"
+                        Variant="Text"
+                        Visibility="{x:Bind PlayerEx.HasPrevious, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    <coreUI:IconButton
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Command="{x:Bind NextCommand}"
+                        Foreground="#fff"
+                        Icon="&#xE893;"
+                        Variant="Text"
+                        Visibility="{x:Bind PlayerEx.HasNext, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+                        <Slider
+                            Margin="0,0,0,-15"
+                            IsEnabled="{x:Bind PlayerEx.Player.CanPlay, Mode=OneWay}"
+                            IsThumbToolTipEnabled="False"
+                            Loaded="TimeSlider_Loaded"
+                            Maximum="{x:Bind PlayerEx.Player.Duration, Mode=OneWay, Converter={StaticResource SecondsFromTicksConverter}}"
+                            Value="{Binding PlayerEx.Player.CurTime, Mode=TwoWay, Converter={StaticResource SecondsFromTicksConverter}}" />
+                        <TextBlock
+                            Margin="0,-10,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontSize="10"
+                            Foreground="#fff"
+                            Text="{x:Bind PlayerEx.Player.CurTime, Mode=OneWay, Converter={StaticResource TicksToStringConverter}}" />
+                        <TextBlock
+                            Margin="0,-10,0,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            FontSize="10"
+                            Foreground="#fff"
+                            Text="{x:Bind PlayerEx.Player.Duration, Mode=OneWay, Converter={StaticResource TicksToStringConverter}}" />
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <Grid
+                Grid.Row="1"
+                ColumnDefinitions="Auto,Auto,*,Auto,Auto"
+                ColumnSpacing="5">
+                <coreUI:ABIconButton
+                    BIcon="&#xE768;"
+                    Background="Transparent"
+                    Command="{x:Bind PlayCommand}"
+                    Foreground="#fff"
+                    Icon="&#xE769;"
+                    IsAOrB="{x:Bind PlayerEx.Current.IsPlaying, Mode=OneWay}"
+                    IsEnabled="{x:Bind PlayerEx.Player.CanPlay, Mode=OneWay}"
+                    Variant="Text" />
+                <coreUI:IconButton
+                    Grid.Column="1"
+                    Background="Transparent"
+                    Foreground="#fff"
+                    Icon="{x:Bind PlayerEx.VolumeIcon, Mode=OneWay}"
+                    IsEnabled="{x:Bind PlayerEx.Player.CanPlay, Mode=OneWay}"
+                    Variant="Text">
+                    <coreUI:IconButton.Flyout>
+                        <Flyout>
+                            <Grid
+                                Width="200"
+                                ColumnDefinitions="Auto,*"
+                                ColumnSpacing="10">
+                                <coreUI:IconButton
+                                    Command="{x:Bind MuteCommand}"
+                                    Corner="None"
+                                    Icon="{x:Bind PlayerEx.VolumeIcon, Mode=OneWay}"
+                                    Variant="Text" />
+                                <Slider
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Maximum="{x:Bind PlayerEx.Player.Config.Player.VolumeMax, Mode=OneWay}"
+                                    Minimum="0"
+                                    Value="{x:Bind PlayerEx.Player.Audio.Volume, Mode=TwoWay}" />
+                            </Grid>
+                            <Flyout.FlyoutPresenterStyle>
+                                <Style TargetType="FlyoutPresenter">
+                                    <Setter Property="Padding" Value="5" />
+                                    <Setter Property="CornerRadius" Value="5" />
+                                    <Setter Property="Background" Value="{ThemeResource FlyoutBackground}" />
+                                </Style>
+                            </Flyout.FlyoutPresenterStyle>
+                        </Flyout>
+                    </coreUI:IconButton.Flyout>
+                </coreUI:IconButton>
+                <coreUI:IconButton
+                    Grid.Column="3"
+                    Background="Transparent"
+                    Command="{x:Bind ShuffleCommand}"
+                    Foreground="#fff"
+                    Icon="&#xE8B1;"
+                    IsEnabled="{x:Bind PlayerEx.Player.CanPlay, Mode=OneWay}"
+                    IsTheme="{x:Bind PlayerEx.PlayEndedOption, Mode=OneWay, ConverterParameter=Random, Converter={StaticResource EnumComparisonToBoolConverter}}"
+                    Variant="Text" />
+            </Grid>
+        </Grid>
+    </Grid>
+</coreUI:UserControlEx>

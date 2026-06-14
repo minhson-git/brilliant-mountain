@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPresenter
+    x:Class="IOApp.Features.MediaConverterControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:af="using:IOApp.Features"
+    xmlns:ag="using:IOApp.Gens"
+    xmlns:cam="using:IOCore.AppManager"
+    xmlns:cb="using:IOCore.Base"
+    xmlns:cl="using:IOCore.License"
+    xmlns:cui="using:IOCore.UI"
+    xmlns:cuib="using:IOCore.UI.Behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ContentPresenter.Resources>
+        <af:MediaConverterControlProxy x:Name="Proxy" _="{x:Bind}" />
+    </ContentPresenter.Resources>
+
+    <cui:StandardLayout
+        Title="{x:Bind ConvertTypeSelection.SelectedKeyOrDefault, Mode=OneWay}"
+        Width="400"
+        SubTitle="{x:Bind Item.InputInfo.Name, Mode=OneWay}">
+        <cui:StandardLayout.Panel>
+            <Grid>
+                <cui:AZ IsA="{x:Bind Item.Status.IsLoadFailed, Mode=OneWay}">
+                    <cui:AZ.A>
+                        <cui:EmptyList Icon="&#xEA92;" Text="{ag:SR K=LoadCorruptedFile}" />
+                    </cui:AZ.A>
+                    <cui:AZ.B>
+                        <StackPanel Padding="10" HorizontalAlignment="Stretch">
+                            <Border
+                                Width="256"
+                                Height="144"
+                                Background="{ThemeResource FieldsetBackground}"
+                                CornerRadius="10">
+                                <cui:AZ IsA="{x:Bind Item.InputInfo.HasVideo, Mode=OneWay}">
+                                    <cui:AZ.A>
+                                        <Image
+                                            Width="256"
+                                            Height="144"
+                                            Source="{x:Bind Thumbnail, Mode=OneWay}"
+                                            Stretch="Uniform" />
+                                    </cui:AZ.A>
+                                    <cui:AZ.B>
+                                        <FontIcon
+                                            VerticalAlignment="Center"
+                                            FontSize="64"
+                                            Glyph="&#xE8D6;" />
+                                    </cui:AZ.B>
+                                </cui:AZ>
+                            </Border>
+
+                            <ItemsRepeater
+                                Margin="0,15,0,0"
+                                HorizontalAlignment="Center"
+                                ItemsSource="{x:Bind ConvertTypeSelection.Items}"
+                                Visibility="{x:Bind Item.InputInfo.HasVideo, Mode=OneWay, Converter={StaticResource Bool}}">
+                                <ItemsRepeater.Layout>
+                                    <StackLayout Orientation="Horizontal" Spacing="5" />
+                                </ItemsRepeater.Layout>
+                                <ItemsRepeater.ItemTemplate>
+                                    <DataTemplate>
+                                        <RadioButton IsChecked="{Binding IsSelected, Mode=TwoWay}" IsEnabled="{Binding _.Item.Status.IsNotProcessing, Source={StaticResource Proxy}}">
+                                            <TextBlock VerticalAlignment="Center" Text="{Binding Value}" />
+                                        </RadioButton>
+                                    </DataTemplate>
+                                </ItemsRepeater.ItemTemplate>
+                            </ItemsRepeater>
+
+                            <cui:AZ Margin="0,15,0,0" IsA="{x:Bind ConvertTypeSelection.SelectedKeyOrDefault, Mode=OneWay, ConverterParameter=Video, Converter={StaticResource Any}}">
+                                <cui:AZ.A>
+                                    <StackPanel Spacing="10">
+                                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                            <StackPanel Spacing="2">
+                                                <TextBlock
+                                                    FontSize="11"
+                                                    FontWeight="SemiBold"
+                                                    Text="{ag:SR K=Format}" />
+                                                <cui:ComboBoxEx
+                                                    HorizontalAlignment="Stretch"
+                                                    IsEnabled="{x:Bind Item.Status.IsNotProcessing, Mode=OneWay}"
+                                                    ItemsSource="{x:Bind Item.ConvertArgs.FamilySelection.Items}"
+                                                    SelectedIndex="{x:Bind Item.ConvertArgs.FamilySelection.SelectedIndex, Mode=TwoWay}">
+                                                    <cui:ComboBoxEx.ItemContainerStyle>
+                                                        <Style TargetType="ComboBoxItem">
+                                                            <Setter Property="cb:Bind.IsEnabled" Value="IsEnabled" />
+                                                        </Style>
+                                                    </cui:ComboBoxEx.ItemContainerStyle>
+                                                </cui:ComboBoxEx>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1" Spacing="2">
+                                                <TextBlock
+                                                    FontSize="11"
+                                                    FontWeight="SemiBold"
+                                                    Text="{ag:SR K=Resolution}" />
+                                                <cui:ComboBoxEx
+                                                    HorizontalAlignment="Stretch"
+                                                    IsEnabled="{x:Bind Item.Status.IsNotProcessing, Mode=OneWay}"
+                                                    ItemsSource="{x:Bind Item.ConvertArgs.ResolutionSelection.Items}"
+                                                    SelectedIndex="{x:Bind Item.ConvertArgs.ResolutionSelection.SelectedIndex, Mode=TwoWay}">
+                                                    <cui:ComboBoxEx.ItemContainerStyle>
+                                                        <Style TargetType="ComboBoxItem">
+                                                            <Setter Property="cb:Bind.IsEnabled" Value="IsEnabled" />
+                                                        </Style>
+                                                    </cui:ComboBoxEx.ItemContainerStyle>
+                                                </cui:ComboBoxEx>
+                                            </StackPanel>
+                                        </Grid>
+                                        <Grid ColumnDefinitions="*,*,Auto" ColumnSpacing="10">
+                                            <StackPanel Spacing="2">
+                                                <TextBlock
+                                                    FontSize="11"
+                                                    FontWeight="SemiBold"
+                                                    Text="{ag:SR K=Media_VideoBitrate}" />
+                                                <cui:ComboBoxEx
+                                                    HorizontalAlignment="Stretch"
+                                                    IsEnabled="{x:Bind Item.Status.IsNotProcessing, Mode=OneWay}"
+                                                    ItemsSource="{x:Bind Item.ConvertArgs.VideoBitrateSelection.Items}"
+                                                    SelectedIndex="{x:Bind Item.ConvertArgs.VideoBitrateSelection.SelectedIndex, Mode=TwoWay}">
+                                                    <cui:ComboBoxEx.ItemContainerStyle>
+                                                        <Style TargetType="ComboBoxItem">
+                                                            <Setter Property="cb:Bind.IsEnabled" Value="IsEnabled" />
+                                                        </Style>
+                                                    </cui:ComboBoxEx.ItemContainerStyle>
+                                                </cui:ComboBoxEx>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1" Spacing="2">
+                                                <TextBlock
+                                                    FontSize="11"
+                                                    FontWeight="SemiBold"
+                                                    Text="{ag:SR K=Media_AudioBitrate}" />
+                                                <cui:ComboBoxEx
+                                                    HorizontalAlignment="Stretch"
+                                                    IsEnabled="{x:Bind Item.Status.IsNotProcessing, Mode=OneWay}"
+                                                    ItemsSource="{x:Bind Item.ConvertArgs.AudioBitrateSelection.Items}"
+                                                    SelectedIndex="{x:Bind Item.ConvertArgs.AudioBitrateSelection.SelectedIndex, Mode=TwoWay}">
+                                                    <cui:ComboBoxEx.ItemContainerStyle>
+                                                        <Style TargetType="ComboBoxItem">
+                                                            <Setter Property="cb:Bind.IsEnabled" Value="IsEnabled" />
+                                                        </Style>
+                                                    </cui:ComboBoxEx.ItemContainerStyle>
+                                                </cui:ComboBoxEx>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2" Spacing="2">
+                                                <TextBlock
+                                                    FontSize="11"
+                                                    FontWeight="SemiBold"
+                                                    Text="" />
+                                                <StackPanel Orientation="Horizontal">
+                                                    <cui:IconButton
+                                                        Command="{x:Bind ApplyTransformCommand}"
+                                                        CommandParameter="HorizontalFlip"
+                                                        Corner="Left"
+                                                        Icon="&#xF583;"
+                                                        IsEnabled="{x:Bind Item.Status.IsNotProcessing, Mode=OneWay}" />
+                                                    <cui:IconButton
+                                                        Command="{x:Bind ApplyTransformCommand}"
+                                                        CommandParameter="VerticalFlip"
+                                                        Corner="None"
+                                                        Icon="&#xF589;"
+                                                        IsEnabled="{x:Bind Item.Status.IsNotProcessing, Mode=OneWay}" />
+                                                    <cui:IconButton
+                                                        Command="{x:Bind ApplyTransformCommand}"
+                                                        CommandParameter="ClockwiseRotation"
+                                                        Corner="Right"
+                                                        Icon="&#xE7AD;"
+                                                        IsEnabled="{x:Bind Item.Status.IsNotProcessing, Mode=OneWay}" />
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Grid>
+                                    </StackPanel>
+                                </cui:AZ.A>
+                                <cui:AZ.B>
+                                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                        <StackPanel Spacing="2">
+                                            <TextBlock
+                                                FontSize="11"
+                                                FontWeight="SemiBold"
+                                                Text="{ag:SR K=Format}" />
+                                            <cui:ComboBoxEx
+                                                HorizontalAlignment="Stretch"
+                                                IsEnabled="{x:Bind Item.Status.IsNotProcessing, Mode=OneWay}"
+                                                ItemsSource="{x:Bind Item.ConvertArgs.FamilySelection.Items}"
+                                                SelectedIndex="{x:Bind Item.ConvertArgs.FamilySelection.SelectedIndex, Mode=TwoWay}">
+                                                <cui:ComboBoxEx.ItemContainerStyle>
+                                                    <Style TargetType="ComboBoxItem">
+                                                        <Setter Property="cb:Bind.IsEnabled" Value="IsEnabled" />
+                                                    </Style>
+                                                </cui:ComboBoxEx.ItemContainerStyle>
+                                            </cui:ComboBoxEx>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Spacing="2">
+                                            <TextBlock
+                                                FontSize="11"
+                                                FontWeight="SemiBold"
+                                                Text="{ag:SR K=Media_AudioBitrate}" />
+                                            <cui:ComboBoxEx
+                                                HorizontalAlignment="Stretch"
+                                                IsEnabled="{x:Bind Item.Status.IsNotProcessing, Mode=OneWay}"
+                                                ItemsSource="{x:Bind Item.ConvertArgs.AudioBitrateSelection.Items}"
+                                                SelectedIndex="{x:Bind Item.ConvertArgs.AudioBitrateSelection.SelectedIndex, Mode=TwoWay}">
+                                                <cui:ComboBoxEx.ItemContainerStyle>
+                                                    <Style TargetType="ComboBoxItem">
+                                                        <Setter Property="cb:Bind.IsEnabled" Value="IsEnabled" />
+                                                    </Style>
+                                                </cui:ComboBoxEx.ItemContainerStyle>
+                                            </cui:ComboBoxEx>
+                                        </StackPanel>
+                                    </Grid>
+                                </cui:AZ.B>
+                            </cui:AZ>
+
+                            <Grid Margin="0,15,0,0" ColumnDefinitions="Auto,*,Auto,Auto">
+                                <cui:ProgressRingEx
+                                    DisplayText="True"
+                                    IsProcessed="{x:Bind Item.Status.IsProcessed, Mode=OneWay}"
+                                    IsProcessing="{x:Bind Item.Status.IsProcessing, Mode=OneWay}"
+                                    Percent="{x:Bind Item.Percent, Mode=OneWay}"
+                                    Text="{x:Bind Item.RemainText, Mode=OneWay}" />
+                                <cui:IconButton
+                                    Grid.Column="2"
+                                    Command="{x:Bind PlayCommand}"
+                                    Corner="Left"
+                                    Icon="&#xE768;"
+                                    IsEnabled="{x:Bind Item.Status.IsNotBusy, Mode=OneWay}" />
+                                <cui:ABIconTextButton
+                                    Grid.Column="3"
+                                    CheckedText="{ag:SR K=Cancel}"
+                                    Command="{x:Bind ConvertCommand}"
+                                    Corner="Right"
+                                    IsChecked="{x:Bind Item.Status.IsProcessing, Mode=OneWay}"
+                                    IsThemeEnabled="True"
+                                    Scheme="Theme"
+                                    Text="{ag:SR K=Convert}" />
+                            </Grid>
+
+                            <cam:PromotionApp
+                                Margin="0,15,0,0"
+                                cuib:Visible.Value1="{x:Bind cl:IOLicense.I.Status.IsTrial, Mode=OneWay}"
+                                cuib:Visible.Value2="{x:Bind cuib:Menu.PromotionAppItems.IsNotEmpty, Mode=OneWay}"
+                                AppItem="{x:Bind cuib:Menu.PromotionAppItems.FirstItem, Mode=OneWay}"
+                                TrackingId="MediaConverterDialog" />
+                        </StackPanel>
+                    </cui:AZ.B>
+                </cui:AZ>
+            </Grid>
+        </cui:StandardLayout.Panel>
+    </cui:StandardLayout>
+</ContentPresenter>

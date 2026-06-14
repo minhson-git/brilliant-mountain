@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<coreUI:ControlEx
+    x:Class="IOApp.Features.MediaThumbnail"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:coreHelpers="using:IOCore.Helpers"
+    xmlns:coreUI="using:IOCore.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:features="using:IOApp.Features"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance Type=features:MediaThumbnail}"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource FieldsetBackground}" CornerRadius="16,16,0,0">
+        <FontIcon
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="20"
+            Glyph="&#xE714;" />
+
+        <Image
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Source="{x:Bind ThumbnailPath, Mode=OneWay}"
+            Stretch="UniformToFill" />
+
+        <Border
+            Margin="8,4"
+            Padding="4,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Background="{coreHelpers:SolidColorBrushAdjustment Color=Black,
+                                                               Opacity=0.6}"
+            CornerRadius="4"
+            Visibility="{x:Bind IsDurationVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+            <coreUI:IconTextBlock
+                FontSize="12"
+                Foreground="White"
+                Text="{x:Bind Duration, Mode=OneWay, Converter={StaticResource TimeSpanToStringConverter}}" />
+        </Border>
+
+        <coreUI:IconButton
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Command="{x:Bind Command, Mode=OneWay}"
+            CommandParameter="{x:Bind CommandParameter, Mode=OneWay}"
+            Icon="&#xF5B0;"
+            IsArcCorner="True"
+            IsTheme="True"
+            Size="LG"
+            Visibility="{x:Bind CanPlay, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+    </Grid>
+</coreUI:ControlEx>
